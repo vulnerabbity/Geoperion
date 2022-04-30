@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "geoperion",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
