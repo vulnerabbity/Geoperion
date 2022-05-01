@@ -3,7 +3,9 @@ import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 import { CountriesService } from "../countries/countries.service"
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class FlagsService {
   constructor(private countriesService: CountriesService) {}
 

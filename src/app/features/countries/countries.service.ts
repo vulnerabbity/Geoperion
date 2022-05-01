@@ -4,7 +4,9 @@ import { CountriesList, Country } from "src/app/data/countries.data"
 import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { CountiesLimitOutOfRange } from "./countries.errors"
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class CountriesService {
   private readonly countries = CountriesList
 
