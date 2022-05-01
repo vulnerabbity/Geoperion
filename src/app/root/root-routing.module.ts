@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core"
 import { PreloadAllModules, RouterModule, Route } from "@angular/router"
-import { GamesPage } from "../pages/games/games.page"
 import { HomePage } from "../pages/home/home.page"
 import { AppPaths } from "./routing.interface"
 
@@ -19,7 +18,6 @@ const homePath: Route = {
 const gamesPath: Route = {
   path: AppPaths.games,
   loadChildren: () => import("../pages/games/games.module").then(m => m.GamesPageModule),
-  component: GamesPage,
 }
 
 const routes: Route[] = [redirectionPath, homePath, gamesPath]
