@@ -7,14 +7,16 @@ import { CountriesService } from "../countries/countries.service"
 export class FlagsService {
   constructor(private countriesService: CountriesService) {}
 
-  getRandomFlag({ useFullPath } = { useFullPath: true }): string {
+  getRandomFlag(): string {
     const randomCountry = this.countriesService.getRandom()
     const randomFlag = randomCountry.flag
 
-    if (useFullPath) {
-      return getFlagFullPath(randomFlag)
-    }
+    return getFlagFullPath(randomFlag)
+  }
 
-    return randomFlag
+  getFlagByCode(code: CountryCode) {
+    const country = this.countriesService.getByCode(code)
+
+    return getFlagFullPath(country.flag)
   }
 }

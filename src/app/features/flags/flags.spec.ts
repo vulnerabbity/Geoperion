@@ -13,12 +13,5 @@ describe("Flags service", () => {
         expect(isString).toBe(true)
       }
     })
-    it("should use full path arg", () => {
-      const fullFlag = service.getRandomFlag({ useFullPath: true })
-      const shortFlag = service.getRandomFlag({ useFullPath: false })
-
-      const isDifferentLength = fullFlag.length !== shortFlag.length
-      expect(isDifferentLength).toBe(true)
-    })
   })
 })
