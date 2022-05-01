@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core"
 import { AppPaths } from "src/app/root/routing.interface"
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class LinksService {
   getHomeLink() {
     return this.getRootLink(AppPaths.home)
