@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core"
+import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 import { CountriesService } from "../countries/countries.service"
 

@@ -250,4 +250,4 @@ export enum CountriesCodesEnum {
   AX = "AX",
 }
 
-export type CountriesCode = `${CountriesCodesEnum}`
+export type CountryCode = `${CountriesCodesEnum}`

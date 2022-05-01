@@ -1,8 +1,8 @@
-import { CountriesCode } from "../interfaces/iso-3166.interface"
+import { CountryCode } from "../interfaces/iso-3166.interface"
 
 export interface Country {
   name: string
-  code: CountriesCode
+  code: CountryCode
   flag: string
 }
 
