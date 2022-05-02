@@ -8,8 +8,11 @@
       <img class="flag-image" [src]="getCurrentPageFlag()" alt="flag of country" />
     </div>
   </ng-template>
+
   <div class="answers">
     <guess-country__answers [page]="getCurrentPage()"></guess-country__answers>
   </div>
-  <guess-country__paginator></guess-country__paginator>
+  <div class="paginator">
+    <guess-country__paginator></guess-country__paginator>
+  </div>
 </div>
