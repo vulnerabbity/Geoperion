@@ -14,5 +14,7 @@ export class GuessCountryGameEventsBus {
 
   changeConditionalOption$ = new Subject()
 
-  selectAnswer$ = new Subject<number>()
+  selectAnswer$ = new Subject<{ answerIndex: number }>()
+
+  toNextPage$ = new Subject()
 }

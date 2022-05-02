@@ -2,15 +2,17 @@ import { Injectable } from "@angular/core"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { GuessCountryService } from "src/app/features/games/guess-country.service"
 import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
-import { GuessCountrySelectablePage } from "./guess-country.interface"
-import { GuessCountryState } from "./guess-country.state"
+import {
+  makeGuessCountryGetDefaultState,
+  GuessCountryState,
+  GuessCountryStateObject,
+} from "./guess-country.state"
 
 @Injectable({
   providedIn: "root",
 })
 export class GuessCountryEventsHandler {
-  private pages: GuessCountrySelectablePage[] = []
-  private currentPageIndex = 0
+  private stateSnapshot = makeGuessCountryGetDefaultState()
 
   constructor(
     private state: GuessCountryState,
@@ -20,40 +22,33 @@ export class GuessCountryEventsHandler {
     this.handleNewGame()
     this.handleAnswer()
 
-    this.subscribeToPages()
-    this.subscribeToCurrentPage()
+    this.subscribeToState()
   }
 
   handleNewGame() {
     return this.eventsBus.startNewGame$.subscribe(async () => {
       const pages = await this.guessCountryService.getPages()
+      const newState = makeGuessCountryGetDefaultState()
+      newState.pages = pages
 
-      this.state.pages$.next(pages)
-      this.state.currentPageIndex$.next(0)
+      this.state.state$.next(newState)
     })
   }
 
   handleAnswer() {
-    return this.eventsBus.selectAnswer$.subscribe(answerIndex => {
-      const pages = makeDeepCopy(this.pages)
+    return this.eventsBus.selectAnswer$.subscribe(({ answerIndex }) => {
+      const state = makeDeepCopy(this.stateSnapshot)
 
-      const currentPage = pages[this.currentPageIndex]
+      const currentPage = state.pages[this.stateSnapshot.currentPageIndex]
       currentPage.selectedAnswerIndex = answerIndex
-      console.log(currentPage)
 
-      this.state.pages$.next(pages)
+      this.state.state$.next(state)
     })
   }
 
-  subscribeToPages() {
-    return this.state.pages$.subscribe(pages => {
-      this.pages = pages
-    })
-  }
-
-  subscribeToCurrentPage() {
-    return this.state.currentPageIndex$.subscribe(currentIndex => {
-      this.currentPageIndex = currentIndex
+  subscribeToState() {
+    return this.state.state$.subscribe(state => {
+      this.stateSnapshot = state
     })
   }
 }

@@ -13,8 +13,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   pages: GuessCountrySelectablePage[] = []
   private currentPageIndex = 0
 
-  private pagesSubscription = this.subscribeToPage()
-  private currentPageIndexSubscription = this.subscribeToCurrentPageIndex()
+  private stateSub = this.subscribeToState()
 
   constructor(private state: GuessCountryState, private eventsBuss: GuessCountryGameEventsBus) {}
 
@@ -23,8 +22,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.pagesSubscription.unsubscribe()
-    this.currentPageIndexSubscription.unsubscribe()
+    this.stateSub.unsubscribe()
   }
 
   getCurrentPageFlag(): string {
@@ -49,15 +47,10 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     this.eventsBuss.startNewGame$.next()
   }
 
-  private subscribeToPage() {
-    return this.state.pages$.subscribe(pages => {
-      this.pages = pages
-    })
-  }
-
-  private subscribeToCurrentPageIndex() {
-    return this.state.currentPageIndex$.subscribe(pageIndex => {
-      this.currentPageIndex = pageIndex
+  private subscribeToState() {
+    return this.state.state$.subscribe(state => {
+      this.pages = state.pages
+      this.currentPageIndex = state.currentPageIndex
     })
   }
 }
