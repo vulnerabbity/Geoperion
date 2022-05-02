@@ -1,1 +1,24 @@
-<p>guess</p>
+<div class="container">
+  <header class="header">
+    <ion-button aria-label="Back button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-progress-bar class="progress-bar" [value]="0.5"></ion-progress-bar>
+
+    <ion-button (click)="options.show($event)">
+      <ion-icon name="options-outline"></ion-icon>
+    </ion-button>
+  </header>
+
+  <ng-template [ngIf]="pages.length > 0">
+    <div class="flag-image-container">
+      <img class="flag-image" [src]="getCurrentPageFlag()" alt="flag of country" />
+    </div>
+  </ng-template>
+  <div class="answers">
+    <guess-country__answers [page]="getCurrentPage()"></guess-country__answers>
+  </div>
+</div>
+
+<guess-country__options #options></guess-country__options>
