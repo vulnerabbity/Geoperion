@@ -5,7 +5,6 @@ import { GuessCountrySelectablePage } from "./guess-country.interface"
 export interface GuessCountryStateObject {
   pages: GuessCountrySelectablePage[]
   currentPageIndex: number
-  progress: number
 }
 
 @Injectable({
@@ -19,6 +18,5 @@ export function makeGuessCountryGetDefaultState(): GuessCountryStateObject {
   return {
     currentPageIndex: 0,
     pages: [],
-    progress: 0,
   }
 }

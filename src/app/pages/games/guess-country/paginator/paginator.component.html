@@ -1,9 +1,17 @@
-<ion-button class="paginator-button" [disabled]="hasNoPreviousPage()">
+<ion-button
+  class="paginator-button"
+  [disabled]="pagesService.hasNoPreviousPage()"
+  (click)="onPrevPage()"
+>
   <ion-icon name="arrow-back-outline"></ion-icon>
   Prev
 </ion-button>
 <ion-button class="paginator-button" color="success">Done</ion-button>
-<ion-button class="paginator-button">
+<ion-button
+  class="paginator-button"
+  [disabled]="pagesService.hasNoNextPage()"
+  (click)="onNextPage()"
+>
   Next
   <ion-icon name="arrow-forward-outline"></ion-icon>
 </ion-button>

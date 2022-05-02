@@ -16,5 +16,7 @@ export class GuessCountryGameEventsBus {
 
   selectAnswer$ = new Subject<{ answerIndex: number }>()
 
-  toNextPage$ = new Subject()
+  toPreviousPage$ = new Subject<void>()
+
+  toNextPage$ = new Subject<void>()
 }

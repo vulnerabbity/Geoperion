@@ -1,4 +1,6 @@
 import { Component, OnDestroy } from "@angular/core"
+import { GuessCountryPagesService } from "../guess-country-pages.service"
+import { GuessCountryGameEventsBus } from "../guess-country.events-bus"
 import { GuessCountrySelectablePage } from "../guess-country.interface"
 import { GuessCountryState } from "../guess-country.state"
 
@@ -7,31 +9,17 @@ import { GuessCountryState } from "../guess-country.state"
   templateUrl: "./paginator.component.html",
   styleUrls: ["./paginator.component.scss"],
 })
-export class GuessCountryPaginatorComponent implements OnDestroy {
-  private pages: GuessCountrySelectablePage[] = []
-  private currentPageIndex = 0
+export class GuessCountryPaginatorComponent {
+  constructor(
+    public pagesService: GuessCountryPagesService,
+    private eventBus: GuessCountryGameEventsBus,
+  ) {}
 
-  private stateSub = this.subscribeToState()
-
-  constructor(private state: GuessCountryState) {}
-
-  ngOnDestroy(): void {
-    this.stateSub.unsubscribe()
+  onPrevPage() {
+    this.eventBus.toPreviousPage$.next()
   }
 
-  hasNoPreviousPage(): boolean {
-    return this.currentPageIndex <= 0
-  }
-
-  hasNoNextPage(): boolean {
-    const lastIndex = this.pages.length - 1
-    return this.currentPageIndex >= lastIndex
-  }
-
-  private subscribeToState() {
-    return this.state.state$.subscribe(state => {
-      this.pages = state.pages
-      this.currentPageIndex = state.currentPageIndex
-    })
+  onNextPage() {
+    this.eventBus.toNextPage$.next()
   }
 }

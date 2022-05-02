@@ -31,7 +31,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     return getFlagFullPath(rightCountry.flag)
   }
 
-  getCurrentRightCountry() {
+  private getCurrentRightCountry() {
     const currentPage = this.getCurrentPage()
     const rightAnswerIndex = currentPage.rightAnswerIndex
     return currentPage.options[rightAnswerIndex]

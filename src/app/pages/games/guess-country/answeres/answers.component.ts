@@ -18,7 +18,7 @@ export class GuessCountryAnswersComponent {
     if (this.isAnswered()) {
       return
     }
-    this.eventsBuss.selectAnswer$.next(answerIndex)
+    this.eventsBuss.selectAnswer$.next({ answerIndex })
   }
 
   isButtonsDisabled() {
