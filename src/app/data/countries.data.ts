@@ -147,7 +147,6 @@ export const CountriesList: Country[] = [
   { code: "MQ", name: "Martinique", flag: "mq.svg" },
   { code: "MR", name: "Mauritania", flag: "mr.svg" },
   { code: "MU", name: "Mauritius", flag: "mu.svg" },
-  { code: "YT", name: "Mayotte", flag: "yt.svg" },
   { code: "MX", name: "Mexico", flag: "mx.svg" },
   { code: "FM", name: "Micronesia", flag: "fm.svg" },
   { code: "MD", name: "Moldova", flag: "md.svg" },
