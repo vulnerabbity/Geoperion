@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core"
+import { Router } from "@angular/router"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { GuessCountryService } from "src/app/features/games/guess-country.service"
+import { GamesLinksService } from "../games-links.service"
+import { GamesRouterService } from "../games-router.service"
 import { GuessCountryPagesService } from "./guess-country-pages.service"
 import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
 import { makeGuessCountryGetDefaultState, GuessCountryState } from "./guess-country.state"
@@ -16,10 +19,16 @@ export class GuessCountryEventsHandler {
     private eventsBus: GuessCountryGameEventsBus,
     private guessCountryService: GuessCountryService,
     private pagesService: GuessCountryPagesService,
+    private gamesRouter: GamesRouterService,
   ) {
+    this.startHandling()
+  }
+
+  startHandling() {
     this.handleNewGame()
     this.handleAnswer()
 
+    this.handleExit()
     this.handleNextPage()
     this.handlePrevPage()
 
@@ -66,6 +75,12 @@ export class GuessCountryEventsHandler {
 
         this.state.state$.next(this.stateSnapshot)
       }
+    })
+  }
+
+  handleExit() {
+    this.eventsBus.exit$.subscribe(() => {
+      this.gamesRouter.redirectToGames()
     })
   }
 

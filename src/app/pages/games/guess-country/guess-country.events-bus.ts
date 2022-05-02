@@ -19,4 +19,6 @@ export class GuessCountryGameEventsBus {
   toPreviousPage$ = new Subject<void>()
 
   toNextPage$ = new Subject<void>()
+
+  exit$ = new Subject<void>()
 }

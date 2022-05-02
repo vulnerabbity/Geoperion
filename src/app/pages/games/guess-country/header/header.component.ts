@@ -12,4 +12,8 @@ export class GuessCountryHeaderComponent {
   onRestart() {
     this.eventsBus.startNewGame$.next()
   }
+
+  onExit() {
+    this.eventsBus.exit$.next()
+  }
 }
