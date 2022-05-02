@@ -1,0 +1,17 @@
+<header class="header">
+  <ion-button aria-label="Back button">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+
+  <ion-button aria-label="Restart game button" (click)="this.onRestart()">
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-button>
+
+  <guess-country__progress-bar></guess-country__progress-bar>
+
+  <ion-button (click)="options.show($event)">
+    <ion-icon name="options-outline"></ion-icon>
+  </ion-button>
+</header>
+
+<guess-country__options #options></guess-country__options>

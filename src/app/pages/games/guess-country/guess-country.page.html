@@ -1,15 +1,5 @@
 <div class="container">
-  <header class="header">
-    <ion-button aria-label="Back button">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
-
-    <guess-country__progress-bar></guess-country__progress-bar>
-
-    <ion-button (click)="options.show($event)">
-      <ion-icon name="options-outline"></ion-icon>
-    </ion-button>
-  </header>
+  <guess-country__header></guess-country__header>
 
   <p class="progress-numbers">{{getAnsweredNumber()}}/{{getTotalPages()}}</p>
 
@@ -23,5 +13,3 @@
   </div>
   <guess-country__paginator></guess-country__paginator>
 </div>
-
-<guess-country__options #options></guess-country__options>
