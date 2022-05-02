@@ -6,7 +6,6 @@ import { GuessCountryEventsHandler } from "./guess-country.handler"
 import { GuessCountryGamePage } from "./guess-country.page"
 import { GuessCountryState } from "./guess-country.state"
 import { GuessCountryHeaderComponent } from "./header/header.component"
-import { GuessCountryOptionsComponent } from "./options/options.component"
 import { GuessCountryPaginatorComponent } from "./paginator/paginator.component"
 import { GuessCountryProgressBarComponent } from "./progress-bar/progress-bar.component"
 
@@ -14,7 +13,6 @@ import { GuessCountryProgressBarComponent } from "./progress-bar/progress-bar.co
   imports: [AppCommonModule],
   declarations: [
     GuessCountryGamePage,
-    GuessCountryOptionsComponent,
     GuessCountryAnswersComponent,
     GuessCountryPaginatorComponent,
     GuessCountryProgressBarComponent,
