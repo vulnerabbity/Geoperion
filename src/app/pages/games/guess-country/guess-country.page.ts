@@ -25,22 +25,38 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     this.stateSub.unsubscribe()
   }
 
+  getTotalPages() {
+    return this.pages.length
+  }
+
+  getAnsweredNumber() {
+    let answered = 0
+    this.pages.forEach(page => {
+      const isSelected = typeof page.selectedAnswerIndex === "number"
+      if (isSelected) {
+        answered += 1
+      }
+    })
+
+    return answered
+  }
+
   getCurrentPageFlag(): string {
     const rightCountry = this.getCurrentRightCountry()
 
     return getFlagFullPath(rightCountry.flag)
   }
 
-  private getCurrentRightCountry() {
-    const currentPage = this.getCurrentPage()
-    const rightAnswerIndex = currentPage.rightAnswerIndex
-    return currentPage.options[rightAnswerIndex]
-  }
-
   getCurrentPage() {
     const currentPage = this.pages[this.currentPageIndex]
 
     return currentPage
+  }
+
+  getCurrentRightCountry() {
+    const currentPage = this.getCurrentPage()
+    const rightAnswerIndex = currentPage.rightAnswerIndex
+    return currentPage.options[rightAnswerIndex]
   }
 
   private async startNewGame() {

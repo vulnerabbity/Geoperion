@@ -11,6 +11,8 @@
     </ion-button>
   </header>
 
+  <p class="progress-numbers">{{getAnsweredNumber()}}/{{getTotalPages()}}</p>
+
   <ng-template [ngIf]="pages.length > 0">
     <div class="flag-image-container">
       <img class="flag-image" [src]="getCurrentPageFlag()" alt="flag of country" />
