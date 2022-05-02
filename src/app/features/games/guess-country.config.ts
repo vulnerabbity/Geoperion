@@ -40,7 +40,7 @@ export class GuessCountryConfig {
 
   async getGameLength() {
     const result = await this.storage.get<number>(this.lengthKey)
-    console.log(result)
+
     return result ?? 10
   }
 

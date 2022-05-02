@@ -19,6 +19,7 @@ describe("Guess country service", async () => {
 
         const pages = await service.getPages()
         expect(pages.length).toBe(gameLength)
+        config.clearGameLength()
       }
     })
   })
