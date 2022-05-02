@@ -5,8 +5,8 @@ import { AppPaths } from "src/app/root/routing.interface"
   providedIn: "root",
 })
 export class LinksService {
-  getHomeLink() {
-    return this.getRootLink(AppPaths.home)
+  getSettingsLink() {
+    return this.getRootLink(AppPaths.settings)
   }
 
   getGamesLink() {

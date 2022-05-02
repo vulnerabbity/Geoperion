@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core"
 import { AppCommonModule } from "src/app/common/common.module"
-import { HomePage } from "./home.page"
+import { SettingsPage } from "./settings.page"
 
 @NgModule({
   imports: [AppCommonModule],
-  declarations: [HomePage],
+  declarations: [SettingsPage],
 })
-export class HomePageModule {}
+export class SettingsPageModule {}

@@ -8,8 +8,8 @@ import { AppPaths } from "src/app/root/routing.interface"
 export class RouterService {
   constructor(private router: Router) {}
 
-  redirectHome() {
-    this.redirect(AppPaths.home)
+  redirectSettings() {
+    this.redirect(AppPaths.settings)
   }
 
   redirectGames() {
