@@ -4,6 +4,7 @@ import { IonicModule } from "@ionic/angular"
 import { CommonServicesModule } from "./services/services.module"
 import { RouterModule } from "@angular/router"
 import { CommonComponentsModule } from "./components/common-components.module"
+import { FormsModule } from "@angular/forms"
 
 const modules = [
   CommonModule,
@@ -11,6 +12,7 @@ const modules = [
   CommonServicesModule,
   CommonComponentsModule,
   RouterModule,
+  FormsModule,
 ]
 
 @NgModule({

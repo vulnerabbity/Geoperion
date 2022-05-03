@@ -1,0 +1,19 @@
+.answer-button {
+  height: min(5rem, 10vw);
+  font-size: min(2rem, 5vw);
+
+  display: block;
+  margin-top: 1rem;
+
+  overflow: hidden;
+  border-radius: 5rem;
+}
+
+.answers-list {
+  padding: 0;
+  background: transparent;
+}
+
+.disabled-button {
+  pointer-events: none;
+}

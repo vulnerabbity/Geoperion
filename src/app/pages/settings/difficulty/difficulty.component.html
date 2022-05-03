@@ -1,0 +1,8 @@
+<ion-item>
+  <ion-label>Difficulty</ion-label>
+  <ion-select [value]="currentDifficulty" [(ngModel)]="currentDifficulty" (ionChange)="set()">
+    <ion-select-option value="easy">Easy</ion-select-option>
+    <ion-select-option value="medium">Medium</ion-select-option>
+    <ion-select-option value="hard">Hard</ion-select-option>
+  </ion-select>
+</ion-item>

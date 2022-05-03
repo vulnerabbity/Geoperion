@@ -5,6 +5,8 @@ import { IonicModule, IonicRouteStrategy } from "@ionic/angular"
 import { RootComponent } from "./root.component"
 import { AppRoutingModule } from "./root-routing.module"
 import { AppCommonModule } from "../common/common.module"
+import { IonicStorageModule } from "@ionic/storage-angular"
+import { GameSettingsModule } from "../features/settings/settings.module"
 
 const IonicRouteStrategyProvider: Provider = {
   provide: RouteReuseStrategy,
@@ -14,7 +16,14 @@ const IonicRouteStrategyProvider: Provider = {
 @NgModule({
   declarations: [RootComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AppCommonModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AppCommonModule,
+    IonicStorageModule.forRoot(),
+    GameSettingsModule,
+  ],
   providers: [IonicRouteStrategyProvider],
   bootstrap: [RootComponent],
 })

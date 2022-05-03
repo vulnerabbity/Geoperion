@@ -1,26 +1,27 @@
 import { NgModule } from "@angular/core"
 import { PreloadAllModules, RouterModule, Route } from "@angular/router"
-import { HomePage } from "../pages/home/home.page"
+import { SettingsPage } from "../pages/settings/settings.page"
 import { AppPaths } from "./routing.interface"
 
 const redirectionPath: Route = {
   path: "",
-  redirectTo: "home",
+  redirectTo: "games",
   pathMatch: "full",
 }
 
-const homePath: Route = {
-  path: AppPaths.home,
-  loadChildren: () => import("../pages/home/home.module").then(m => m.HomePageModule),
-  component: HomePage,
+const settingsRoute: Route = {
+  path: AppPaths.settings,
+  loadChildren: () =>
+    import("../pages/settings/settings-page.module").then(m => m.SettingsPageModule),
+  component: SettingsPage,
 }
 
-const gamesPath: Route = {
+const gamesRoute: Route = {
   path: AppPaths.games,
   loadChildren: () => import("../pages/games/games.module").then(m => m.GamesPageModule),
 }
 
-const routes: Route[] = [redirectionPath, homePath, gamesPath]
+const routes: Route[] = [redirectionPath, settingsRoute, gamesRoute]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

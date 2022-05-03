@@ -22,7 +22,7 @@ export class CountriesService {
   }
 
   getByCode(code: CountryCode): Country {
-    return this.countries.find(country => country.code === code)
+    return this.countries.find(country => country.code === code)!
   }
 
   private validateLimit(limit: number) {

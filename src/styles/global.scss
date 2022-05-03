@@ -55,3 +55,25 @@ html {
 img {
   max-width: 100%;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 50rem;
+  padding: 0 1rem;
+  height: 100%;
+
+  overflow-x: auto;
+
+  @media (min-width: 80rem) {
+    max-width: 60rem;
+  }
+
+  @media (min-width: 100rem) {
+    max-width: 80rem;
+  }
+
+  margin: 0 auto;
+}

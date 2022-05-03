@@ -1,4 +1,4 @@
 export const AppPaths = {
-  home: "home",
+  settings: "settings",
   games: "games",
 }
