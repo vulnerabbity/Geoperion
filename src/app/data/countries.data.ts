@@ -182,7 +182,6 @@ export const CountriesList: Country[] = [
   { code: "RO", name: "Romania", flag: "ro.svg" },
   { code: "RU", name: "Russia", flag: "ru.svg" },
   { code: "RW", name: "Rwanda", flag: "rw.svg" },
-  { code: "RE", name: "Reunion", flag: "re.svg" },
   { code: "SH", name: "Saint Helena", flag: "sh.svg" },
   { code: "KN", name: "Saint Kitts and Nevis", flag: "kn.svg" },
   { code: "LC", name: "Saint Lucia", flag: "lc.svg" },
