@@ -1,63 +1,44 @@
 import { Injectable } from "@angular/core"
-import { Storage } from "@ionic/storage-angular"
-import { StorageService } from "src/app/common/services/storage.service"
+import { GameConfig, getTestingGameConfig } from "../../settings/game-config"
+import { GameDifficulty } from "../../settings/settings.interface"
 
-export interface GuessCountryConfigVariables {
+export interface GuessCountryConfigObject {
   answersLength: number
   gameLength: number
+}
+
+export enum GuessCountryAnswersLengths {
+  "easy" = 2,
+  "medium" = 4,
+  "hard" = 6,
+}
+
+export enum GuessCountryGameLengths {
+  "short" = 10,
+  "medium" = 25,
+  "long" = 50,
 }
 
 @Injectable({
   providedIn: "root",
 })
 export class GuessCountryConfig {
-  private readonly answersLengthsKey = "guess-country-answers-length"
-
-  private readonly lengthKey = "guess-country-length"
-
-  constructor(private storage: StorageService) {}
-
-  async getConfig(): Promise<GuessCountryConfigVariables> {
-    const answersLength = await this.getAnswersLength()
-    const gameLength = await this.getGameLength()
-
-    return { answersLength, gameLength }
-  }
+  constructor(private gameConfig: GameConfig) {}
 
   async getAnswersLength() {
-    const result = await this.storage.get<number>(this.answersLengthsKey)
-
-    return result ?? 2
-  }
-
-  async setAnswersLength(difficulty: number) {
-    return await this.storage.set(this.answersLengthsKey, difficulty)
-  }
-
-  async clearAnswersLength() {
-    await this.storage.destroy(this.answersLengthsKey)
+    const difficulty = await this.gameConfig.difficulty.get()
+    return GuessCountryAnswersLengths[difficulty]
   }
 
   async getGameLength() {
-    const result = await this.storage.get<number>(this.lengthKey)
-
-    return result ?? 10
-  }
-
-  async setGameLength(length: number) {
-    await this.storage.set(this.lengthKey, length)
-  }
-
-  async clearGameLength() {
-    await this.storage.destroy(this.lengthKey)
+    const gameLength = await this.gameConfig.length.get()
+    return GuessCountryGameLengths[gameLength]
   }
 }
 
-export async function getGuessCountryConfigModule() {
-  const storage = new Storage()
-  await storage.create()
-  const storageService = new StorageService(storage)
-  const config = new GuessCountryConfig(storageService)
+export function getTestingGuessCountryConfig() {
+  const gameConfig = getTestingGameConfig()
+  const guessCountryConfig = new GuessCountryConfig(gameConfig)
 
-  return config
+  return guessCountryConfig
 }
