@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { getRandomIndex } from "src/app/common/functions/random.functions"
-import { CountriesService } from "../countries/countries.service"
+import { CountriesService } from "../../countries/countries.service"
 import { getGuessCountryConfigModule, GuessCountryConfig } from "./guess-country.config"
 import { GuessCountryPage } from "./guess-country.interface"
 
