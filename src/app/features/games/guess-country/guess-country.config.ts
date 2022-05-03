@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { GameConfig, getTestingGameConfig } from "../../settings/game-config"
-import { GameDifficulty } from "../../settings/settings.interface"
+import { GameConfigState, getTestingGameConfigState } from "../../settings/game-config.state"
+import { GameDifficulty, GameLength } from "../../settings/settings.interface"
 
 export interface GuessCountryConfigObject {
   answersLength: number
@@ -23,22 +23,25 @@ export enum GuessCountryGameLengths {
   providedIn: "root",
 })
 export class GuessCountryConfig {
-  constructor(private gameConfig: GameConfig) {}
+  private difficulty: GameDifficulty = "easy"
+  private gameLength: GameLength = "short"
+
+  constructor(private configState: GameConfigState) {
+    this.subscribeToConfig()
+  }
 
   async getAnswersLength() {
-    const difficulty = await this.gameConfig.difficulty.get()
-    return GuessCountryAnswersLengths[difficulty]
+    return GuessCountryAnswersLengths[this.difficulty]
   }
 
   async getGameLength() {
-    const gameLength = await this.gameConfig.length.get()
-    return GuessCountryGameLengths[gameLength]
+    return GuessCountryGameLengths[this.gameLength]
   }
-}
 
-export function getTestingGuessCountryConfig() {
-  const gameConfig = getTestingGameConfig()
-  const guessCountryConfig = new GuessCountryConfig(gameConfig)
-
-  return guessCountryConfig
+  private subscribeToConfig() {
+    return this.configState.config$.subscribe(config => {
+      this.difficulty = config.difficulty
+      this.gameLength = config.length
+    })
+  }
 }

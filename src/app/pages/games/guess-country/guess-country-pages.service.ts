@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from "@angular/core"
-import { GuessCountryPage } from "src/app/features/games/guess-country.interface"
+import { GuessCountryPage } from "src/app/features/games/guess-country/guess-country.interface"
 import { GuessCountryState } from "./guess-country.state"
 
 @Injectable({

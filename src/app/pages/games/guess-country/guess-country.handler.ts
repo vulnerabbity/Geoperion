@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { Router } from "@angular/router"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
-import { GuessCountryService } from "src/app/features/games/guess-country.service"
+import { GuessCountryService } from "src/app/features/games/guess-country/guess-country.service"
 import { GamesLinksService } from "../games-links.service"
 import { GamesRouterService } from "../games-router.service"
 import { GuessCountryPagesService } from "./guess-country-pages.service"

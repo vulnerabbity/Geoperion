@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core"
 import { StorageService } from "src/app/common/services/storage.service"
+import { GameConfigEvents } from "./game-config.events"
 import { GameDifficulty } from "./settings.interface"
 
 @Injectable({
@@ -8,7 +9,7 @@ import { GameDifficulty } from "./settings.interface"
 export class GameDifficultyConfig {
   private storageKey = "game-difficulty"
 
-  constructor(private storage: StorageService) {}
+  constructor(private storage: StorageService, private events: GameConfigEvents) {}
 
   async get() {
     const result = await this.storage.get<GameDifficulty>(this.storageKey)
@@ -17,5 +18,6 @@ export class GameDifficultyConfig {
 
   async set(difficulty: GameDifficulty) {
     await this.storage.set(this.storageKey, difficulty)
+    this.events.configChanged$.next()
   }
 }

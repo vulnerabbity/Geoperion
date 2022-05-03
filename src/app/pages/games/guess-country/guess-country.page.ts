@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
-import { GuessCountryService } from "src/app/features/games/guess-country.service"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
 import { GuessCountrySelectablePage } from "./guess-country.interface"

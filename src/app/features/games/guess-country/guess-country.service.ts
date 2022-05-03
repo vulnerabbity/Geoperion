@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { getRandomIndex } from "src/app/common/functions/random.functions"
 import { CountriesService } from "../../countries/countries.service"
-import { getTestingGuessCountryConfig, GuessCountryConfig } from "./guess-country.config"
+import { GuessCountryConfig } from "./guess-country.config"
 import { GuessCountryPage } from "./guess-country.interface"
 
 @Injectable({ providedIn: "root" })
@@ -33,12 +33,4 @@ export class GuessCountryService {
 
     return this.countriesService.getManyRandomUnique({ limit: answersLength })
   }
-}
-
-export function getGuessCountryTestingService() {
-  const config = getTestingGuessCountryConfig()
-  const countriesService = new CountriesService()
-  const service = new GuessCountryService(config, countriesService)
-
-  return service
 }

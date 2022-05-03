@@ -1,4 +1,4 @@
-import { GuessCountryPage } from "src/app/features/games/guess-country.interface"
+import { GuessCountryPage } from "src/app/features/games/guess-country/guess-country.interface"
 
 export type GuessCountryDifficulty = "easy" | "medium" | "hard" | "insane"
 
