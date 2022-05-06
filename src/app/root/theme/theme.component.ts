@@ -14,7 +14,7 @@ enum CssBackgroundClasses {
   styleUrls: ["./theme.component.scss"],
 })
 export class RootThemeDefinerComponent {
-  private theme = this.themeState.getDefault()
+  theme = this.themeState.getDefault()
 
   private lastBackground = CssBackgroundClasses.light
 
