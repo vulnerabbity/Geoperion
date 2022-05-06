@@ -1,6 +1,27 @@
+@import "../../../../../styles/themes/themes.scss";
+
 .accent-preview {
   height: 4rem;
   width: 4rem;
 
   border-radius: 50%;
+}
+
+:host ::ng-deep color-picker {
+  div {
+    // disable unrequited hex information
+    .hex-text {
+      display: none !important;
+    }
+    .type-policy {
+      display: none !important;
+    }
+
+    // ionic styling
+    border: 0px;
+    .box {
+      background-color: var(--ion-toolbar-background) !important;
+      margin-bottom: 0;
+    }
+  }
 }

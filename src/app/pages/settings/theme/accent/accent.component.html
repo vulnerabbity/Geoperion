@@ -1,4 +1,10 @@
 <ion-item>
   <ion-label>Accent</ion-label>
-  <button class="accent-preview" [ngStyle]="{ backgroundColor: getAccent() }"></button>
+  <button
+    class="accent-preview"
+    [(colorPicker)]="accent"
+    cpAlphaChannel="disabled"
+    (colorPickerChange)="emitAccentChanged()"
+    [ngStyle]="{ backgroundColor: accent }"
+  ></button>
 </ion-item>

@@ -8,6 +8,7 @@ import { AppCommonModule } from "../common/common.module"
 import { IonicStorageModule } from "@ionic/storage-angular"
 import { GameSettingsModule } from "../features/settings/settings.module"
 import { RootThemeDefinerComponent } from "./theme/theme.component"
+import { ColorPickerModule } from "ngx-color-picker"
 
 const IonicRouteStrategyProvider: Provider = {
   provide: RouteReuseStrategy,
@@ -24,6 +25,7 @@ const IonicRouteStrategyProvider: Provider = {
     AppCommonModule,
     IonicStorageModule.forRoot(),
     GameSettingsModule,
+    ColorPickerModule,
   ],
   providers: [IonicRouteStrategyProvider],
   bootstrap: [RootComponent],

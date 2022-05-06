@@ -1,4 +1,6 @@
-import { Component } from "@angular/core"
+import { Component, OnDestroy } from "@angular/core"
+import { Subject, timer } from "rxjs"
+import { debounce } from "rxjs/operators"
 import { AppThemeEventsBus } from "src/app/features/settings/theme/theme.events-bus"
 import { AppThemeState } from "src/app/features/settings/theme/theme.state"
 
@@ -7,24 +9,45 @@ import { AppThemeState } from "src/app/features/settings/theme/theme.state"
   templateUrl: "./accent.component.html",
   styleUrls: ["./accent.component.scss"],
 })
-export class SettingsPageAccentComponent {
-  private accent: string = this.getDefaultBackground()
+export class SettingsPageAccentComponent implements OnDestroy {
+  accent: string = this.getDefaultBackground()
+
+  private accentChanged$ = new Subject<void>()
+
+  private onAccentChangeSub = this.saveAccentOnChange()
+  private themeStateSub = this.subscribeToTheme()
 
   constructor(private themeState: AppThemeState, private themeEvents: AppThemeEventsBus) {}
 
-  getAccent() {
-    const isFirstHash = this.accent[0] === "#"
-    if (isFirstHash === false) {
-      return `#${this.accent}`
-    }
-    return this.accent
+  ngOnDestroy(): void {
+    this.onAccentChangeSub.unsubscribe()
+    this.themeStateSub.unsubscribe()
   }
 
-  change() {
-    this.themeEvents.changeAccent$.next({ hexColor: "ccc" })
+  emitAccentChanged() {
+    this.accentChanged$.next()
+  }
+
+  private saveAccent() {
+    this.themeEvents.changeAccent$.next({ hexColor: this.accent })
   }
 
   private getDefaultBackground() {
     return this.themeState.getDefault().hexAccent
+  }
+
+  private subscribeToTheme() {
+    return this.themeState.theme$.subscribe(theme => {
+      this.accent = theme.hexAccent
+    })
+  }
+
+  private saveAccentOnChange() {
+    // if many events: save every 100ms
+    const debouncedAccentChange$ = this.accentChanged$.pipe(debounce(() => timer(100)))
+
+    return debouncedAccentChange$.subscribe(() => {
+      this.saveAccent()
+    })
   }
 }
