@@ -4,6 +4,9 @@ import { AppThemeState } from "src/app/features/settings/theme/theme.state"
 // to map background to class name
 enum CssBackgroundClasses {
   light = "light-background-theme",
+  nord = "nord-background-theme",
+  github = "github-background-theme",
+  retro = "retro-background-theme",
   dark = "dark-background-theme",
   black = "black-background-theme",
 }
