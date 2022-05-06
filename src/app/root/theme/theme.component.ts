@@ -4,6 +4,9 @@ import { AppThemeState } from "src/app/features/settings/theme/theme.state"
 // to map background to class name
 enum CssBackgroundClasses {
   light = "light-background-theme",
+  nord = "nord-background-theme",
+  github = "github-background-theme",
+  retro = "retro-background-theme",
   dark = "dark-background-theme",
   black = "black-background-theme",
 }
@@ -14,7 +17,7 @@ enum CssBackgroundClasses {
   styleUrls: ["./theme.component.scss"],
 })
 export class RootThemeDefinerComponent {
-  private theme = this.themeState.getDefault()
+  theme = this.themeState.getDefault()
 
   private lastBackground = CssBackgroundClasses.light
 

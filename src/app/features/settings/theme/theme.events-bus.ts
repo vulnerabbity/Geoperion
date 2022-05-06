@@ -7,4 +7,6 @@ import { AppBackgroundTheme } from "../settings.interface"
 })
 export class AppThemeEventsBus {
   changeBackground$ = new Subject<AppBackgroundTheme>()
+
+  changeAccent$ = new Subject<{ hexColor: string }>()
 }

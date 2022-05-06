@@ -1,7 +1,19 @@
-body.dark-background-theme {
-  --ion-background-color: #121212;
+@mixin github-theme-mixin {
+  --ion-background-color: #22272e;
 
-  --ion-text-color: #ffffff;
+  --ion-card-background: #2c323d;
+
+  --ion-item-background: #2d333b;
+
+  --ion-toolbar-background: #2d333b;
+
+  --ion-tab-bar-background: #2d333b;
+}
+
+body.github-background-theme {
+  @include github-theme-mixin();
+
+  --ion-text-color: #e2e2e2;
 
   --ion-border-color: #222222;
 
@@ -24,12 +36,4 @@ body.dark-background-theme {
   --ion-color-step-850: #dbdbdb;
   --ion-color-step-900: #e7e7e7;
   --ion-color-step-950: #f3f3f3;
-
-  --ion-item-background: #1e1e1e;
-
-  --ion-toolbar-background: #1f1f1f;
-
-  --ion-tab-bar-background: #1f1f1f;
-
-  --ion-card-background: #1e1e1e;
 }

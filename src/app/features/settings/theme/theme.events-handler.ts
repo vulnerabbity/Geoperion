@@ -17,11 +17,20 @@ export class AppThemeEventsHandler {
   }
 
   private startHandling() {
-    this.handleBackgroundChanged()
+    this.handleBackgroundChange()
+    this.handleAccentChange()
   }
 
-  private handleBackgroundChanged() {
-    this.eventsBus.changeBackground$.subscribe(async background => {
+  private handleAccentChange() {
+    return this.eventsBus.changeAccent$.subscribe(async ({ hexColor: accent }) => {
+      // TODO: Add constraint
+      await this.themeConfig.accentConfig.setHexColor(accent)
+      await this.emitThemeChanged()
+    })
+  }
+
+  private handleBackgroundChange() {
+    return this.eventsBus.changeBackground$.subscribe(async background => {
       await this.themeConfig.backgroundConfig.set(background)
       await this.emitThemeChanged()
     })

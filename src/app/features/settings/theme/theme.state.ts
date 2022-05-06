@@ -1,5 +1,6 @@
 import { ReplaySubject } from "rxjs"
 import { AppTheme } from "../settings.interface"
+import { getDefaultThemeHexAccent } from "./theme-accent.config"
 import { getDefaultBackgroundTheme } from "./theme-background.config"
 
 export class AppThemeState {
@@ -7,7 +8,8 @@ export class AppThemeState {
 
   getDefault(): AppTheme {
     const background = getDefaultBackgroundTheme()
+    const hexAccent = getDefaultThemeHexAccent()
 
-    return { background }
+    return { background, hexAccent }
   }
 }
