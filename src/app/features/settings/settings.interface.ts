@@ -24,4 +24,5 @@ export type AppBackgroundTheme = `${AppBackgroundThemes}`
 
 export interface AppTheme {
   background: AppBackgroundTheme
+  hexAccent: string
 }
