@@ -22,7 +22,7 @@ export class AppThemeAccentConfig {
 }
 
 export function getDefaultThemeHexAccent(): string {
-  const defaultIonicBlueAccent = "3880ff"
+  const defaultIonicBlueAccent = "#3880ff"
 
   return defaultIonicBlueAccent
 }
