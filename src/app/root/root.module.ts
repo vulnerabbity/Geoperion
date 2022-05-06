@@ -7,6 +7,7 @@ import { AppRoutingModule } from "./root-routing.module"
 import { AppCommonModule } from "../common/common.module"
 import { IonicStorageModule } from "@ionic/storage-angular"
 import { GameSettingsModule } from "../features/settings/settings.module"
+import { RootThemeDefinerComponent } from "./theme/theme.component"
 
 const IonicRouteStrategyProvider: Provider = {
   provide: RouteReuseStrategy,
@@ -14,7 +15,7 @@ const IonicRouteStrategyProvider: Provider = {
 }
 
 @NgModule({
-  declarations: [RootComponent],
+  declarations: [RootComponent, RootThemeDefinerComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
