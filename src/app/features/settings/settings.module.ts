@@ -4,8 +4,10 @@ import { GameConfig } from "./game-config"
 import { GameConfigState } from "./game-config.state"
 import { GameDifficultyConfig } from "./game-difficulty.config"
 import { GameLengthConfig } from "./game-length.config"
+import { AppThemeSettingsModule } from "./theme/theme-settings.module"
 
 @NgModule({
+  imports: [AppThemeSettingsModule],
   providers: [GameConfig, GameDifficultyConfig, GameLengthConfig],
 })
 export class GameSettingsModule {
