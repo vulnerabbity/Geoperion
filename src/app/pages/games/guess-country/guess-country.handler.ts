@@ -54,8 +54,9 @@ export class GuessCountryEventsHandler {
   private handleAnswer() {
     return this.answersEvents.answersSelected$.subscribe(({ answerIndex }) => {
       const state = makeDeepCopy(this.stateSnapshot)
+      const currentPageIndex = state.currentPageIndex
 
-      const currentPage = state.pages[this.stateSnapshot.currentPageIndex]
+      const currentPage = state.pages[currentPageIndex]
       currentPage.selectedAnswerIndex = answerIndex
 
       this.state.state$.next(state)
@@ -77,6 +78,7 @@ export class GuessCountryEventsHandler {
       if (needHandle) {
         this.stateSnapshot.currentPageIndex += 1
 
+        this.headerEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
         this.state.state$.next(this.stateSnapshot)
       }
     })
@@ -88,6 +90,7 @@ export class GuessCountryEventsHandler {
       if (needHandle) {
         this.stateSnapshot.currentPageIndex -= 1
 
+        this.headerEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
         this.state.state$.next(this.stateSnapshot)
       }
     })
@@ -97,5 +100,11 @@ export class GuessCountryEventsHandler {
     return this.state.state$.subscribe(state => {
       this.stateSnapshot = state
     })
+  }
+
+  private getProgress() {
+    const lastIndex = this.stateSnapshot.pages.length - 1
+    const currentIndex = this.stateSnapshot.currentPageIndex
+    return currentIndex / lastIndex
   }
 }

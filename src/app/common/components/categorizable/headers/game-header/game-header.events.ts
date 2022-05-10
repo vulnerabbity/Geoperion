@@ -10,4 +10,14 @@ export class GameHeaderEvents {
   restart$ = new Subject<void>()
 
   progressChanged$ = new Subject<{ fractionsOfOne: number }>()
+
+  constructor() {
+    this.resetProgressOnRestart()
+  }
+
+  private resetProgressOnRestart() {
+    return this.restart$.subscribe(() => {
+      this.progressChanged$.next({ fractionsOfOne: 0 })
+    })
+  }
 }
