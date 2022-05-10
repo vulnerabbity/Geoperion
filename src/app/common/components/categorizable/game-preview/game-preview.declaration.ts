@@ -1,3 +1,3 @@
-import { GuessCountryGamePreviewComponent } from "./guess-country/guess-country.component"
+import { GamePreviewWithFlagComponent } from "./with-flag/game-preview-with-flag.component"
 
-export const CommonGamesPreviewsComponents = [GuessCountryGamePreviewComponent]
+export const CommonGamesPreviewsComponents = [GamePreviewWithFlagComponent]
