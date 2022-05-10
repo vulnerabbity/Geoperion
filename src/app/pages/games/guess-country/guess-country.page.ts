@@ -59,7 +59,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   }
 
   private async startNewGame() {
-    this.eventsBuss.startNewGame$.next()
+    this.state.init$.next()
   }
 
   private subscribeToState() {

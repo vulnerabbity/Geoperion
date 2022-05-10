@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core"
+import { GameHeaderEvents } from "src/app/common/components/categorizable/headers/game-header/game-header.events"
 import { CommonAnswersComponentEvents } from "src/app/common/components/unique/answers/answers.events"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
@@ -19,33 +20,38 @@ export class GuessCountryEventsHandler {
     private countriesGamesService: CountriesGamesService,
     private pagesService: GuessCountryPagesService,
     private gamesRouter: GamesRouterService,
+    private headerEvents: GameHeaderEvents,
     private answersEvents: CommonAnswersComponentEvents,
   ) {
     this.startHandling()
   }
 
   startHandling() {
-    this.handleNewGame()
     this.handleAnswer()
+    this.handleHeaderActions()
+    this.handleStateInit()
 
-    this.handleExit()
     this.handleNextPage()
     this.handlePrevPage()
 
     this.subscribeToState()
   }
 
-  handleNewGame() {
-    return this.eventsBus.startNewGame$.subscribe(async () => {
+  private handleHeaderActions() {
+    this.headerEvents.restart$.subscribe(async () => {
       const pages = await this.countriesGamesService.getPages()
       const newState = makeGuessCountryGetDefaultState()
       newState.pages = pages
 
       this.state.state$.next(newState)
     })
+
+    this.headerEvents.exit$.subscribe(() => {
+      this.gamesRouter.redirectToGames()
+    })
   }
 
-  handleAnswer() {
+  private handleAnswer() {
     return this.answersEvents.answersSelected$.subscribe(({ answerIndex }) => {
       const state = makeDeepCopy(this.stateSnapshot)
 
@@ -56,7 +62,16 @@ export class GuessCountryEventsHandler {
     })
   }
 
-  handleNextPage() {
+  private handleStateInit() {
+    this.state.init$.subscribe(async () => {
+      const pages = await this.countriesGamesService.getPages()
+      const newState = makeGuessCountryGetDefaultState()
+      newState.pages = pages
+      this.state.state$.next(newState)
+    })
+  }
+
+  private handleNextPage() {
     this.eventsBus.toNextPage$.subscribe(() => {
       const needHandle = this.pagesService.hasNoNextPage() === false
       if (needHandle) {
@@ -67,7 +82,7 @@ export class GuessCountryEventsHandler {
     })
   }
 
-  handlePrevPage() {
+  private handlePrevPage() {
     this.eventsBus.toPreviousPage$.subscribe(() => {
       const needHandle = this.pagesService.hasNoPreviousPage() === false
       if (needHandle) {
@@ -75,12 +90,6 @@ export class GuessCountryEventsHandler {
 
         this.state.state$.next(this.stateSnapshot)
       }
-    })
-  }
-
-  handleExit() {
-    this.eventsBus.exit$.subscribe(() => {
-      this.gamesRouter.redirectToGames()
     })
   }
 
