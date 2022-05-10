@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy } from "@angular/core"
-import { GuessCountryPage } from "src/app/features/games/guess-country/guess-country.interface"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { GuessCountryState } from "./guess-country.state"
 
 @Injectable({
   providedIn: "root",
 })
 export class GuessCountryPagesService implements OnDestroy {
-  private pages: GuessCountryPage[] = []
+  private pages: CountryPage[] = []
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()

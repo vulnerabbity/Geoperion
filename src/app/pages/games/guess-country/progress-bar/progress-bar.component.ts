@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from "@angular/core"
-import { GuessCountrySelectablePage } from "../guess-country.interface"
+import { Component, OnDestroy } from "@angular/core"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { GuessCountryState } from "../guess-country.state"
 
 @Component({
@@ -8,7 +8,7 @@ import { GuessCountryState } from "../guess-country.state"
   styleUrls: ["./progress-bar.component.scss"],
 })
 export class GuessCountryProgressBarComponent implements OnDestroy {
-  private pages: GuessCountrySelectablePage[] = []
+  private pages: CountryPage[] = []
 
   private currentPageIndex = 0
 

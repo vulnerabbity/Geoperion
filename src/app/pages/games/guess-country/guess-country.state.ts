@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core"
 import { BehaviorSubject } from "rxjs"
-import { GuessCountrySelectablePage } from "./guess-country.interface"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 
 export interface GuessCountryStateObject {
-  pages: GuessCountrySelectablePage[]
+  pages: CountryPage[]
   currentPageIndex: number
 }
 

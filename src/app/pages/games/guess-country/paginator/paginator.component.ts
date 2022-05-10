@@ -1,8 +1,6 @@
-import { Component, OnDestroy } from "@angular/core"
+import { Component } from "@angular/core"
 import { GuessCountryPagesService } from "../guess-country-pages.service"
 import { GuessCountryGameEventsBus } from "../guess-country.events-bus"
-import { GuessCountrySelectablePage } from "../guess-country.interface"
-import { GuessCountryState } from "../guess-country.state"
 
 @Component({
   selector: "guess-country__paginator",

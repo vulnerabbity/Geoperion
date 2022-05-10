@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { IonicColor } from "src/app/interfaces/ionic.interface"
 import { GuessCountryGameEventsBus } from "../guess-country.events-bus"
-import { GuessCountrySelectablePage } from "../guess-country.interface"
 
 @Component({
   selector: "guess-country__answers[page]",
@@ -12,7 +12,7 @@ export class GuessCountryAnswersComponent {
   constructor(private eventsBuss: GuessCountryGameEventsBus) {}
 
   @Input()
-  page?: GuessCountrySelectablePage
+  page?: CountryPage
 
   answer(answerIndex: number) {
     if (this.isAnswered()) {

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { Subject } from "rxjs"
-import { GuessCountryDifficulty } from "./guess-country.interface"
+import { GameDifficulty } from "src/app/features/settings/settings.interface"
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +8,7 @@ import { GuessCountryDifficulty } from "./guess-country.interface"
 export class GuessCountryGameEventsBus {
   startNewGame$ = new Subject<void>()
 
-  changeDifficulty$ = new Subject<GuessCountryDifficulty>()
+  changeDifficulty$ = new Subject<GameDifficulty>()
 
   changeGameLength$ = new Subject()
 

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
-import { GuessCountrySelectablePage } from "./guess-country.interface"
 import { GuessCountryState } from "./guess-country.state"
 
 @Component({
@@ -9,7 +9,7 @@ import { GuessCountryState } from "./guess-country.state"
   styleUrls: ["./guess-country.page.scss"],
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
-  pages: GuessCountrySelectablePage[] = []
+  pages: CountryPage[] = []
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()
