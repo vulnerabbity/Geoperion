@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core"
 import { getRandomIndex } from "src/app/common/functions/random.functions"
 import { CountriesService } from "../../countries/countries.service"
-import { GuessCountryConfig } from "./guess-country.config"
+import { GamesDefaultConfigService } from "../config/games-default-config.service"
+
 import { GuessCountryPage } from "./guess-country.interface"
 
 @Injectable({ providedIn: "root" })
 export class GuessCountryService {
-  constructor(private config: GuessCountryConfig, private countriesService: CountriesService) {}
+  constructor(
+    private config: GamesDefaultConfigService,
+    private countriesService: CountriesService,
+  ) {}
 
   async getPages() {
     const pagesNumber = await this.config.getGameLength()
