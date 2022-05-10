@@ -1,24 +1,24 @@
 import { Component, Input } from "@angular/core"
-import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
+import { GamePage } from "src/app/features/games/games.interface"
 import { IonicColor } from "src/app/interfaces/ionic.interface"
-import { GuessCountryGameEventsBus } from "../guess-country.events-bus"
+import { CommonAnswersComponentEvents } from "./answers.events"
 
 @Component({
-  selector: "guess-country__answers[page]",
+  selector: "common-answers[page]",
   templateUrl: "./answers.component.html",
   styleUrls: ["./answers.component.scss"],
 })
-export class GuessCountryAnswersComponent {
-  constructor(private eventsBuss: GuessCountryGameEventsBus) {}
+export class CommonAnswersComponent {
+  constructor(private events: CommonAnswersComponentEvents) {}
 
   @Input()
-  page?: CountryPage
+  page?: GamePage<any>
 
   answer(answerIndex: number) {
     if (this.isAnswered()) {
       return
     }
-    this.eventsBuss.selectAnswer$.next({ answerIndex })
+    this.events.answersSelected$.next({ answerIndex })
   }
 
   isButtonsDisabled() {
@@ -43,15 +43,6 @@ export class GuessCountryAnswersComponent {
     }
 
     return ""
-  }
-
-  private isRightAnswer(): boolean {
-    const page = this.page
-    if (!page) {
-      return false
-    }
-
-    return page.rightAnswerIndex === page.selectedAnswerIndex
   }
 
   private isAnswered(): boolean {

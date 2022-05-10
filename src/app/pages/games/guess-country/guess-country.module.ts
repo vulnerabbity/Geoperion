@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core"
 import { AppCommonModule } from "src/app/common/common.module"
-import { GuessCountryAnswersComponent } from "./answeres/answers.component"
 import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
 import { GuessCountryEventsHandler } from "./guess-country.handler"
 import { GuessCountryGamePage } from "./guess-country.page"
@@ -13,7 +12,6 @@ import { GuessCountryProgressBarComponent } from "./progress-bar/progress-bar.co
   imports: [AppCommonModule],
   declarations: [
     GuessCountryGamePage,
-    GuessCountryAnswersComponent,
     GuessCountryPaginatorComponent,
     GuessCountryProgressBarComponent,
     GuessCountryHeaderComponent,

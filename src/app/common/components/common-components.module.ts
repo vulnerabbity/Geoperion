@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common"
 import { NgModule } from "@angular/core"
 import { RouterModule } from "@angular/router"
 import { IonicModule } from "@ionic/angular"
@@ -7,7 +8,7 @@ import { UniqueCommonComponents } from "./unique/unique.declaration"
 const components = [...UniqueCommonComponents, ...CommonCategorizableComponents]
 
 @NgModule({
-  imports: [IonicModule, RouterModule],
+  imports: [IonicModule, RouterModule, CommonModule],
   declarations: [...components],
   exports: [...components],
 })

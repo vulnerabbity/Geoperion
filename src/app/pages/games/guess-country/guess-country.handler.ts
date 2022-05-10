@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core"
+import { CommonAnswersComponentEvents } from "src/app/common/components/unique/answers/answers.events"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
 import { GamesRouterService } from "../games-router.service"
@@ -18,6 +19,7 @@ export class GuessCountryEventsHandler {
     private countriesGamesService: CountriesGamesService,
     private pagesService: GuessCountryPagesService,
     private gamesRouter: GamesRouterService,
+    private answersEvents: CommonAnswersComponentEvents,
   ) {
     this.startHandling()
   }
@@ -44,7 +46,7 @@ export class GuessCountryEventsHandler {
   }
 
   handleAnswer() {
-    return this.eventsBus.selectAnswer$.subscribe(({ answerIndex }) => {
+    return this.answersEvents.answersSelected$.subscribe(({ answerIndex }) => {
       const state = makeDeepCopy(this.stateSnapshot)
 
       const currentPage = state.pages[this.stateSnapshot.currentPageIndex]
