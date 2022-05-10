@@ -5,8 +5,9 @@ import { GuessCountryGamePage } from "./guess-country/guess-country.page"
 
 export const GamesPaths = {
   GuessCountry: "guess-country",
+  GuessCapital: "guess-capital",
   Games: "games",
-}
+} as const
 
 const gamesRoute: Route = {
   path: "",
