@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from "@angular/core"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
-import { GuessCountryState } from "./guess-country.state"
+import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +11,7 @@ export class GuessCountryPagesService implements OnDestroy {
 
   private stateSub = this.subscribeToState()
 
-  constructor(private state: GuessCountryState) {}
+  constructor(private state: CountriesGamesState) {}
 
   ngOnDestroy(): void {
     this.stateSub.unsubscribe()

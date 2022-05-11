@@ -2,18 +2,22 @@ import { Injectable } from "@angular/core"
 import { CommonGameComponentsEvents } from "src/app/common/components/game/game-events"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
+import {
+  CountriesGamesState,
+  CountriesGamesStateOject,
+  makeCountriesGamesState,
+} from "src/app/features/games/countries/countries-games.state"
 import { GamesRouterService } from "../games-router.service"
 import { GuessCountryPagesService } from "./guess-country-pages.service"
-import { makeGuessCountryGetDefaultState, GuessCountryState } from "./guess-country.state"
 
 @Injectable({
   providedIn: "root",
 })
 export class GuessCountryEventsHandler {
-  private stateSnapshot = makeGuessCountryGetDefaultState()
+  private stateSnapshot = makeCountriesGamesState()
 
   constructor(
-    private state: GuessCountryState,
+    private state: CountriesGamesState,
     private componentsEvents: CommonGameComponentsEvents,
     private countriesGamesService: CountriesGamesService,
     private pagesService: GuessCountryPagesService,
@@ -25,7 +29,6 @@ export class GuessCountryEventsHandler {
   startHandling() {
     this.handleAnswer()
     this.handleHeaderActions()
-    this.handleStateInit()
 
     this.handleNextPage()
     this.handlePrevPage()
@@ -36,7 +39,7 @@ export class GuessCountryEventsHandler {
   private handleHeaderActions() {
     this.componentsEvents.restarted$.subscribe(async () => {
       const pages = await this.countriesGamesService.getPages()
-      const newState = makeGuessCountryGetDefaultState()
+      const newState = makeCountriesGamesState()
       newState.pages = pages
 
       this.state.state$.next(newState)
@@ -85,30 +88,20 @@ export class GuessCountryEventsHandler {
     })
   }
 
-  private handleStateInit() {
-    this.state.init$.subscribe(async () => {
-      const pages = await this.countriesGamesService.getPages()
-      const newState = makeGuessCountryGetDefaultState()
-      newState.pages = pages
-      this.state.state$.next(newState)
-
-      const totalPages = pages.length
-      this.componentsEvents.totalPagesChanged$.next({ totalPages })
-    })
-  }
-
   private handleStateChange() {
-    return this.state.state$.subscribe(newState => {
-      this.stateSnapshot = newState
-
-      const currentPageIndex = newState.currentPageIndex
-      const totalPages = newState.pages.length
-      this.componentsEvents.currentPageChanged$.next({ pageIndex: currentPageIndex })
-      this.componentsEvents.totalPagesChanged$.next({ totalPages })
-    })
+    return this.state.state$.subscribe(newState => this.updateState(newState))
   }
 
   private copyState() {
     return makeDeepCopy(this.stateSnapshot)
+  }
+
+  private updateState(newState: CountriesGamesStateOject) {
+    this.stateSnapshot = newState
+
+    const currentPageIndex = newState.currentPageIndex
+    const totalPages = newState.pages.length
+    this.componentsEvents.currentPageChanged$.next({ pageIndex: currentPageIndex })
+    this.componentsEvents.totalPagesChanged$.next({ totalPages })
   }
 }

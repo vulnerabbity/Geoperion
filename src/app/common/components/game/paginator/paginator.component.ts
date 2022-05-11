@@ -31,7 +31,8 @@ export class GuessCountryPaginatorComponent implements OnDestroy {
   }
 
   private handleStateChange() {
-    return this.state.pagesState$.subscribe(({ hasNextPage, hasPreviousPage }) => {
+    return this.state.pagesState$.subscribe(({ hasNextPage, hasPreviousPage, totalPages }) => {
+      // console.log(totalPages)
       this.isPrevDisabled = hasPreviousPage === false
       this.isNextDisabled = hasNextPage === false
     })

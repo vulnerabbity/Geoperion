@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
+import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
-import { GuessCountryState } from "./guess-country.state"
 
 @Component({
   templateUrl: "./guess-country.page.html",
@@ -13,14 +13,10 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   private stateSub = this.subscribeToState()
 
-  constructor(private state: GuessCountryState) {}
+  constructor(private state: CountriesGamesState) {}
 
   async ngOnInit() {
     await this.startNewGame()
-  }
-
-  ngOnDestroy(): void {
-    this.stateSub.unsubscribe()
   }
 
   getTotalPages() {
@@ -58,7 +54,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   }
 
   private async startNewGame() {
-    this.state.init$.next()
+    this.state.startNewState()
   }
 
   private subscribeToState() {
@@ -66,5 +62,10 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
       this.pages = state.pages
       this.currentPageIndex = state.currentPageIndex
     })
+  }
+
+  ngOnDestroy(): void {
+    this.stateSub.unsubscribe()
+    console.log("destroyed")
   }
 }
