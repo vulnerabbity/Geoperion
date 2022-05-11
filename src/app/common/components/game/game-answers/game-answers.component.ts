@@ -5,8 +5,8 @@ import { CommonGameComponentsEvents } from "../game-events"
 
 @Component({
   selector: "common-answers[page]",
-  templateUrl: "./answers.component.html",
-  styleUrls: ["./answers.component.scss"],
+  templateUrl: "./game-answers.component.html",
+  styleUrls: ["./game-answers.component.scss"],
 })
 export class CommonGameAnswersComponent {
   constructor(private events: CommonGameComponentsEvents) {}
