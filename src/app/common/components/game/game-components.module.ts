@@ -15,7 +15,6 @@ const components: NgModule["declarations"] = [
 
 @NgModule({
   imports: [CommonModule, IonicModule],
-  providers: [],
   declarations: [...components],
   exports: [...components],
 })

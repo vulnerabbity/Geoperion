@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
-import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
 import { GuessCountryState } from "./guess-country.state"
 
 @Component({
@@ -14,7 +13,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   private stateSub = this.subscribeToState()
 
-  constructor(private state: GuessCountryState, private eventsBuss: GuessCountryGameEventsBus) {}
+  constructor(private state: GuessCountryState) {}
 
   async ngOnInit() {
     await this.startNewGame()

@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from "@angular/core"
 import { CommonGameComponentsEvents } from "../game-events"
+import { CommonGameComponentsState } from "../game-state"
 
 @Component({
   selector: "common-game-header",
@@ -11,7 +12,10 @@ export class CommonGameHeaderComponent implements OnDestroy {
 
   private progressSub = this.subscribeToProgress()
 
-  constructor(private events: CommonGameComponentsEvents) {}
+  constructor(
+    private events: CommonGameComponentsEvents,
+    private state: CommonGameComponentsState,
+  ) {}
 
   onRestart() {
     this.events.restarted$.next()
@@ -26,7 +30,7 @@ export class CommonGameHeaderComponent implements OnDestroy {
   }
 
   private subscribeToProgress() {
-    return this.events.progressChanged$.subscribe(({ fractionsOfOne: newProgress }) => {
+    return this.state.pagesState$.subscribe(({ progress: newProgress }) => {
       this.progress = newProgress
     })
   }

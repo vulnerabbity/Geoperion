@@ -4,7 +4,6 @@ import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
 import { GamesRouterService } from "../games-router.service"
 import { GuessCountryPagesService } from "./guess-country-pages.service"
-import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
 import { makeGuessCountryGetDefaultState, GuessCountryState } from "./guess-country.state"
 
 @Injectable({
@@ -15,7 +14,6 @@ export class GuessCountryEventsHandler {
 
   constructor(
     private state: GuessCountryState,
-    private eventsBus: GuessCountryGameEventsBus,
     private componentsEvents: CommonGameComponentsEvents,
     private countriesGamesService: CountriesGamesService,
     private pagesService: GuessCountryPagesService,
@@ -32,7 +30,7 @@ export class GuessCountryEventsHandler {
     this.handleNextPage()
     this.handlePrevPage()
 
-    this.subscribeToState()
+    this.handleStateChange()
   }
 
   private handleHeaderActions() {
@@ -61,48 +59,56 @@ export class GuessCountryEventsHandler {
     })
   }
 
+  private handleNextPage() {
+    this.componentsEvents.nextPageSelected$.subscribe(() => {
+      const needHandle = this.pagesService.hasNoNextPage() === false
+      if (needHandle) {
+        const newState = this.copyState()
+        newState.currentPageIndex += 1
+
+        this.state.state$.next(newState)
+        this.componentsEvents.currentPageChanged$.next({ pageIndex: newState.currentPageIndex })
+      }
+    })
+  }
+
+  private handlePrevPage() {
+    this.componentsEvents.previousPageSelected$.subscribe(() => {
+      const needHandle = this.pagesService.hasNoPreviousPage() === false
+      if (needHandle) {
+        const newState = this.copyState()
+        newState.currentPageIndex -= 1
+
+        this.state.state$.next(newState)
+        this.componentsEvents.currentPageChanged$.next({ pageIndex: newState.currentPageIndex })
+      }
+    })
+  }
+
   private handleStateInit() {
     this.state.init$.subscribe(async () => {
       const pages = await this.countriesGamesService.getPages()
       const newState = makeGuessCountryGetDefaultState()
       newState.pages = pages
       this.state.state$.next(newState)
+
+      const totalPages = pages.length
+      this.componentsEvents.totalPagesChanged$.next({ totalPages })
     })
   }
 
-  private handleNextPage() {
-    this.eventsBus.toNextPage$.subscribe(() => {
-      const needHandle = this.pagesService.hasNoNextPage() === false
-      if (needHandle) {
-        this.stateSnapshot.currentPageIndex += 1
+  private handleStateChange() {
+    return this.state.state$.subscribe(newState => {
+      this.stateSnapshot = newState
 
-        this.componentsEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
-        this.state.state$.next(this.stateSnapshot)
-      }
+      const currentPageIndex = newState.currentPageIndex
+      const totalPages = newState.pages.length
+      this.componentsEvents.currentPageChanged$.next({ pageIndex: currentPageIndex })
+      this.componentsEvents.totalPagesChanged$.next({ totalPages })
     })
   }
 
-  private handlePrevPage() {
-    this.eventsBus.toPreviousPage$.subscribe(() => {
-      const needHandle = this.pagesService.hasNoPreviousPage() === false
-      if (needHandle) {
-        this.stateSnapshot.currentPageIndex -= 1
-
-        this.componentsEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
-        this.state.state$.next(this.stateSnapshot)
-      }
-    })
-  }
-
-  private subscribeToState() {
-    return this.state.state$.subscribe(state => {
-      this.stateSnapshot = state
-    })
-  }
-
-  private getProgress() {
-    const lastIndex = this.stateSnapshot.pages.length - 1
-    const currentIndex = this.stateSnapshot.currentPageIndex
-    return currentIndex / lastIndex
+  private copyState() {
+    return makeDeepCopy(this.stateSnapshot)
   }
 }
