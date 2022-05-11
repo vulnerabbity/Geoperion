@@ -5,9 +5,11 @@ import { IonicModule } from "@ionic/angular"
 import { CommonGameComponentsModule } from "./game/game-components.module"
 import { CommonUniqueComponents } from "./unique/unique.declaration"
 
+const declarations: NgModule["declarations"] = [...CommonUniqueComponents]
+
 @NgModule({
   imports: [IonicModule, RouterModule, CommonModule, CommonGameComponentsModule],
-  exports: [CommonGameComponentsModule],
-  declarations: [...CommonUniqueComponents],
+  declarations,
+  exports: [CommonGameComponentsModule, ...declarations],
 })
 export class CommonComponentsModule {}
