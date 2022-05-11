@@ -4,7 +4,7 @@ import { IonicColor } from "src/app/interfaces/ionic.interface"
 import { CommonGameComponentsEvents } from "../game-events"
 
 @Component({
-  selector: "common-answers[page]",
+  selector: "common-game-answers[page]",
   templateUrl: "./game-answers.component.html",
   styleUrls: ["./game-answers.component.scss"],
 })

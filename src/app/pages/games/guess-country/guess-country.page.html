@@ -3,14 +3,12 @@
 
   <p class="progress-numbers">{{getAnsweredNumber()}}/{{getTotalPages()}}</p>
 
-  <ng-template [ngIf]="pages.length > 0">
-    <div class="flag-image-container">
-      <img class="flag-image" [src]="getCurrentPageFlag()" alt="flag of country" />
-    </div>
-  </ng-template>
+  <div class="flag-image-container" *ngIf="pages.length > 0">
+    <img class="flag-image" [src]="getCurrentPageFlag()" alt="flag of country" />
+  </div>
 
   <div class="answers">
-    <common-answers [page]="getCurrentPage()"></common-answers>
+    <common-game-answers [page]="getCurrentPage()"></common-game-answers>
   </div>
   <div class="paginator">
     <guess-country__paginator></guess-country__paginator>

@@ -25,6 +25,7 @@ export class CountriesGamesState {
     this.state$.next(newState)
   }
 }
+
 export function makeCountriesGamesState(): CountriesGamesStateOject {
   return {
     currentPageIndex: 0,

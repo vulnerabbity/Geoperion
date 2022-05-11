@@ -7,20 +7,18 @@ import {
   CountriesGamesStateOject,
   makeCountriesGamesState,
 } from "src/app/features/games/countries/countries-games.state"
-import { GamesRouterService } from "../games-router.service"
-import { GuessCountryPagesService } from "./guess-country-pages.service"
+import { GamesRouterService } from "src/app/pages/games/games-router.service"
 
 @Injectable({
   providedIn: "root",
 })
-export class GuessCountryEventsHandler {
+export class CountriesGamesEventsHandler {
   private stateSnapshot = makeCountriesGamesState()
 
   constructor(
     private state: CountriesGamesState,
     private componentsEvents: CommonGameComponentsEvents,
     private countriesGamesService: CountriesGamesService,
-    private pagesService: GuessCountryPagesService,
     private gamesRouter: GamesRouterService,
   ) {
     this.startHandling()
@@ -64,7 +62,7 @@ export class GuessCountryEventsHandler {
 
   private handleNextPage() {
     this.componentsEvents.nextPageSelected$.subscribe(() => {
-      const needHandle = this.pagesService.hasNoNextPage() === false
+      const needHandle = this.hasNextPage()
       if (needHandle) {
         const newState = this.copyState()
         newState.currentPageIndex += 1
@@ -77,7 +75,8 @@ export class GuessCountryEventsHandler {
 
   private handlePrevPage() {
     this.componentsEvents.previousPageSelected$.subscribe(() => {
-      const needHandle = this.pagesService.hasNoPreviousPage() === false
+      const needHandle = this.hasPreviousPage()
+
       if (needHandle) {
         const newState = this.copyState()
         newState.currentPageIndex -= 1
@@ -103,5 +102,16 @@ export class GuessCountryEventsHandler {
     const totalPages = newState.pages.length
     this.componentsEvents.currentPageChanged$.next({ pageIndex: currentPageIndex })
     this.componentsEvents.totalPagesChanged$.next({ totalPages })
+  }
+
+  private hasNextPage() {
+    const lastPageIndex = this.stateSnapshot.pages.length - 1
+    const currentPageIndex = this.stateSnapshot.currentPageIndex
+
+    return currentPageIndex < lastPageIndex
+  }
+
+  private hasPreviousPage() {
+    return this.stateSnapshot.currentPageIndex > 0
   }
 }
