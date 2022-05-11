@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from "@angular/core"
+import { Component, Input } from "@angular/core"
 
 @Component({
   selector: "common-game-header__progress-bar",

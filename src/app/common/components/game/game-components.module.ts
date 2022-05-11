@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { NgModule } from "@angular/core"
+import { IonicModule } from "@ionic/angular"
 import { CommonGameAnswersComponent } from "./answers/answers.component"
 import { CommonGameHeaderComponent } from "./game-header/game-header.component"
 import { CommonGameHeaderProgressBar } from "./game-header/progress-bar/progress-bar.component"
@@ -13,7 +14,7 @@ const components: NgModule["declarations"] = [
 ]
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, IonicModule],
   providers: [],
   declarations: [...components],
   exports: [...components],

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core"
-import { CommonAnswersComponentEvents } from "src/app/common/components/game/answers/answers.events"
-import { GameHeaderEvents } from "src/app/common/components/game/game-header/game-header.events"
+import { CommonGameComponentsEvents } from "src/app/common/components/game/game-events"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
 import { GamesRouterService } from "../games-router.service"
@@ -17,11 +16,10 @@ export class GuessCountryEventsHandler {
   constructor(
     private state: GuessCountryState,
     private eventsBus: GuessCountryGameEventsBus,
+    private componentsEvents: CommonGameComponentsEvents,
     private countriesGamesService: CountriesGamesService,
     private pagesService: GuessCountryPagesService,
     private gamesRouter: GamesRouterService,
-    private headerEvents: GameHeaderEvents,
-    private answersEvents: CommonAnswersComponentEvents,
   ) {
     this.startHandling()
   }
@@ -38,7 +36,7 @@ export class GuessCountryEventsHandler {
   }
 
   private handleHeaderActions() {
-    this.headerEvents.restart$.subscribe(async () => {
+    this.componentsEvents.restarted$.subscribe(async () => {
       const pages = await this.countriesGamesService.getPages()
       const newState = makeGuessCountryGetDefaultState()
       newState.pages = pages
@@ -46,13 +44,13 @@ export class GuessCountryEventsHandler {
       this.state.state$.next(newState)
     })
 
-    this.headerEvents.exit$.subscribe(() => {
+    this.componentsEvents.exited$.subscribe(() => {
       this.gamesRouter.redirectToGames()
     })
   }
 
   private handleAnswer() {
-    return this.answersEvents.answersSelected$.subscribe(({ answerIndex }) => {
+    return this.componentsEvents.answerSelected$.subscribe(({ answerIndex }) => {
       const state = makeDeepCopy(this.stateSnapshot)
       const currentPageIndex = state.currentPageIndex
 
@@ -78,7 +76,7 @@ export class GuessCountryEventsHandler {
       if (needHandle) {
         this.stateSnapshot.currentPageIndex += 1
 
-        this.headerEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
+        this.componentsEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
         this.state.state$.next(this.stateSnapshot)
       }
     })
@@ -90,7 +88,7 @@ export class GuessCountryEventsHandler {
       if (needHandle) {
         this.stateSnapshot.currentPageIndex -= 1
 
-        this.headerEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
+        this.componentsEvents.progressChanged$.next({ fractionsOfOne: this.getProgress() })
         this.state.state$.next(this.stateSnapshot)
       }
     })

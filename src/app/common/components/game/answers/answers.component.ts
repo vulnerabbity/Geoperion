@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core"
 import { GamePage } from "src/app/features/games/games.interface"
 import { IonicColor } from "src/app/interfaces/ionic.interface"
-import { CommonAnswersComponentEvents } from "./answers.events"
+import { CommonGameComponentsEvents } from "../game-events"
 
 @Component({
   selector: "common-answers[page]",
@@ -9,7 +9,7 @@ import { CommonAnswersComponentEvents } from "./answers.events"
   styleUrls: ["./answers.component.scss"],
 })
 export class CommonGameAnswersComponent {
-  constructor(private events: CommonAnswersComponentEvents) {}
+  constructor(private events: CommonGameComponentsEvents) {}
 
   @Input()
   page?: GamePage<any>
@@ -18,7 +18,7 @@ export class CommonGameAnswersComponent {
     if (this.isAnswered()) {
       return
     }
-    this.events.answersSelected$.next({ answerIndex })
+    this.events.answerSelected$.next({ answerIndex })
   }
 
   isButtonsDisabled() {

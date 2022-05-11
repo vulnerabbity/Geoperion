@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from "@angular/core"
-import { GameHeaderEvents } from "./game-header.events"
+import { CommonGameComponentsEvents } from "../game-events"
 
 @Component({
   selector: "common-game-header",
@@ -11,14 +11,14 @@ export class CommonGameHeaderComponent implements OnDestroy {
 
   private progressSub = this.subscribeToProgress()
 
-  constructor(private events: GameHeaderEvents) {}
+  constructor(private events: CommonGameComponentsEvents) {}
 
   onRestart() {
-    this.events.restart$.next()
+    this.events.restarted$.next()
   }
 
   onExit() {
-    this.events.exit$.next()
+    this.events.exited$.next()
   }
 
   ngOnDestroy(): void {
