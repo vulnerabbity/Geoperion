@@ -8,7 +8,7 @@ import { CommonAnswersComponentEvents } from "./answers.events"
   templateUrl: "./answers.component.html",
   styleUrls: ["./answers.component.scss"],
 })
-export class CommonAnswersComponent {
+export class CommonGameAnswersComponent {
   constructor(private events: CommonAnswersComponentEvents) {}
 
   @Input()

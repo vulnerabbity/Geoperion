@@ -1,4 +1,3 @@
-import { CommonAnswersComponent } from "./answers/answers.component"
-import { MainTabBarComponent } from "./main-tab-bar/tab-bar.component"
+import { CommonMainTabBarComponent } from "./main-tab-bar/tab-bar.component"
 
-export const UniqueCommonComponents = [MainTabBarComponent, CommonAnswersComponent]
+export const CommonUniqueComponents = [CommonMainTabBarComponent]

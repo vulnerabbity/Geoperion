@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { GameHeaderEvents } from "src/app/common/components/categorizable/headers/game-header/game-header.events"
-import { CommonAnswersComponentEvents } from "src/app/common/components/unique/answers/answers.events"
+import { CommonAnswersComponentEvents } from "src/app/common/components/game/answers/answers.events"
+import { GameHeaderEvents } from "src/app/common/components/game/game-header/game-header.events"
 import { makeDeepCopy } from "src/app/common/functions/copy.functions"
 import { CountriesGamesService } from "src/app/features/games/countries/countries-games.service"
 import { GamesRouterService } from "../games-router.service"
