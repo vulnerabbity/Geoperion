@@ -1,11 +1,11 @@
 <ion-list class="answers-list" *ngIf="page">
   <ion-button
     class="answer-button"
-    *ngFor="let country of page.options; let index = index"
+    *ngFor="let option of page.options; let index = index"
     [ngClass]="{ 'disabled-button': isButtonsDisabled() }"
     [color]="getButtonColor(index)"
     (click)="answer(index)"
   >
-    <ion-label>{{ country.name }}</ion-label>
+    <ion-label>{{ option.optionName }}</ion-label>
   </ion-button>
 </ion-list>

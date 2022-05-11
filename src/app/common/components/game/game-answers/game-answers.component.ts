@@ -3,6 +3,8 @@ import { GamePage } from "src/app/features/games/games.interface"
 import { IonicColor } from "src/app/interfaces/ionic.interface"
 import { CommonGameComponentsEvents } from "../game-events"
 
+export type AnswersComponentPage = GamePage<{ optionName: string }>
+
 @Component({
   selector: "common-game-answers[page]",
   templateUrl: "./game-answers.component.html",
@@ -12,7 +14,7 @@ export class CommonGameAnswersComponent {
   constructor(private events: CommonGameComponentsEvents) {}
 
   @Input()
-  page?: GamePage<any>
+  page?: AnswersComponentPage
 
   answer(answerIndex: number) {
     if (this.isAnswered()) {

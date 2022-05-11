@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
+import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
@@ -41,16 +42,25 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     return getFlagFullPath(rightCountry.flag)
   }
 
-  getCurrentPage() {
-    const currentPage = this.pages[this.currentPageIndex]
+  getAnswersPage(): AnswersComponentPage {
+    const currentPage = this.getCurrentPage()
 
-    return currentPage
+    const answersOptions = currentPage.options.map(option => {
+      return { optionName: option.name }
+    })
+
+    return { ...currentPage, options: answersOptions }
   }
 
   getCurrentRightCountry() {
     const currentPage = this.getCurrentPage()
     const rightAnswerIndex = currentPage.rightAnswerIndex
     return currentPage.options[rightAnswerIndex]
+  }
+
+  private getCurrentPage() {
+    const currentPage = this.pages[this.currentPageIndex]
+    return currentPage
   }
 
   private async startNewGame() {
