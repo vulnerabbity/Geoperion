@@ -22,7 +22,7 @@ interface PagesState {
 export class CommonGameComponentsState {
   // internal subject to prevent emitting outside this class
   // placed above public observables to use in place conversion to observables
-  private pagesStateEmitter$ = new Subject<PagesState>()
+  private pagesStateEmitter$ = new ReplaySubject<PagesState>()
 
   pagesState$ = from(this.pagesStateEmitter$)
 
