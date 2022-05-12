@@ -3,11 +3,11 @@ import { CommonGameComponentsEvents } from "../game-events"
 import { CommonGameComponentsState } from "../game-state"
 
 @Component({
-  selector: "guess-country__paginator",
+  selector: "common-game-paginator",
   templateUrl: "./paginator.component.html",
   styleUrls: ["./paginator.component.scss"],
 })
-export class GuessCountryPaginatorComponent implements OnDestroy {
+export class CommonGamePaginatorComponent implements OnDestroy {
   isNextDisabled = true
   isPrevDisabled = false
 
@@ -32,7 +32,7 @@ export class GuessCountryPaginatorComponent implements OnDestroy {
 
   private handleStateChange() {
     return this.state.pagesState$.subscribe(({ hasNextPage, hasPreviousPage, totalPages }) => {
-      // console.log(totalPages)
+      console.log("totalPages: ", totalPages)
       this.isPrevDisabled = hasPreviousPage === false
       this.isNextDisabled = hasNextPage === false
     })
