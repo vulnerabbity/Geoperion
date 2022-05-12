@@ -1,0 +1,28 @@
+.progress-numbers {
+  display: flex;
+  height: 3rem;
+
+  font-size: 2.3rem;
+
+  justify-content: center;
+
+  margin: 0 auto;
+}
+
+.paginator-container {
+  // align component to bottom
+  display: flex;
+  flex-direction: column-reverse;
+
+  height: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.game-title {
+  display: block;
+  height: 3rem;
+  margin: 1rem 0;
+
+  font-size: min(2rem, 5vw);
+  text-align: center;
+}
