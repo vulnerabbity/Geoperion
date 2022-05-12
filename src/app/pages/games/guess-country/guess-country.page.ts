@@ -1,27 +1,23 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
+import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
+import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
+import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
-import { GuessCountryGameEventsBus } from "./guess-country.events-bus"
-import { GuessCountrySelectablePage } from "./guess-country.interface"
-import { GuessCountryState } from "./guess-country.state"
 
 @Component({
   templateUrl: "./guess-country.page.html",
-  styleUrls: ["./guess-country.page.scss"],
+  styleUrls: ["./guess-country.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
-  pages: GuessCountrySelectablePage[] = []
+  private pages: CountryPage[] = []
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()
 
-  constructor(private state: GuessCountryState, private eventsBuss: GuessCountryGameEventsBus) {}
+  constructor(private state: CountriesGamesState) {}
 
   async ngOnInit() {
     await this.startNewGame()
-  }
-
-  ngOnDestroy(): void {
-    this.stateSub.unsubscribe()
   }
 
   getTotalPages() {
@@ -46,10 +42,14 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     return getFlagFullPath(rightCountry.flag)
   }
 
-  getCurrentPage() {
-    const currentPage = this.pages[this.currentPageIndex]
+  getAnswersPage(): AnswersComponentPage {
+    const currentPage = this.getCurrentPage()
 
-    return currentPage
+    const answersOptions = currentPage.options.map(option => {
+      return { optionName: option.name }
+    })
+
+    return { ...currentPage, options: answersOptions }
   }
 
   getCurrentRightCountry() {
@@ -58,8 +58,13 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     return currentPage.options[rightAnswerIndex]
   }
 
+  private getCurrentPage() {
+    const currentPage = this.pages[this.currentPageIndex]
+    return currentPage
+  }
+
   private async startNewGame() {
-    this.eventsBuss.startNewGame$.next()
+    this.state.startNewState()
   }
 
   private subscribeToState() {
@@ -67,5 +72,9 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
       this.pages = state.pages
       this.currentPageIndex = state.currentPageIndex
     })
+  }
+
+  ngOnDestroy(): void {
+    this.stateSub.unsubscribe()
   }
 }

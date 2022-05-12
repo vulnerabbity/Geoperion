@@ -1,0 +1,11 @@
+<header class="header">
+  <ion-button aria-label="Back button" (click)="onExit()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+
+  <common-game-header__progress-bar [progress]="progress"></common-game-header__progress-bar>
+
+  <ion-button aria-label="Restart game button" (click)="this.onRestart()">
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-button>
+</header>

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.flag-preview {
+  &__card {
+    border-radius: 2rem;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+
+    &--reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__image {
+    display: block;
+    max-height: 16rem;
+    max-width: 20rem;
+
+    margin: min(1.5vw, 1rem);
+
+    border-radius: 2.5rem;
+    border: 2px solid rgb(185, 183, 175);
+
+    box-shadow: 0px 0px 20px 2px rgba(black, 0.1);
+  }
+  &__title {
+    display: flex;
+    width: 50%;
+
+    justify-content: center;
+    align-items: center;
+  }
+}

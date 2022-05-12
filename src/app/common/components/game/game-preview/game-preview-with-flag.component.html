@@ -1,0 +1,8 @@
+<ion-card class="flag-preview__card">
+  <div class="flag-preview__content" [ngClass]="{ 'flag-preview__content--reverse': reverseStyle }">
+    <img class="flag-preview__image" [src]="flagPath" alt="flag" />
+    <div class="flag-preview__title">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ion-card>

@@ -1,3 +1,3 @@
-import { MainTabBarComponent } from "./main-tab-bar/tab-bar.component"
+import { CommonMainTabBarComponent } from "./main-tab-bar/tab-bar.component"
 
-export const UniqueCommonComponents = [MainTabBarComponent]
+export const CommonUniqueComponents = [CommonMainTabBarComponent]

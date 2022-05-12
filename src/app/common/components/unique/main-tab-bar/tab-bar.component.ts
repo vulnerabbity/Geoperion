@@ -5,6 +5,6 @@ import { LinksService } from "src/app/common/services/links.service"
   selector: "common-main-tab-bar",
   templateUrl: "./tab-bar.component.html",
 })
-export class MainTabBarComponent {
+export class CommonMainTabBarComponent {
   constructor(public links: LinksService) {}
 }
