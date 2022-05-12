@@ -6,10 +6,10 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
 @Component({
   templateUrl: "./guess-country.page.html",
-  styleUrls: ["./guess-country.page.scss"],
+  styleUrls: ["./guess-country.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
-  pages: CountryPage[] = []
+  private pages: CountryPage[] = []
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()
@@ -76,6 +76,5 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stateSub.unsubscribe()
-    console.log("destroyed")
   }
 }
