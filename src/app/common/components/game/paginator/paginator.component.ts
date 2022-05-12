@@ -31,8 +31,7 @@ export class CommonGamePaginatorComponent implements OnDestroy {
   }
 
   private handleStateChange() {
-    return this.state.pagesState$.subscribe(({ hasNextPage, hasPreviousPage, totalPages }) => {
-      console.log("totalPages: ", totalPages)
+    return this.state.pagesState$.subscribe(({ hasNextPage, hasPreviousPage }) => {
       this.isPrevDisabled = hasPreviousPage === false
       this.isNextDisabled = hasNextPage === false
     })
