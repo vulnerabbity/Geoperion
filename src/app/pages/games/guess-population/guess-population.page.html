@@ -1,0 +1,17 @@
+<div class="container" *ngIf="this.hasCurrentPage()">
+  <common-game-header></common-game-header>
+
+  <p class="progress-numbers">{{getAnsweredNumber()}}/{{getTotalPages()}}</p>
+
+  <ion-title class="game-title">
+    <p>What is population of {{getCountryName()}} ?</p>
+  </ion-title>
+
+  <common-game-flag [flagUrl]="getFlag()"></common-game-flag>
+
+  <common-game-answers [page]="getAnswersPage()"></common-game-answers>
+
+  <div class="paginator-container">
+    <common-game-paginator></common-game-paginator>
+  </div>
+</div>
