@@ -3,10 +3,12 @@ import { Route, RouterModule } from "@angular/router"
 import { GamesPage } from "./games.page"
 import { GuessCapitalGamePage } from "./guess-capital/guess-capital.page"
 import { GuessCountryGamePage } from "./guess-country/guess-country.page"
+import { GuessPopulationGamePage } from "./guess-population/guess-population.page"
 
 export const GamesPaths = {
   GuessCountry: "guess-country",
   GuessCapital: "guess-capital",
+  GuessPopulation: "guess-population",
   Games: "games",
 } as const
 
@@ -29,7 +31,14 @@ const guessCapitalRoute: Route = {
   component: GuessCapitalGamePage,
 } as const
 
-const routes: Route[] = [guessCountryRoute, guessCapitalRoute, gamesRoute]
+const guessPopulationRoute: Route = {
+  path: `${GamesPaths.GuessPopulation}`,
+  loadChildren: () =>
+    import("./guess-population/guess-population.module").then(m => m.GuessPopulationGameModule),
+  component: GuessPopulationGamePage,
+}
+
+const routes: Route[] = [guessCountryRoute, guessCapitalRoute, gamesRoute, guessPopulationRoute]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

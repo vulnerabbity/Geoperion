@@ -6,7 +6,7 @@
 
 <div class="container">
   <a [routerLink]="paths.GuessCountry">
-    <common-game-preview-with-flag>
+    <common-game-preview-with-flag [flagPath]="flags.guessCountry">
       <h3>
         Guess
         <br />
@@ -14,12 +14,23 @@
       </h3>
     </common-game-preview-with-flag>
   </a>
+
   <a [routerLink]="paths.GuessCapital">
-    <common-game-preview-with-flag [reverseStyle]="true">
+    <common-game-preview-with-flag [flagPath]="flags.guessCapital" [reverseStyle]="true">
       <h3>
         Guess
         <br />
         capital
+      </h3>
+    </common-game-preview-with-flag>
+  </a>
+
+  <a [routerLink]="paths.GuessPopulation">
+    <common-game-preview-with-flag [flagPath]="flags.guessPopulation">
+      <h3>
+        Guess
+        <br />
+        population
       </h3>
     </common-game-preview-with-flag>
   </a>
