@@ -1,24 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core"
-import { FlagsService } from "src/app/features/flags/flags.service"
+import { Component, Input } from "@angular/core"
 
 @Component({
-  selector: "common-game-preview-with-flag",
+  selector: "common-game-preview-with-flag[flagPath]",
   templateUrl: "./game-preview-with-flag.component.html",
   styleUrls: ["./game-preview-with-flag.component.scss"],
 })
-export class GamePreviewWithFlagComponent implements OnInit {
+export class GamePreviewWithFlagComponent {
+  @Input()
   flagPath: string = ""
 
   @Input()
   reverseStyle: boolean = false
-
-  constructor(private flagsService: FlagsService) {}
-
-  ngOnInit(): void {
-    this.updateFlag()
-  }
-
-  private updateFlag() {
-    this.flagPath = this.flagsService.getRandomFlag()
-  }
 }
