@@ -1,9 +1,7 @@
-import { CountriesService } from "../countries/countries.service"
 import { FlagsService } from "./flags.service"
 
 describe("Flags service", () => {
-  const countriesService = new CountriesService()
-  const service = new FlagsService(countriesService)
+  const service = new FlagsService()
 
   describe("getRadomFlag method", () => {
     it("should return string", () => {

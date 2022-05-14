@@ -7,7 +7,7 @@ import { CountriesService } from "../countries/countries.service"
   providedIn: "root",
 })
 export class FlagsService {
-  constructor(private countriesService: CountriesService) {}
+  private countriesService = new CountriesService()
 
   getRandomFlag(): string {
     const randomCountry = this.countriesService.getRandom()

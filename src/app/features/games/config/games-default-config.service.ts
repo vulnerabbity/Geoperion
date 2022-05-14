@@ -16,8 +16,8 @@ export class GamesDefaultConfigService {
     this.subscribeToConfig()
   }
 
-  async getAnswersLength() {
-    return this.pureService.getAnswersLength(this.configSnapshot.difficulty)
+  async getCountriesPartPerDifficulty() {
+    return this.pureService.getCountriesPartPerDifficulty(this.configSnapshot.difficulty)
   }
 
   async getGameLength() {

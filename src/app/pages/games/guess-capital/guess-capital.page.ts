@@ -44,7 +44,7 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
   getAnsweredQuestionsNumber() {
     let answered = 0
     for (let page of this.pages) {
-      const isAnswered = !!page.selectedAnswerIndex
+      const isAnswered = page.selectedAnswerIndex !== undefined
       if (isAnswered) {
         answered += 1
       }
