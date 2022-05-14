@@ -1,10 +1,10 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from "@capacitor/cli"
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'geoperion',
-  webDir: 'www',
-  bundledWebRuntime: false
-};
+  appId: "com.vulnerabbity.geoperion",
+  appName: "geoperion",
+  webDir: "www",
+  bundledWebRuntime: false,
+}
 
-export default config;
+export default config
