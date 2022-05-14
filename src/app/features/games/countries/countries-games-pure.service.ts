@@ -1,4 +1,6 @@
-import { getRandomIndex } from "src/app/common/functions/random.functions"
+import { makeDeepCopy } from "src/app/common/functions/copy.functions"
+import { getRandomIndex, getShuffledArray } from "src/app/common/functions/random.functions"
+import { Country } from "src/app/data/countries.data"
 import { CountriesService } from "../../countries/countries.service"
 import { CountryPage } from "./countries-games.interface"
 
@@ -7,6 +9,20 @@ export class CountriesGamesPureService {
   private countriesService = new CountriesService()
   private pagesNumber = 10
   private answersNumber = 4
+
+  private countriesPartToTake: number = 1
+
+  setCountriesPartToTake(value: number) {
+    this.countriesPartToTake = value
+  }
+
+  setAnswersNumber(value: number) {
+    this.answersNumber = value
+  }
+
+  setPagesNumber(value: number) {
+    this.pagesNumber = value
+  }
 
   getPages() {
     const pages: CountryPage[] = []
@@ -20,21 +36,35 @@ export class CountriesGamesPureService {
   }
 
   getPage(): CountryPage {
-    const answersOptions = this.getAnswersOptions(this.answersNumber)
+    const answersOptions = this.getAnswersOptions()
     const rightAnswerIndex = getRandomIndex(answersOptions)
 
     return { options: answersOptions, rightAnswerIndex }
   }
 
-  setAnswersNumber(value: number) {
-    this.answersNumber = value
+  private getAnswersOptions() {
+    const randomCountries = this.getRandomTopCountries()
+
+    return randomCountries.slice(0, this.answersNumber)
   }
 
-  setPagesNumber(value: number) {
-    this.pagesNumber = value
+  private getRandomTopCountries() {
+    const topCountries = this.getTopCountries()
+
+    return getShuffledArray(topCountries)
   }
 
-  private getAnswersOptions(amount: number) {
-    return this.countriesService.getManyRandomUnique({ limit: amount })
+  private getTopCountries(): Country[] {
+    this.countriesService.setSortBy("population")
+
+    const topCountries = this.countriesService.getMany(this.getCountriesNumberToTake())
+
+    return topCountries
+  }
+
+  private getCountriesNumberToTake(): number {
+    const totalCountries = this.countriesService.getTotal()
+
+    return Math.floor(totalCountries * this.countriesPartToTake)
   }
 }

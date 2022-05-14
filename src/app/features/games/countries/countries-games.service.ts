@@ -22,9 +22,9 @@ export class CountriesGamesService {
 
   private async updateConfig() {
     const pagesNumber = await this.config.getGameLength()
-    const answersNumber = await this.config.getAnswersLength()
+    const countriesPart = await this.config.getCountriesPartPerDifficulty()
 
-    this.pureService.setAnswersNumber(answersNumber)
+    this.pureService.setCountriesPartToTake(countriesPart)
     this.pureService.setPagesNumber(pagesNumber)
   }
 }
