@@ -11,7 +11,9 @@ describe("CountriesPureGamesService", () => {
     it("should take expected pages number", () => {
       const pagesNumberDataset = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const
       pagesNumberDataset.forEach(expectedPagesNumber => {
-        const pages = service.getPages({ pagesNumber: expectedPagesNumber })
+        service.setPagesNumber(expectedPagesNumber)
+
+        const pages = service.getPages()
 
         expect(pages.length).toBe(expectedPagesNumber)
       })
@@ -22,7 +24,9 @@ describe("CountriesPureGamesService", () => {
     it("should take expected options number", () => {
       const optionsNumbersDataset = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const
       optionsNumbersDataset.forEach(expectedOptionsNumber => {
-        const page = service.getPage(expectedOptionsNumber)
+        service.setAnswersNumber(expectedOptionsNumber)
+
+        const page = service.getPage()
 
         expect(page.options.length).toBe(expectedOptionsNumber)
       })
