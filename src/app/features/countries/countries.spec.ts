@@ -3,7 +3,16 @@ import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { CountriesService } from "./countries.service"
 
 describe("Countries service", () => {
-  const service = new CountriesService()
+  let service: CountriesService
+
+  function reassignService() {
+    service = new CountriesService()
+  }
+
+  beforeEach(() => {
+    reassignService()
+  })
+
   describe("getRandom method", () => {
     it("should take existing countries", () => {
       const countries = CountriesList
@@ -24,13 +33,17 @@ describe("Countries service", () => {
     })
   })
 
-  describe("getManyRandomUnique method", () => {
-    it("should use limit", () => {
-      const limits = [1, 5, 10, 25]
-      for (let limit of limits) {
-        const countries = service.getManyRandomUnique({ limit })
-        expect(countries.length).toBe(limit)
-      }
+  describe("getMany method", () => {
+    it("should use sorting", () => {
+      const order = "population"
+
+      service.setSortBy(order)
+      const countries = service.getMany()
+      const firstCountryName = countries[0].name
+      const secondCountryName = countries[1].name
+
+      expect(firstCountryName).toBe("China")
+      expect(secondCountryName).toBe("India")
     })
   })
 })
