@@ -34,3 +34,5 @@ export class LanguageService {
     return translation ?? this.defaultTranslation
   }
 }
+
+export const LanguageServiceInstance = new LanguageService()
