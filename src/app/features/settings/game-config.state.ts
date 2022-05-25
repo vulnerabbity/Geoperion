@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { BehaviorSubject, ReplaySubject, Subject } from "rxjs"
-import { GameConfig, GameConfigObject, getTestingGameConfig } from "./game-config"
+import { GameConfig, GameConfigObject } from "./game-config"
 import { GameConfigEvents } from "./game-config.events"
 
 @Injectable({ providedIn: "root" })
@@ -26,11 +26,4 @@ export class GameConfigState {
       this.config$.next(config)
     })
   }
-}
-
-export function getTestingGameConfigState() {
-  const events = new GameConfigEvents()
-  const gameConfig = getTestingGameConfig()
-
-  return new GameConfigState(events, gameConfig)
 }

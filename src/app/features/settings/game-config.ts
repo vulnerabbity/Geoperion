@@ -24,16 +24,3 @@ export class GameConfig {
     return { difficulty, length }
   }
 }
-
-export function getTestingGameConfig() {
-  const ionStorage = new Storage()
-  ionStorage.create()
-
-  const storage = new StorageService(ionStorage)
-  const events = new GameConfigEvents()
-
-  const difficultyStorage = new GameDifficultyStorage(storage, events)
-  const lengthConfig = new GameLengthConfig(storage, events)
-
-  return new GameConfig(difficultyStorage, lengthConfig)
-}
