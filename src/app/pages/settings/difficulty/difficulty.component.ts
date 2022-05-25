@@ -1,7 +1,5 @@
 import { Component, Input } from "@angular/core"
-import { LanguageService, LanguageServiceInstance } from "src/app/common/language/language.service"
-import { GameConfig } from "src/app/features/settings/game-config"
-import { GameConfigState } from "src/app/features/settings/game-config.state"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { GameDifficulty } from "src/app/features/settings/settings.interface"
 
 @Component({
