@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
-import { LanguageService } from "src/app/common/language/language.service"
+import { LanguageService, LanguageServiceInstance } from "src/app/common/language/language.service"
 import { Translation } from "src/app/common/language/translations/en.translation"
 
 @Component({
@@ -7,9 +7,7 @@ import { Translation } from "src/app/common/language/translations/en.translation
   styleUrls: ["./settings.page.scss"],
 })
 export class SettingsPage {
-  private translation = this.languageService.translation
-
-  constructor(private languageService: LanguageService) {}
+  private translation = LanguageServiceInstance.translation
 
   getTitle() {
     return this.translation.settings.settings
