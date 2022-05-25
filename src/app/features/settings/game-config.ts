@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
 import { Storage } from "@ionic/storage-angular"
 import { StorageService } from "src/app/common/services/storage.service"
 import { GameConfigEvents } from "./game-config.events"
-import { GameDifficultyConfig } from "./game-difficulty.config"
+import { GameDifficultyStorage } from "./game-difficulty.storage"
 import { GameLengthConfig } from "./game-length.config"
 import { GameDifficulty, GameLength } from "./settings.interface"
 
@@ -15,7 +15,7 @@ export interface GameConfigObject {
   providedIn: "root",
 })
 export class GameConfig {
-  constructor(public difficulty: GameDifficultyConfig, public length: GameLengthConfig) {}
+  constructor(public difficulty: GameDifficultyStorage, public length: GameLengthConfig) {}
 
   async getConfig(): Promise<GameConfigObject> {
     const difficulty = await this.difficulty.get()
@@ -32,8 +32,8 @@ export function getTestingGameConfig() {
   const storage = new StorageService(ionStorage)
   const events = new GameConfigEvents()
 
-  const difficultyConfig = new GameDifficultyConfig(storage, events)
+  const difficultyStorage = new GameDifficultyStorage(storage, events)
   const lengthConfig = new GameLengthConfig(storage, events)
 
-  return new GameConfig(difficultyConfig, lengthConfig)
+  return new GameConfig(difficultyStorage, lengthConfig)
 }

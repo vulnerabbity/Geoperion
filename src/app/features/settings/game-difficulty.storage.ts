@@ -6,7 +6,7 @@ import { GameDifficulty } from "./settings.interface"
 @Injectable({
   providedIn: "root",
 })
-export class GameDifficultyConfig {
+export class GameDifficultyStorage {
   private storageKey = "game-difficulty"
 
   constructor(private storage: StorageService, private events: GameConfigEvents) {}
