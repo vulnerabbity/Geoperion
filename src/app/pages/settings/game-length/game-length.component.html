@@ -1,6 +1,6 @@
 <ion-item>
   <ion-label>Game length</ion-label>
-  <ion-select [value]="currentLength" [(ngModel)]="currentLength" (ionChange)="set()">
+  <ion-select [value]="currentLength" [(ngModel)]="currentLength" (ionChange)="changeGameLength()">
     <ion-select-option value="short">Short</ion-select-option>
     <ion-select-option value="medium">Medium</ion-select-option>
     <ion-select-option value="long">Long</ion-select-option>
