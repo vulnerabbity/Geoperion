@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { Storage } from "@ionic/storage-angular"
 import { AppTheme } from "../settings.interface"
-import { AppThemeAccentConfig } from "./theme-accent.config"
+import { AppThemeAccentStorage } from "./theme-accent.storage"
 import { AppThemeBackgroundConfig } from "./theme-background.config"
 
 @Injectable({
@@ -10,7 +10,7 @@ import { AppThemeBackgroundConfig } from "./theme-background.config"
 export class AppThemeConfig {
   constructor(
     public backgroundConfig: AppThemeBackgroundConfig,
-    public accentConfig: AppThemeAccentConfig,
+    public accentStorage: AppThemeAccentStorage,
     storage: Storage,
   ) {
     storage.create()
@@ -18,7 +18,7 @@ export class AppThemeConfig {
 
   async getTheme(): Promise<AppTheme> {
     const background = await this.getBackground()
-    const hexAccent = await this.accentConfig.getHexColor()
+    const hexAccent = await this.accentStorage.getHexColor()
 
     return { background, hexAccent }
   }

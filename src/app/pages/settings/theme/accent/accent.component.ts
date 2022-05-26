@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core"
-import { getDefaultThemeHexAccent } from "src/app/features/settings/theme/theme-accent.config"
+import { getDefaultThemeHexAccent } from "src/app/features/settings/theme/theme-accent.storage"
 import { SettingsPageEvents } from "../../settings.events"
 
 @Component({

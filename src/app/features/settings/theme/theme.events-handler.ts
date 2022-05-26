@@ -24,7 +24,7 @@ export class AppThemeEventsHandler {
   private handleAccentChange() {
     return this.eventsBus.changeAccent$.subscribe(async ({ hexColor: accent }) => {
       // TODO: Add constraint
-      await this.themeConfig.accentConfig.setHexColor(accent)
+      await this.themeConfig.accentStorage.setHexColor(accent)
       await this.emitThemeChanged()
     })
   }
