@@ -14,6 +14,6 @@ export class SettingsPageAccentComponent {
   constructor(private events: SettingsPageEvents) {}
 
   changeAccent() {
-    this.events.accentChanged$.next({ hexColor: this.hexAccent })
+    this.events.theme.accentChanged$.next({ hexColor: this.hexAccent })
   }
 }
