@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
 import { AppBackgroundTheme } from "src/app/features/settings/settings.interface"
-import { getDefaultBackgroundTheme } from "src/app/features/settings/theme/theme-background.config"
+import { getDefaultBackgroundTheme } from "src/app/features/settings/theme/theme-background.storage"
 import { SettingsPageEvents } from "../../settings.events"
 
 @Component({

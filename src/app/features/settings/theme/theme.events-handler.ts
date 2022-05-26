@@ -31,7 +31,7 @@ export class AppThemeEventsHandler {
 
   private handleBackgroundChange() {
     return this.eventsBus.changeBackground$.subscribe(async background => {
-      await this.themeConfig.backgroundConfig.set(background)
+      await this.themeConfig.backgroundStorage.set(background)
       await this.emitThemeChanged()
     })
   }

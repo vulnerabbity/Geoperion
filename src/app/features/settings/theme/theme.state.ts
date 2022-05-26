@@ -1,7 +1,7 @@
 import { ReplaySubject } from "rxjs"
 import { AppTheme } from "../settings.interface"
 import { getDefaultThemeHexAccent } from "./theme-accent.storage"
-import { getDefaultBackgroundTheme } from "./theme-background.config"
+import { getDefaultBackgroundTheme } from "./theme-background.storage"
 
 export class AppThemeState {
   theme$ = new ReplaySubject<AppTheme>()

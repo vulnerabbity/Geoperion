@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core"
 import { Storage } from "@ionic/storage-angular"
 import { AppTheme } from "../settings.interface"
 import { AppThemeAccentStorage } from "./theme-accent.storage"
-import { AppThemeBackgroundConfig } from "./theme-background.config"
+import { AppThemeBackgroundStorage } from "./theme-background.storage"
 
 @Injectable({
   providedIn: "root",
 })
 export class AppThemeConfig {
   constructor(
-    public backgroundConfig: AppThemeBackgroundConfig,
+    public backgroundStorage: AppThemeBackgroundStorage,
     public accentStorage: AppThemeAccentStorage,
     storage: Storage,
   ) {
@@ -24,6 +24,6 @@ export class AppThemeConfig {
   }
 
   private async getBackground() {
-    return await this.backgroundConfig.get()
+    return await this.backgroundStorage.get()
   }
 }

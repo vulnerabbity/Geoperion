@@ -5,7 +5,7 @@ import { AppBackgroundTheme } from "../settings.interface"
 @Injectable({
   providedIn: "root",
 })
-export class AppThemeBackgroundConfig {
+export class AppThemeBackgroundStorage {
   private readonly storageKey = "theme-background"
 
   constructor(private storage: StorageService) {}
