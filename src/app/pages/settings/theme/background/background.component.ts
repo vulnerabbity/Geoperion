@@ -1,31 +1,22 @@
-import { Component, OnDestroy, OnInit } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import { AppBackgroundTheme } from "src/app/features/settings/settings.interface"
-import { AppThemeEventsBus } from "src/app/features/settings/theme/theme.events-bus"
-import { AppThemeState } from "src/app/features/settings/theme/theme.state"
+import { getDefaultBackgroundTheme } from "src/app/features/settings/theme/theme-background.config"
+import { SettingsPageEvents } from "../../settings.events"
 
 @Component({
   selector: "settings__background",
   templateUrl: "./background.component.html",
   styleUrls: ["./background.component.scss"],
 })
-export class SettingsPageBackgroundComponent implements OnDestroy {
-  background: AppBackgroundTheme = "light"
+export class SettingsPageBackgroundComponent {
+  @Input("background")
+  background: AppBackgroundTheme = getDefaultBackgroundTheme()
 
-  private themeSub = this.subscribeToTheme()
+  constructor(private events: SettingsPageEvents) {}
 
-  constructor(private themeEventsBus: AppThemeEventsBus, private themeState: AppThemeState) {}
+  changeBackground() {
+    const newBackground = this.background
 
-  ngOnDestroy(): void {
-    this.themeSub.unsubscribe()
-  }
-
-  change() {
-    this.themeEventsBus.changeBackground$.next(this.background)
-  }
-
-  private subscribeToTheme() {
-    return this.themeState.theme$.subscribe(theme => {
-      this.background = theme.background
-    })
+    this.events.theme.backgroundChanged$.next(newBackground)
   }
 }
