@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { AppThemeConfig } from "./theme.config"
+import { AppThemeStorage } from "./theme.storage"
 import { AppThemeEventsBus } from "./theme.events-bus"
 import { AppThemeState } from "./theme.state"
 
@@ -9,7 +9,7 @@ import { AppThemeState } from "./theme.state"
 export class AppThemeEventsHandler {
   constructor(
     private eventsBus: AppThemeEventsBus,
-    private themeConfig: AppThemeConfig,
+    private themeStorage: AppThemeStorage,
     private themeState: AppThemeState,
   ) {
     this.startHandling()
@@ -24,14 +24,14 @@ export class AppThemeEventsHandler {
   private handleAccentChange() {
     return this.eventsBus.changeAccent$.subscribe(async ({ hexColor: accent }) => {
       // TODO: Add constraint
-      await this.themeConfig.accentStorage.setHexColor(accent)
+      await this.themeStorage.accentStorage.setHexColor(accent)
       await this.emitThemeChanged()
     })
   }
 
   private handleBackgroundChange() {
     return this.eventsBus.changeBackground$.subscribe(async background => {
-      await this.themeConfig.backgroundStorage.set(background)
+      await this.themeStorage.backgroundStorage.set(background)
       await this.emitThemeChanged()
     })
   }
@@ -41,7 +41,7 @@ export class AppThemeEventsHandler {
   }
 
   private async fetchTheme() {
-    const theme = await this.themeConfig.getTheme()
+    const theme = await this.themeStorage.getTheme()
     this.themeState.theme$.next(theme)
   }
 }

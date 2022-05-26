@@ -7,7 +7,7 @@ import { AppThemeBackgroundStorage } from "./theme-background.storage"
 @Injectable({
   providedIn: "root",
 })
-export class AppThemeConfig {
+export class AppThemeStorage {
   constructor(
     public backgroundStorage: AppThemeBackgroundStorage,
     public accentStorage: AppThemeAccentStorage,
