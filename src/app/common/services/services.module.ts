@@ -1,10 +1,9 @@
-import { NgModule } from "@angular/core"
+import { NgModule, Provider } from "@angular/core"
 import { LinksService } from "./links.service"
 import { RouterService } from "./router.service"
-import { StorageService } from "./storage.service"
 import { CommonValidatorsModule } from "./validators/validators.module"
 
-const services = [RouterService, LinksService, StorageService]
+const services: Provider[] = [RouterService, LinksService]
 
 @NgModule({
   imports: [CommonValidatorsModule],
