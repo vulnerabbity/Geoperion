@@ -19,4 +19,13 @@ export class Translation {
       long: "long",
     },
   }
+
+  readonly gamesPage = {
+    title: "games",
+    games: {
+      guessCountry: "guess country",
+      guessCapital: "guess capital",
+      guessPopulation: "guess population",
+    },
+  }
 }
