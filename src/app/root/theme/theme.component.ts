@@ -1,4 +1,5 @@
 import { Component } from "@angular/core"
+import { AppTheme } from "src/app/features/settings/settings.interface"
 import { AppThemeState } from "src/app/features/settings/theme/theme.state"
 
 // to map background to class name
@@ -17,7 +18,7 @@ enum CssBackgroundClasses {
   styleUrls: ["./theme.component.scss"],
 })
 export class RootThemeDefinerComponent {
-  theme = this.themeState.getDefault()
+  theme: AppTheme = this.themeState.getDefault()
 
   private lastBackground = CssBackgroundClasses.light
 
@@ -41,7 +42,7 @@ export class RootThemeDefinerComponent {
   }
 
   private subscribeToTheme() {
-    return this.themeState.theme$.subscribe(theme => {
+    return this.themeState.currentTheme$.subscribe(theme => {
       this.theme = theme
       this.setBackground()
     })
