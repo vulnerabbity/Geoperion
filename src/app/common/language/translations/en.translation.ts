@@ -1,4 +1,5 @@
 import { Locale } from "../language.interface"
+import { TranslationCountries } from "./en.countries"
 
 export class Translation {
   readonly localeKey: Locale = "EN"
@@ -28,4 +29,6 @@ export class Translation {
       guessPopulation: "guess population",
     },
   }
+
+  readonly countries = new TranslationCountries()
 }
