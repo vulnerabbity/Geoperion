@@ -3,7 +3,7 @@ import { GameDifficultyStorage } from "./game-difficulty.storage"
 import { GameLengthStorage } from "./game-length.config"
 import { GameDifficulty, GameLength } from "./settings.interface"
 
-export interface GameConfigObject {
+export interface GameConfig {
   difficulty: GameDifficulty
   length: GameLength
 }
@@ -11,10 +11,10 @@ export interface GameConfigObject {
 @Injectable({
   providedIn: "root",
 })
-export class GameConfig {
+export class GameStorage {
   constructor(public difficulty: GameDifficultyStorage, public length: GameLengthStorage) {}
 
-  async getConfig(): Promise<GameConfigObject> {
+  async getConfig(): Promise<GameConfig> {
     const difficulty = await this.difficulty.get()
     const length = await this.length.get()
 
