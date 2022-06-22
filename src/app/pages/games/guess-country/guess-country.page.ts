@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
+import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
@@ -13,6 +15,8 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()
+
+  private translation = LanguageServiceInstance.translation.countries
 
   constructor(private state: CountriesGamesState) {}
 
@@ -46,7 +50,9 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     const currentPage = this.getCurrentPage()
 
     const answersOptions = currentPage.options.map(option => {
-      return { optionName: option.name }
+      const optionName = this.translateOption(option)
+
+      return { optionName: optionName }
     })
 
     return { ...currentPage, options: answersOptions }
@@ -56,6 +62,14 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     const currentPage = this.getCurrentPage()
     const rightAnswerIndex = currentPage.rightAnswerIndex
     return currentPage.options[rightAnswerIndex]
+  }
+
+  private translateOption(country: Country): string {
+    const code = country.code
+
+    const translatedCountryName = this.translation[code].name ?? ""
+
+    return translatedCountryName
   }
 
   private getCurrentPage() {
