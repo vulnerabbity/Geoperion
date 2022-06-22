@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { GameConfigObject } from "../../settings/game-config"
+import { GameConfig } from "../../settings/game-config"
 import { GameConfigState } from "../../settings/game-config.state"
 import { GamesDefaultConfigPureService } from "./games-default-config.pure-service"
 
@@ -7,7 +7,7 @@ import { GamesDefaultConfigPureService } from "./games-default-config.pure-servi
   providedIn: "root",
 })
 export class GamesDefaultConfigService {
-  private configSnapshot: GameConfigObject = { difficulty: "easy", length: "short" }
+  private configSnapshot: GameConfig = { difficulty: "easy", length: "short" }
 
   constructor(
     private configState: GameConfigState,
