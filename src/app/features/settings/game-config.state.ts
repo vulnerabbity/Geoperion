@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core"
-import { BehaviorSubject, ReplaySubject, Subject } from "rxjs"
-import { GameConfig, GameConfigObject } from "./game-config"
+import { ReplaySubject } from "rxjs"
+import { GameStorage, GameConfig } from "./game-config"
 import { GameConfigEvents } from "./game-config.events"
 
 @Injectable({ providedIn: "root" })
 export class GameConfigState {
-  config$ = new ReplaySubject<GameConfigObject>()
+  config$ = new ReplaySubject<GameConfig>()
 
-  constructor(private events: GameConfigEvents, private gameConfig: GameConfig) {
+  constructor(private events: GameConfigEvents, private gameStorage: GameStorage) {
     this.updateOnConfigChange()
   }
 
@@ -16,13 +16,13 @@ export class GameConfigState {
   }
 
   private async fetchState() {
-    const config = await this.gameConfig.getConfig()
+    const config = await this.gameStorage.getConfig()
     this.config$.next(config)
   }
 
   private updateOnConfigChange() {
     return this.events.configChanged$.subscribe(async () => {
-      const config = await this.gameConfig.getConfig()
+      const config = await this.gameStorage.getConfig()
       this.config$.next(config)
     })
   }
