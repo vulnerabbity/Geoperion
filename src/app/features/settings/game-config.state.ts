@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { ReplaySubject } from "rxjs"
-import { GameStorage, GameConfig } from "./game-config"
+import { GameStorage, GameConfig } from "./game-storage"
 import { GameConfigEvents } from "./game-config.events"
 
 @Injectable({ providedIn: "root" })

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { GameConfig } from "../../settings/game-config"
+import { GameConfig } from "../../settings/game-storage"
 import { GameConfigState } from "../../settings/game-config.state"
 import { GamesDefaultConfigPureService } from "./games-default-config.pure-service"
 
