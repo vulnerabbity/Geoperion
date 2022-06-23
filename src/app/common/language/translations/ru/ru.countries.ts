@@ -1,4 +1,4 @@
-import { TranslationCountries } from "./en.countries"
+import { TranslationCountries } from "../en/en.countries"
 
 export class TranslationRuCountries implements TranslationCountries {
   AF = { name: "Афганистан", capital: "Кабул" }

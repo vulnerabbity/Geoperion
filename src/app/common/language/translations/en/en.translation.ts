@@ -1,4 +1,4 @@
-import { Locale } from "../language.interface"
+import { Locale } from "../../language.interface"
 import { TranslationCountries } from "./en.countries"
 
 export class Translation {

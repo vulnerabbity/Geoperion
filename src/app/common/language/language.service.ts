@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { Locale } from "./language.interface"
-import { Translation } from "./translations/en.translation"
+import { Translation } from "./translations/en/en.translation"
 import { getTranslations } from "./translations/translations"
 
 export const DefaultLocale: Locale = "EN" as const
