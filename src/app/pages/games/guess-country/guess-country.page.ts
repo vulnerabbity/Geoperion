@@ -16,12 +16,16 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   private stateSub = this.subscribeToState()
 
-  private translation = LanguageServiceInstance.translation.countries
+  private translation = LanguageServiceInstance.translation
 
   constructor(private state: CountriesGamesState) {}
 
   async ngOnInit() {
     await this.startNewGame()
+  }
+
+  getTitle(): string {
+    return this.translation.gamePage.guessCountryTitle
   }
 
   getTotalPages() {
@@ -67,7 +71,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   private translateOption(country: Country): string {
     const code = country.code
 
-    const translatedCountryName = this.translation[code].name ?? ""
+    const translatedCountryName = this.translation.countries[code].name ?? ""
 
     return translatedCountryName
   }
