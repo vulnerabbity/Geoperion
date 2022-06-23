@@ -29,6 +29,12 @@ export class TranslationSettingsPage {
     title: "accent",
   }
 
+  readonly language = {
+    title: "language",
+    english: "english",
+    russian: "russian",
+  }
+
   categories = {
     general: "general",
     theme: "theme",

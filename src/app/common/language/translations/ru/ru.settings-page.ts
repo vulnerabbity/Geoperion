@@ -31,6 +31,12 @@ export class TranslationRuSettingsPage implements TranslationSettingsPage {
     title: "Акцент",
   }
 
+  readonly language = {
+    title: "язык",
+    english: "Английский",
+    russian: "Русский",
+  }
+
   readonly categories = {
     general: "основные",
     theme: "тема",
