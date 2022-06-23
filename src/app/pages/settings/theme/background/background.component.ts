@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { AppBackgroundTheme } from "src/app/features/settings/settings.interface"
 import { getDefaultBackgroundTheme } from "src/app/features/settings/theme/theme-background.storage"
 import { SettingsPageEvents } from "../../settings.events"
@@ -11,6 +12,8 @@ import { SettingsPageEvents } from "../../settings.events"
 export class SettingsPageBackgroundComponent {
   @Input("background")
   background: AppBackgroundTheme = getDefaultBackgroundTheme()
+
+  translation = LanguageServiceInstance.translation.settingsPage.background
 
   constructor(private events: SettingsPageEvents) {}
 

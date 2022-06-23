@@ -15,4 +15,14 @@ export class TranslationRuSettingsPage implements TranslationSettingsPage {
     medium: "средне",
     long: "долго",
   }
+
+  readonly background = {
+    title: "Фон",
+    light: "Светлый",
+    nord: "Норд",
+    github: "Гитхаб",
+    retro: "Ретро",
+    dark: "Темный",
+    black: "Черный",
+  }
 }
