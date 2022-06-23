@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { GameLength } from "src/app/features/settings/settings.interface"
 import { SettingsPageEvents } from "../settings.events"
 
@@ -10,6 +11,8 @@ import { SettingsPageEvents } from "../settings.events"
 export class SettingsPageGameLengthComponent {
   @Input("gameLength")
   currentLength: GameLength = "short"
+
+  translation = LanguageServiceInstance.translation.settingsPage.gameLength
 
   constructor(private events: SettingsPageEvents) {}
 

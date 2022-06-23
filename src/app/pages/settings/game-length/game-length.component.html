@@ -1,8 +1,8 @@
 <ion-item>
-  <ion-label>Game length</ion-label>
+  <ion-label>{{ translation.title }}</ion-label>
   <ion-select [value]="currentLength" [(ngModel)]="currentLength" (ionChange)="changeGameLength()">
-    <ion-select-option value="short">Short</ion-select-option>
-    <ion-select-option value="medium">Medium</ion-select-option>
-    <ion-select-option value="long">Long</ion-select-option>
+    <ion-select-option value="short">{{ translation.short | titlecase }}</ion-select-option>
+    <ion-select-option value="medium">{{ translation.medium | titlecase }}</ion-select-option>
+    <ion-select-option value="long">{{ translation.long | titlecase }}</ion-select-option>
   </ion-select>
 </ion-item>
