@@ -26,4 +26,8 @@ export class TranslationRuSettingsPage implements TranslationSettingsPage {
     dark: "Темный",
     black: "Черный",
   }
+
+  readonly accent = {
+    title: "Акцент",
+  }
 }

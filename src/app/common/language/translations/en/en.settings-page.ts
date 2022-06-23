@@ -24,4 +24,8 @@ export class TranslationSettingsPage {
     dark: "dark",
     black: "black",
   }
+
+  accent = {
+    title: "accent",
+  }
 }
