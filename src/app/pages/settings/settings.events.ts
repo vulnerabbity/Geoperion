@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core"
-import { ReplaySubject } from "rxjs"
+import { Subject } from "rxjs"
+import { Locale } from "src/app/common/language/language.interface"
 import {
   AppBackgroundTheme,
   GameDifficulty,
@@ -13,13 +14,14 @@ import {
 @Injectable({ providedIn: "root" })
 export class SettingsPageEvents {
   readonly general = {
-    difficultyChanged$: new ReplaySubject<GameDifficulty>(),
-    gameLengthChanged$: new ReplaySubject<GameLength>(),
+    difficultyChanged$: new Subject<GameDifficulty>(),
+    gameLengthChanged$: new Subject<GameLength>(),
+    languageChanged$: new Subject<Locale>(),
   } as const
 
   readonly theme = {
-    accentChanged$: new ReplaySubject<{ hexColor: string }>(),
+    accentChanged$: new Subject<{ hexColor: string }>(),
 
-    backgroundChanged$: new ReplaySubject<AppBackgroundTheme>(),
+    backgroundChanged$: new Subject<AppBackgroundTheme>(),
   } as const
 }
