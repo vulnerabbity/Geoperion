@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
@@ -17,6 +18,8 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
 
   private stateSub = this.handleStateChange()
 
+  private translation = LanguageServiceInstance.translation.gamePage
+
   constructor(private countriesState: CountriesGamesState) {}
 
   ngOnInit(): void {
@@ -33,8 +36,11 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
     return getFlagFullPath(flag)
   }
 
-  getRightCountryName() {
-    return this.rightCountry?.name ?? "Country"
+  getTitle(): string {
+    const currentCountryCode = this.rightCountry?.code ?? "US"
+
+    const title = this.translation.getGuessCapitalTitle({ countryCode: currentCountryCode })
+    return title
   }
 
   getTotalPages() {
