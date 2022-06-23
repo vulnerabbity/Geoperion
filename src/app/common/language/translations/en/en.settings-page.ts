@@ -9,6 +9,7 @@ export class TranslationSettingsPage {
   }
 
   gameLength = {
+    title: "game length",
     short: "short",
     medium: "medium",
     long: "long",

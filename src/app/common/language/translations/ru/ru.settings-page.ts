@@ -11,6 +11,7 @@ export class TranslationRuSettingsPage implements TranslationSettingsPage {
   }
 
   readonly gameLength = {
+    title: "Длина игры",
     short: "коротко",
     medium: "средне",
     long: "долго",
