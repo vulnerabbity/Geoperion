@@ -28,4 +28,9 @@ export class TranslationSettingsPage {
   accent = {
     title: "accent",
   }
+
+  categories = {
+    general: "general",
+    theme: "theme",
+  }
 }
