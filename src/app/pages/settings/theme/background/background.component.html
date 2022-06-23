@@ -1,16 +1,16 @@
 <ion-item>
-  <ion-label>{{ translation.title }}</ion-label>
+  <ion-label>{{ translation.title | titlecase }}</ion-label>
   <ion-select
     interface="popover"
     value="light"
     [(ngModel)]="background"
     (ionChange)="changeBackground()"
   >
-    <ion-select-option value="light">{{ translation.light }}</ion-select-option>
-    <ion-select-option value="nord">{{ translation.nord }}</ion-select-option>
-    <ion-select-option value="github">{{ translation.github }}</ion-select-option>
-    <ion-select-option value="retro">{{ translation.retro }}</ion-select-option>
-    <ion-select-option value="dark">{{ translation.dark }}</ion-select-option>
-    <ion-select-option value="black">{{ translation.black }}</ion-select-option>
+    <ion-select-option value="light">{{ translation.light | titlecase }}</ion-select-option>
+    <ion-select-option value="nord">{{ translation.nord | titlecase }}</ion-select-option>
+    <ion-select-option value="github">{{ translation.github | titlecase }}</ion-select-option>
+    <ion-select-option value="retro">{{ translation.retro | titlecase }}</ion-select-option>
+    <ion-select-option value="dark">{{ translation.dark | titlecase }}</ion-select-option>
+    <ion-select-option value="black">{{ translation.black | titlecase }}</ion-select-option>
   </ion-select>
 </ion-item>

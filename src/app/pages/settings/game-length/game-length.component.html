@@ -1,5 +1,5 @@
 <ion-item>
-  <ion-label>{{ translation.title }}</ion-label>
+  <ion-label>{{ translation.title | titlecase }}</ion-label>
   <ion-select [value]="currentLength" [(ngModel)]="currentLength" (ionChange)="changeGameLength()">
     <ion-select-option value="short">{{ translation.short | titlecase }}</ion-select-option>
     <ion-select-option value="medium">{{ translation.medium | titlecase }}</ion-select-option>
