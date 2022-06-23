@@ -5,7 +5,7 @@ import { TranslationRuCountries } from "./ru.countries"
 export class TranslationRuGamePage extends TranslationGamePage {
   override translationCountries = new TranslationRuCountries()
 
-  override guessCountryTitle = "What country is this flag ?"
+  override guessCountryTitle = "Какой страны этот флаг ?"
 
   override getGuessCapitalTitle({ countryCode }: { countryCode: CountryCode }) {
     const countryName = this.getCountryNameTranslation(countryCode)
