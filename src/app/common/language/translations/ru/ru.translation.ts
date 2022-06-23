@@ -1,5 +1,5 @@
-import { Locale } from "../language.interface"
-import { Translation } from "./en.translation"
+import { Locale } from "../../language.interface"
+import { Translation } from "../en/en.translation"
 import { TranslationRuCountries } from "./ru.countries"
 
 export class TranslationRU extends Translation {
