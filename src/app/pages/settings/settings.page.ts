@@ -9,6 +9,6 @@ export class SettingsPage {
   private translation = LanguageServiceInstance.translation
 
   getTitle() {
-    return this.translation.settings.settings
+    return this.translation.settingsPage.title
   }
 }
