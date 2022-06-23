@@ -1,25 +1,11 @@
 import { Locale } from "../../language.interface"
 import { TranslationCountries } from "./en.countries"
+import { TranslationSettingsPage } from "./en.settings-page"
 
 export class Translation {
   readonly localeKey: Locale = "EN"
 
-  readonly settings = {
-    settings: "settings",
-
-    difficulty: {
-      difficulty: "difficulty",
-      easy: "easy",
-      medium: "medium",
-      hard: "hard",
-    },
-
-    gameLength: {
-      short: "short",
-      medium: "medium",
-      long: "long",
-    },
-  }
+  readonly settingsPage = new TranslationSettingsPage()
 
   readonly gamesPage = {
     title: "games",
