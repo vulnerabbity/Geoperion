@@ -1,5 +1,6 @@
 import { Locale } from "../../language.interface"
 import { TranslationCountries } from "./en.countries"
+import { TranslationGamesPage } from "./en.games-page"
 import { TranslationSettingsPage } from "./en.settings-page"
 
 export class Translation {
@@ -7,14 +8,7 @@ export class Translation {
 
   readonly settingsPage = new TranslationSettingsPage()
 
-  readonly gamesPage = {
-    title: "games",
-    games: {
-      guessCountry: "guess country",
-      guessCapital: "guess capital",
-      guessPopulation: "guess population",
-    },
-  }
+  readonly gamesPage = new TranslationGamesPage()
 
   readonly countries = new TranslationCountries()
 }
