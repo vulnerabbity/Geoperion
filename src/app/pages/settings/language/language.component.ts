@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import { Locale } from "src/app/common/language/language.interface"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { SettingsPageEvents } from "../settings.events"
@@ -10,6 +10,7 @@ import { SettingsPageEvents } from "../settings.events"
 export class SettingsPageLanguageComponent {
   translation = LanguageServiceInstance.translation.settingsPage.language
 
+  @Input()
   currentLocale: Locale = "EN"
 
   constructor(private events: SettingsPageEvents) {}
