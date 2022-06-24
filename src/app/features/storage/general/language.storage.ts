@@ -10,7 +10,14 @@ export class LanguageStorage extends StorageService<Locale> {
   protected readonly defaultValue = "EN"
   protected readonly storageKey = "language"
 
-  test = this.currentValue$.subscribe(newLocale => {
-    LanguageServiceInstance.setLocale(newLocale)
-  })
+  constructor() {
+    super()
+    this.updateLanguageOnChange()
+  }
+
+  updateLanguageOnChange() {
+    return this.currentValue$.subscribe(newLocale => {
+      LanguageServiceInstance.setLocale(newLocale)
+    })
+  }
 }
