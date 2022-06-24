@@ -9,6 +9,7 @@ export class SettingsPageEventsHandler {
     this.handleGameLengthChange()
     this.handleAccentChange()
     this.handleBackgroundChange()
+    this.handleLanguageChange()
   }
 
   private handleDifficultyChange() {
@@ -32,6 +33,12 @@ export class SettingsPageEventsHandler {
   private handleBackgroundChange() {
     this.events.theme.backgroundChanged$.subscribe(newBackground => {
       this.gameStorage.backgroundStorage.set(newBackground)
+    })
+  }
+
+  private handleLanguageChange() {
+    this.events.general.languageChanged$.subscribe(newLanguage => {
+      this.gameStorage.languageStorage.set(newLanguage)
     })
   }
 }
