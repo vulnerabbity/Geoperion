@@ -13,19 +13,3 @@ export enum GameLengths {
 }
 
 export type GameLength = `${GameLengths}`
-
-export enum AppBackgroundThemes {
-  Light = "light",
-  Dark = "dark",
-  Black = "black",
-  Nord = "nord",
-  Github = "github",
-  Retro = "retro",
-}
-
-export type AppBackgroundTheme = `${AppBackgroundThemes}`
-
-export interface AppTheme {
-  background: AppBackgroundTheme
-  hexAccent: string
-}
