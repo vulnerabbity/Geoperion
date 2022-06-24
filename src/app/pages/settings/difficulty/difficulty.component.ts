@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
-import { GameDifficulty } from "src/app/features/settings/settings.interface"
+import { GameDifficulty } from "src/app/features/storage/settings.interface"
 import { SettingsPageEvents } from "../settings.events"
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
-import { GameStorage } from "src/app/features/settings/game-storage"
-import { AppThemeAccentStorage } from "src/app/features/settings/theme/theme-accent.storage"
-import { AppThemeBackgroundStorage } from "src/app/features/settings/theme/theme-background.storage"
+import { GameStorage } from "src/app/features/storage/game-storage"
+import { AppThemeAccentStorage } from "src/app/features/storage/theme/theme-accent.storage"
+import { AppThemeBackgroundStorage } from "src/app/features/storage/theme/theme-background.storage"
 import { SettingsPageEvents } from "./settings.events"
 
 @Injectable({ providedIn: "root" })

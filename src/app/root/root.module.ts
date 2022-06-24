@@ -6,7 +6,7 @@ import { RootComponent } from "./root.component"
 import { AppRoutingModule } from "./root-routing.module"
 import { AppCommonModule } from "../common/common.module"
 import { IonicStorageModule } from "@ionic/storage-angular"
-import { GameSettingsModule } from "../features/settings/settings.module"
+import { GameSettingsModule } from "../features/storage/settings.module"
 import { RootThemeDefinerComponent } from "./theme/theme.component"
 import { ColorPickerModule } from "ngx-color-picker"
 

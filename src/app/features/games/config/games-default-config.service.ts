@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { GameConfig } from "../../settings/game-storage"
-import { GameConfigState } from "../../settings/game-config.state"
+import { GameConfig } from "../../storage/game-storage"
+import { GameConfigState } from "../../storage/game-config.state"
 import { GamesDefaultConfigPureService } from "./games-default-config.pure-service"
 
 @Injectable({

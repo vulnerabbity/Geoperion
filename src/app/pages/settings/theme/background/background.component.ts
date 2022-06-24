@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
-import { AppBackgroundTheme } from "src/app/features/settings/settings.interface"
-import { getDefaultBackgroundTheme } from "src/app/features/settings/theme/theme-background.storage"
+import { AppBackgroundTheme } from "src/app/features/storage/settings.interface"
+import { getDefaultBackgroundTheme } from "src/app/features/storage/theme/theme-background.storage"
 import { SettingsPageEvents } from "../../settings.events"
 
 @Component({

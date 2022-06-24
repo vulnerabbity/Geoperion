@@ -1,4 +1,4 @@
-import { GameLength } from "../../settings/settings.interface"
+import { GameLength } from "../../storage/settings.interface"
 import { GamesDefaultConfigPureService } from "./games-default-config.pure-service"
 import { DefaultGameLengths } from "./games-default.interface"
 

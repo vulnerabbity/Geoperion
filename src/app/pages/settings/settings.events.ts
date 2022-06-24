@@ -5,7 +5,7 @@ import {
   AppBackgroundTheme,
   GameDifficulty,
   GameLength,
-} from "src/app/features/settings/settings.interface"
+} from "src/app/features/storage/settings.interface"
 
 /**
  * Events between settings sub components.

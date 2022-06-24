@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
-import { AppTheme } from "src/app/features/settings/settings.interface"
-import { AppThemeState } from "src/app/features/settings/theme/theme.state"
+import { AppTheme } from "src/app/features/storage/settings.interface"
+import { AppThemeState } from "src/app/features/storage/theme/theme.state"
 
 // to map background to class name
 enum CssBackgroundClasses {
