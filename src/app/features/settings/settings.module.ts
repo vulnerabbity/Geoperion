@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core"
 import { GameStorage } from "./game-storage"
 import { GameConfigState } from "./game-config.state"
 import { GameDifficultyStorage } from "./game-difficulty.storage"
-import { GameLengthStorage } from "./game-length.config"
+import { GameLengthStorage } from "./game-length.storage"
 import { AppThemeSettingsModule } from "./theme/theme-settings.module"
 
 @NgModule({
