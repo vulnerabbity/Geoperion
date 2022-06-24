@@ -12,7 +12,9 @@ export class SettingsPageGameLengthComponent {
   @Input("gameLength")
   currentLength: GameLength = "short"
 
-  translation = LanguageServiceInstance.translation.settingsPage.gameLength
+  get translation() {
+    return LanguageServiceInstance.translation.settingsPage.gameLength
+  }
 
   constructor(private events: SettingsPageEvents) {}
 

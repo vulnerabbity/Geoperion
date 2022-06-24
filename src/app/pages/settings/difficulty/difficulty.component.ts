@@ -14,7 +14,9 @@ export class SettingsPageDifficultyComponent {
 
   difficulties: GameDifficulty[] = ["easy", "medium", "hard"]
 
-  private translation = LanguageServiceInstance.translation.settingsPage
+  private get translation() {
+    return LanguageServiceInstance.translation.settingsPage
+  }
 
   constructor(private events: SettingsPageEvents) {}
 

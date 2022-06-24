@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core"
+import { Component, OnDestroy, AfterViewInit } from "@angular/core"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { GameStorage } from "src/app/features/storage/game-storage"
 
@@ -7,7 +7,9 @@ import { GameStorage } from "src/app/features/storage/game-storage"
   styleUrls: ["./settings.page.scss"],
 })
 export class SettingsPage implements OnDestroy {
-  translation = LanguageServiceInstance.translation.settingsPage
+  get translation() {
+    return LanguageServiceInstance.translation.settingsPage
+  }
 
   configSnapshot = this.gameStorage.getConfigReference()
 

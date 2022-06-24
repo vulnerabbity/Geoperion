@@ -11,7 +11,9 @@ export class SettingsPageAccentComponent {
   @Input("hexAccent")
   hexAccent: string = ""
 
-  translation = LanguageServiceInstance.translation.settingsPage.accent
+  get translation() {
+    return LanguageServiceInstance.translation.settingsPage.accent
+  }
 
   constructor(private events: SettingsPageEvents) {}
 

@@ -8,22 +8,33 @@ import { SettingsPageEvents } from "../settings.events"
   templateUrl: "./language.component.html",
 })
 export class SettingsPageLanguageComponent {
-  translation = LanguageServiceInstance.translation.settingsPage.language
+  get translation() {
+    return LanguageServiceInstance.translation.settingsPage.language
+  }
 
   @Input()
   currentLocale: Locale = "EN"
 
   constructor(private events: SettingsPageEvents) {}
 
-  changeLanguage() {
+  changeLanguage($event: any) {
     const newLanguage = this.currentLocale
 
     this.events.general.languageChanged$.next(newLanguage)
 
-    this.reloadPage()
+    // Ionic triggers (ionChange) event even if ngModel changed
+    // code below executes only if user clicked to change language
+    // otherwise page in chrome will be in in infinite reloading
+    const classList: string[] = $event.target.className.split(" ")
+    const isManualEvent = classList.includes("ion-touched")
+    if (isManualEvent) {
+      this.reloadPage()
+    }
   }
 
   reloadPage() {
-    window.location.reload()
+    setTimeout(() => {
+      window.location.reload()
+    })
   }
 }

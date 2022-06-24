@@ -15,7 +15,9 @@ export class SettingsPageBackgroundComponent {
   @Input("background")
   background: BackgroundTheme = getDefaultBackgroundTheme()
 
-  translation = LanguageServiceInstance.translation.settingsPage.background
+  get translation() {
+    return LanguageServiceInstance.translation.settingsPage.background
+  }
 
   constructor(private events: SettingsPageEvents) {}
 
