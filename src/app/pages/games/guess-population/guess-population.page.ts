@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
 import { getFancyNumberString } from "src/app/common/functions/fancy.functions"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
@@ -15,6 +16,8 @@ export class GuessPopulationGamePage implements OnDestroy, OnInit {
   private currentPage: CountryPage | undefined = undefined
 
   private stateSub = this.handleStateUpdate()
+
+  private translation = LanguageServiceInstance.translation.gamePage
 
   constructor(private gamesState: CountriesGamesState) {}
 
@@ -46,12 +49,12 @@ export class GuessPopulationGamePage implements OnDestroy, OnInit {
     return getFlagFullPath(flag)
   }
 
-  getCountryName(): string | undefined {
+  getTitle(): string {
     const currentCountry = this.getRightAnswerCountry()
+    const currentCountryCode = currentCountry?.code ?? "US"
 
-    if (currentCountry !== undefined) {
-      return currentCountry.name
-    }
+    const title = this.translation.getGuessPopulationTitle({ countryCode: currentCountryCode })
+    return title
   }
 
   getAnsweredNumber() {

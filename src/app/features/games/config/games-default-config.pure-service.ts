@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { GameDifficulty, GameLength } from "../../settings/settings.interface"
+import { GameDifficulty, GameLength } from "../../storage/settings.interface"
 import { CountriesPartsPerDifficulty, DefaultGameLengths } from "./games-default.interface"
 
 /**

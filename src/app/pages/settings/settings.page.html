@@ -1,12 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Settings</ion-title>
+    <ion-title>{{translation.title | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <div class="container">
-  <settings__difficulty></settings__difficulty>
-  <settings__game-length></settings__game-length>
-  <settings__background></settings__background>
-  <settings__accent></settings__accent>
+  <h3 class="settings-page__title">{{ translation.categories.general | titlecase }}</h3>
+  <ul class="settings-page__list">
+    <settings__difficulty [difficulty]="this.configSnapshot.difficulty"></settings__difficulty>
+    <settings__game-length [gameLength]="this.configSnapshot.length"></settings__game-length>
+    <settings__language [currentLocale]="this.configSnapshot.language"></settings__language>
+  </ul>
+
+  <h3 class="settings-page__title">{{ translation.categories.theme | titlecase }}</h3>
+  <ul class="settings-page__list">
+    <settings__background [background]="this.configSnapshot.backgroundTheme"></settings__background>
+    <settings__accent [hexAccent]="this.configSnapshot.hexAccent"></settings__accent>
+  </ul>
 </div>

@@ -1,31 +1,36 @@
-import { Component, OnDestroy, OnInit } from "@angular/core"
-import { GameConfig } from "src/app/features/settings/game-config"
-import { GameConfigState } from "src/app/features/settings/game-config.state"
-import { GameDifficulty } from "src/app/features/settings/settings.interface"
+import { Component, Input } from "@angular/core"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
+import { GameDifficulty } from "src/app/features/storage/settings.interface"
+import { SettingsPageEvents } from "../settings.events"
 
 @Component({
   selector: "settings__difficulty",
   templateUrl: "./difficulty.component.html",
   styleUrls: ["./difficulty.component.scss"],
 })
-export class SettingsPageDifficultyComponent implements OnDestroy {
+export class SettingsPageDifficultyComponent {
+  @Input("difficulty")
   currentDifficulty: GameDifficulty = "easy"
 
-  private stateSub = this.subscribeToState()
+  difficulties: GameDifficulty[] = ["easy", "medium", "hard"]
 
-  constructor(private config: GameConfig, private state: GameConfigState) {}
-
-  ngOnDestroy(): void {
-    this.stateSub.unsubscribe()
+  private get translation() {
+    return LanguageServiceInstance.translation.settingsPage
   }
 
-  async set() {
-    await this.config.difficulty.set(this.currentDifficulty)
+  constructor(private events: SettingsPageEvents) {}
+
+  changeDifficulty() {
+    const newDifficulty = this.currentDifficulty
+
+    this.events.general.difficultyChanged$.next(newDifficulty)
   }
 
-  private subscribeToState() {
-    return this.state.config$.subscribe(config => {
-      this.currentDifficulty = config.difficulty
-    })
+  getVisualDifficulty(difficulty: GameDifficulty) {
+    return this.translation.difficulty[difficulty]
+  }
+
+  getTitle() {
+    return this.translation.difficulty.title
   }
 }

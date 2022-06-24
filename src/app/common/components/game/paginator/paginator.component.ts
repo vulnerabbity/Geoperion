@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from "@angular/core"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { CommonGameComponentsEvents } from "../game-events"
 import { CommonGameComponentsState } from "../game-state"
 
@@ -10,6 +11,8 @@ import { CommonGameComponentsState } from "../game-state"
 export class CommonGamePaginatorComponent implements OnDestroy {
   isNextDisabled = true
   isPrevDisabled = false
+
+  buttonsTranslation = LanguageServiceInstance.translation.ui.buttons
 
   private stateSub = this.handleStateChange()
 

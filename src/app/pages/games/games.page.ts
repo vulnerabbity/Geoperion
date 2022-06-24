@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core"
+import { Component } from "@angular/core"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { FlagsService } from "src/app/features/flags/flags.service"
 import { GamesPaths } from "./games-routing.module"
 
@@ -12,6 +13,10 @@ export class GamesPage {
     guessCountry: this.getRandomFlag(),
     guessCapital: this.getRandomFlag(),
     guessPopulation: this.getRandomFlag(),
+  }
+
+  get translation() {
+    return LanguageServiceInstance.translation.gamesPage
   }
 
   constructor(private flagsService: FlagsService) {}

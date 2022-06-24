@@ -1,10 +1,9 @@
-<ion-item>
-  <ion-label>Accent</ion-label>
-  <button
-    class="accent-preview"
-    [(colorPicker)]="accent"
-    cpAlphaChannel="disabled"
-    (colorPickerChange)="emitAccentChanged()"
-    [ngStyle]="{ backgroundColor: accent }"
-  ></button>
+<ion-item
+  button="true"
+  [(colorPicker)]="hexAccent"
+  cpAlphaChannel="disabled"
+  (colorPickerChange)="changeAccent()"
+>
+  <ion-label>{{ translation.title | titlecase }}</ion-label>
+  <button class="accent-preview" [ngStyle]="{ backgroundColor: hexAccent }"></button>
 </ion-item>

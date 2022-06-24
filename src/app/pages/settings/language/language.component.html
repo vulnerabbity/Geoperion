@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label>{{ translation.title | titlecase }}</ion-label>
+  <ion-select
+    [value]="currentLocale"
+    [(ngModel)]="currentLocale"
+    (ionChange)="changeLanguage($event)"
+  >
+    <ion-select-option value="EN">{{ translation.english | titlecase }}</ion-select-option>
+    <ion-select-option value="RU">{{ translation.russian | titlecase }}</ion-select-option>
+  </ion-select>
+</ion-item>

@@ -1,19 +1,18 @@
 import { Injectable } from "@angular/core"
-import { GameConfigObject } from "../../settings/game-config"
-import { GameConfigState } from "../../settings/game-config.state"
+import { GameConfig, GameStorage } from "../../storage/game-storage"
 import { GamesDefaultConfigPureService } from "./games-default-config.pure-service"
 
 @Injectable({
   providedIn: "root",
 })
 export class GamesDefaultConfigService {
-  private configSnapshot: GameConfigObject = { difficulty: "easy", length: "short" }
+  private configSnapshot: GameConfig = this.gameStorage.getConfigReference()
 
   constructor(
-    private configState: GameConfigState,
     private pureService: GamesDefaultConfigPureService,
+    private gameStorage: GameStorage,
   ) {
-    this.subscribeToConfig()
+    this.configSnapshot = this.gameStorage.getConfigReference()
   }
 
   async getCountriesPartPerDifficulty() {
@@ -22,11 +21,5 @@ export class GamesDefaultConfigService {
 
   async getGameLength() {
     return this.pureService.getGameLength(this.configSnapshot.length)
-  }
-
-  private subscribeToConfig() {
-    return this.configState.config$.subscribe(newConfig => {
-      this.configSnapshot = newConfig
-    })
   }
 }

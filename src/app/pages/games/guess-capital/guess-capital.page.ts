@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { AnswersComponentPage } from "src/app/common/components/game/game-answers/game-answers.component"
+import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
 @Component({
@@ -16,6 +18,8 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
   private rightCountry: Country | undefined = undefined
 
   private stateSub = this.handleStateChange()
+
+  private translation = LanguageServiceInstance.translation
 
   constructor(private countriesState: CountriesGamesState) {}
 
@@ -33,8 +37,13 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
     return getFlagFullPath(flag)
   }
 
-  getRightCountryName() {
-    return this.rightCountry?.name ?? "Country"
+  getTitle(): string {
+    const currentCountryCode = this.rightCountry?.code ?? "US"
+
+    const title = this.translation.gamePage.getGuessCapitalTitle({
+      countryCode: currentCountryCode,
+    })
+    return title
   }
 
   getTotalPages() {
@@ -62,7 +71,8 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
 
     // select capital as displayed answer
     const answersOptions = currentPage.options.map(option => {
-      return { optionName: option.capital }
+      const translatedCapital = this.translateCapital(option.code)
+      return { optionName: translatedCapital }
     })
 
     return { ...currentPage, options: answersOptions }
@@ -70,6 +80,10 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.stateSub.unsubscribe()
+  }
+
+  private translateCapital(countryCode: CountryCode) {
+    return this.translation.countries[countryCode].capital
   }
 
   private handleStateChange() {

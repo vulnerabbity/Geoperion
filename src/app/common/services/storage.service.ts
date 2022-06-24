@@ -1,22 +1,53 @@
-import { Injectable, OnInit } from "@angular/core"
-import { Storage } from "@ionic/storage-angular"
+import { Injectable } from "@angular/core"
+import { Storage as IonicStorage } from "@ionic/storage-angular"
+import { BehaviorSubject } from "rxjs"
 
-@Injectable({
-  providedIn: "root",
-})
-export class StorageService {
-  constructor(private storage: Storage) {}
+@Injectable({ providedIn: "root" })
+export abstract class StorageService<T> {
+  public currentValue$ = new BehaviorSubject<T>(this.getDefault())
 
-  async set<T>(key: string, value: T) {
-    await this.storage.set(key, value)
+  protected abstract storageKey: string
+  protected abstract defaultValue: T
+
+  protected currentValue = this.getDefault()
+
+  private ionicStorage = new IonicStorage()
+
+  constructor() {
+    // "create()" is required by library
+    this.ionicStorage.create().then(() => {
+      this.initCurrentValue()
+    })
   }
 
-  async get<T = any>(key: string) {
-    const result = await this.storage.get(key)
-    return result as T | null
+  async set(newValue: T) {
+    this.currentValue$.next(newValue)
+    this.currentValue = newValue
+
+    await this.ionicStorage.set(this.storageKey, newValue)
   }
 
-  async destroy(key: string) {
-    await this.storage.remove(key)
+  async get(): Promise<T> {
+    const result = await this.ionicStorage.get(this.storageKey)
+    return result ?? this.defaultValue
+  }
+
+  getDefault(): T {
+    return this.defaultValue
+  }
+
+  getCurrentValue(): T {
+    return this.currentValue ?? this.defaultValue
+  }
+
+  async remove(key: string) {
+    await this.ionicStorage.remove(key)
+  }
+
+  private async initCurrentValue() {
+    const currentValueFromStorage = await this.get()
+
+    this.currentValue = currentValueFromStorage
+    this.currentValue$.next(currentValueFromStorage)
   }
 }
