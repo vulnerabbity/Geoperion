@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core"
+import { Locale } from "src/app/common/language/language.interface"
 import { GameDifficultyStorage } from "./general/game-difficulty.storage"
 import { GameLengthStorage } from "./general/game-length.storage"
+import { LanguageStorage } from "./general/language.storage"
 import { GameDifficulty, GameLength } from "./settings.interface"
 import { ThemeAccentStorage } from "./theme/theme-accent.storage"
 import { BackgroundTheme, ThemeBackgroundStorage } from "./theme/theme-background.storage"
@@ -10,6 +12,7 @@ export interface GameConfig {
   length: GameLength
   hexAccent: string
   backgroundTheme: BackgroundTheme
+  language: Locale
 }
 
 @Injectable({
@@ -20,6 +23,7 @@ export class GameStorage {
   public readonly lengthStorage = new GameLengthStorage()
   public readonly accentStorage = new ThemeAccentStorage()
   public readonly backgroundStorage = new ThemeBackgroundStorage()
+  public readonly languageStorage = new LanguageStorage()
 
   private configSnapshot = this.getConfig()
 
@@ -43,8 +47,9 @@ export class GameStorage {
     const length = this.lengthStorage.getCurrentValue()
     const backgroundTheme = this.backgroundStorage.getCurrentValue()
     const hexAccent = this.accentStorage.getCurrentValue()
+    const language = this.languageStorage.getCurrentValue()
 
-    return { difficulty, length, hexAccent, backgroundTheme }
+    return { difficulty, length, hexAccent, backgroundTheme, language }
   }
 
   private async getConfigFromStorage(): Promise<GameConfig> {
@@ -52,7 +57,8 @@ export class GameStorage {
     const length = await this.lengthStorage.get()
     const backgroundTheme = await this.backgroundStorage.get()
     const hexAccent = await this.accentStorage.get()
+    const language = await this.languageStorage.get()
 
-    return { difficulty, length, hexAccent, backgroundTheme }
+    return { difficulty, length, hexAccent, backgroundTheme, language }
   }
 }
