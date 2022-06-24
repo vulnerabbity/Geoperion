@@ -12,11 +12,29 @@ export interface GameConfig {
   providedIn: "root",
 })
 export class GameStorage {
-  constructor(public difficulty: GameDifficultyStorage, public length: GameLengthStorage) {}
+  public readonly difficultyStorage = new GameDifficultyStorage()
+  public readonly lengthStorage = new GameLengthStorage()
 
-  async getConfig(): Promise<GameConfig> {
-    const difficulty = await this.difficulty.get()
-    const length = await this.length.get()
+  private configSnapshot = this.getConfig()
+
+  constructor() {
+    this.updateSnapshot()
+  }
+
+  getConfigReference(): GameConfig {
+    return this.configSnapshot
+  }
+
+  private updateSnapshot() {
+    const currentConfig = this.getConfig()
+
+    // change fields of snapshot without reassigning with "=" to keep same reference
+    Object.assign(this.configSnapshot, currentConfig)
+  }
+
+  private getConfig(): GameConfig {
+    const difficulty = this.difficultyStorage.getCurrentValue()
+    const length = this.lengthStorage.getCurrentValue()
 
     return { difficulty, length }
   }
