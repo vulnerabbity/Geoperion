@@ -1,17 +1,10 @@
 import { Injectable } from "@angular/core"
 import { GameStorage } from "src/app/features/storage/game-storage"
-import { AppThemeAccentStorage } from "src/app/features/storage/theme/theme-accent.storage"
-import { AppThemeBackgroundStorage } from "src/app/features/storage/theme/theme-background.storage"
 import { SettingsPageEvents } from "./settings.events"
 
 @Injectable({ providedIn: "root" })
 export class SettingsPageEventsHandler {
-  constructor(
-    private events: SettingsPageEvents,
-    private gameStorage: GameStorage,
-    private accentStorage: AppThemeAccentStorage,
-    private backgroundStorage: AppThemeBackgroundStorage,
-  ) {
+  constructor(private events: SettingsPageEvents, private gameStorage: GameStorage) {
     this.handleDifficultyChange()
     this.handleGameLengthChange()
     this.handleAccentChange()
@@ -20,25 +13,25 @@ export class SettingsPageEventsHandler {
 
   private handleDifficultyChange() {
     this.events.general.difficultyChanged$.subscribe(newDifficulty => {
-      this.gameStorage.difficulty.set(newDifficulty)
+      this.gameStorage.difficultyStorage.set(newDifficulty)
     })
   }
 
   private handleGameLengthChange() {
     this.events.general.gameLengthChanged$.subscribe(newLength => {
-      this.gameStorage.length.set(newLength)
+      this.gameStorage.lengthStorage.set(newLength)
     })
   }
 
   private handleAccentChange() {
     this.events.theme.accentChanged$.subscribe(({ hexColor }) => {
-      this.accentStorage.set(hexColor)
+      this.gameStorage.accentStorage.set(hexColor)
     })
   }
 
   private handleBackgroundChange() {
     this.events.theme.backgroundChanged$.subscribe(newBackground => {
-      this.backgroundStorage.set(newBackground)
+      this.gameStorage.backgroundStorage.set(newBackground)
     })
   }
 }
