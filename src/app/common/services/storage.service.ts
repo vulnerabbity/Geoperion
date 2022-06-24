@@ -9,7 +9,7 @@ export abstract class StorageService<T> {
   protected abstract storageKey: string
   protected abstract defaultValue: T
 
-  protected currentValue: T | undefined
+  protected currentValue = this.getDefault()
 
   private ionicStorage = new IonicStorage()
 
