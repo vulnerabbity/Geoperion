@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
-import { AppTheme } from "src/app/features/storage/settings.interface"
-import { AppThemeState } from "src/app/features/storage/theme/theme.state"
+import { GameStorage } from "src/app/features/storage/game-storage"
+import { BackgroundTheme } from "src/app/features/storage/theme/theme-background.storage"
 
 // to map background to class name
 enum CssBackgroundClasses {
@@ -18,19 +18,22 @@ enum CssBackgroundClasses {
   styleUrls: ["./theme.component.scss"],
 })
 export class RootThemeDefinerComponent {
-  theme: AppTheme = this.themeState.getDefault()
+  private lastBackgroundClass = CssBackgroundClasses.light
 
-  private lastBackground = CssBackgroundClasses.light
+  private currentBackground: BackgroundTheme = "light"
 
-  private themeSub = this.subscribeToTheme()
+  public hexAccent = this.gameStorage.accentStorage.getCurrentValue()
 
-  constructor(private themeState: AppThemeState) {}
+  constructor(private gameStorage: GameStorage) {
+    this.subscribeToTheme()
+  }
 
   setBackground() {
-    this.removeClass(this.lastBackground)
-    const backgroundClass = CssBackgroundClasses[this.theme.background]
-    this.lastBackground = backgroundClass
-    this.addClass(backgroundClass)
+    this.removeClass(this.lastBackgroundClass)
+    const newBackgroundClass = CssBackgroundClasses[this.currentBackground]
+    this.lastBackgroundClass = newBackgroundClass
+
+    this.addClass(newBackgroundClass)
   }
 
   private addClass(className: string) {
@@ -42,9 +45,13 @@ export class RootThemeDefinerComponent {
   }
 
   private subscribeToTheme() {
-    return this.themeState.currentTheme$.subscribe(theme => {
-      this.theme = theme
+    this.gameStorage.backgroundStorage.currentValue$.subscribe(newBackground => {
+      this.currentBackground = newBackground
       this.setBackground()
+    })
+
+    this.gameStorage.accentStorage.currentValue$.subscribe(accent => {
+      this.hexAccent = accent
     })
   }
 }
