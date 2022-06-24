@@ -6,7 +6,7 @@ import { GamesDefaultConfigPureService } from "./games-default-config.pure-servi
   providedIn: "root",
 })
 export class GamesDefaultConfigService {
-  private configSnapshot: GameConfig = { difficulty: "easy", length: "short" }
+  private configSnapshot: GameConfig = this.gameStorage.getConfigReference()
 
   constructor(
     private pureService: GamesDefaultConfigPureService,
