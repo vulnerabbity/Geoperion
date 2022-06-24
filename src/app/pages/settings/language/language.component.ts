@@ -18,5 +18,11 @@ export class SettingsPageLanguageComponent {
     const newLanguage = this.currentLocale
 
     this.events.general.languageChanged$.next(newLanguage)
+
+    this.reloadPage()
+  }
+
+  reloadPage() {
+    window.location.reload()
   }
 }
