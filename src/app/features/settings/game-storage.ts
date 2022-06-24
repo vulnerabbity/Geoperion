@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { GameDifficultyStorage } from "./game-difficulty.storage"
-import { GameLengthStorage } from "./game-length.storage"
+import { GameDifficultyStorage } from "./general/game-difficulty.storage"
+import { GameLengthStorage } from "./general/game-length.storage"
 import { GameDifficulty, GameLength } from "./settings.interface"
 
 export interface GameConfig {
