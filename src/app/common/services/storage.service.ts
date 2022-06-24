@@ -7,6 +7,8 @@ export abstract class StorageService<T> {
   protected abstract storageKey: string
   protected abstract defaultValue: T
 
+  protected currentValue: T | undefined
+
   private setEmitter$ = new Subject<T>()
 
   public readonly valueChanged$ = from(this.setEmitter$)
@@ -16,6 +18,7 @@ export abstract class StorageService<T> {
   constructor() {
     // required by library
     this.ionicStorage.create()
+    this.initCurrentValue()
   }
 
   async set(value: T) {
@@ -29,7 +32,21 @@ export abstract class StorageService<T> {
     return result ?? this.defaultValue
   }
 
+  getDefault(): T {
+    return this.defaultValue
+  }
+
+  getCurrentValue(): T {
+    return this.currentValue ?? this.defaultValue
+  }
+
   async remove(key: string) {
     await this.ionicStorage.remove(key)
+  }
+
+  private async initCurrentValue() {
+    const currentValueFromStorage = await this.get()
+
+    this.currentValue = currentValueFromStorage
   }
 }
