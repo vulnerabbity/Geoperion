@@ -1,30 +1,30 @@
-import { Injectable, OnInit } from "@angular/core"
+import { Injectable } from "@angular/core"
 import { Storage as IonicStorage } from "@ionic/storage-angular"
-import { from, Subject } from "rxjs"
+import { BehaviorSubject } from "rxjs"
 
 @Injectable({ providedIn: "root" })
 export abstract class StorageService<T> {
+  public currentValue$ = new BehaviorSubject<T>(this.getDefault())
+
   protected abstract storageKey: string
   protected abstract defaultValue: T
 
   protected currentValue: T | undefined
 
-  private setEmitter$ = new Subject<T>()
-
-  public readonly valueChanged$ = from(this.setEmitter$)
-
   private ionicStorage = new IonicStorage()
 
   constructor() {
-    // required by library
-    this.ionicStorage.create()
-    this.initCurrentValue()
+    // "create()" is required by library
+    this.ionicStorage.create().then(() => {
+      this.initCurrentValue()
+    })
   }
 
-  async set(value: T) {
-    this.setEmitter$.next(value)
+  async set(newValue: T) {
+    this.currentValue$.next(newValue)
+    this.currentValue = newValue
 
-    await this.ionicStorage.set(this.storageKey, value)
+    await this.ionicStorage.set(this.storageKey, newValue)
   }
 
   async get(): Promise<T> {
@@ -48,5 +48,6 @@ export abstract class StorageService<T> {
     const currentValueFromStorage = await this.get()
 
     this.currentValue = currentValueFromStorage
+    this.currentValue$.next(currentValueFromStorage)
   }
 }
