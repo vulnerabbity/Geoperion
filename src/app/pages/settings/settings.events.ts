@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core"
 import { Subject } from "rxjs"
 import { Locale } from "src/app/common/language/language.interface"
-import {
-  AppBackgroundTheme,
-  GameDifficulty,
-  GameLength,
-} from "src/app/features/storage/settings.interface"
+import { GameDifficulty, GameLength } from "src/app/features/storage/settings.interface"
+import { BackgroundTheme } from "src/app/features/storage/theme/theme-background.storage"
 
 /**
  * Events between settings sub components.
@@ -22,6 +19,6 @@ export class SettingsPageEvents {
   readonly theme = {
     accentChanged$: new Subject<{ hexColor: string }>(),
 
-    backgroundChanged$: new Subject<AppBackgroundTheme>(),
+    backgroundChanged$: new Subject<BackgroundTheme>(),
   } as const
 }
