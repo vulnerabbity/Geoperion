@@ -1,29 +1,31 @@
 import { Injectable } from "@angular/core"
-import { Locale } from "./language.interface"
+import { Locale, Locales } from "./language.interface"
 import { Translation } from "./translations/en/en.translation"
 import { getTranslations } from "./translations/translations"
 
 export const DefaultLocale: Locale = "EN" as const
 
-@Injectable({ providedIn: "root" })
-export class LanguageService {
+class LanguageService {
   private currentLocale: Locale = DefaultLocale
 
   private readonly translations: Translation[] = getTranslations()
   private readonly defaultTranslation = new Translation()
 
-  // Important: should be always same object link
-  readonly translation = this.getTranslation()
+  translation = this.getTranslation()
 
-  setLocale(locale: Locale) {
-    this.currentLocale = locale
+  setLocale(newLocale: Locale) {
+    const isSupportedLocale = Locales.includes(newLocale)
+    if (isSupportedLocale) {
+      this.currentLocale = newLocale
 
-    this.updateTranslation()
+      this.updateTranslation()
+    } else {
+      console.warn(`Locale "${newLocale}" is not supported`)
+    }
   }
 
   private updateTranslation() {
-    // change translation object without modifying link to use reactivity
-    Object.assign(this.translation, this.getTranslation())
+    this.translation = this.getTranslation()
   }
 
   private getTranslation() {
