@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core"
-import { StorageService } from "src/app/common/services/storage.service"
+import { GameStorageService } from "../game-storage.service"
 
 @Injectable({
   providedIn: "root",
 })
-export class ThemeAccentStorage extends StorageService<string> {
+export class ThemeAccentStorage extends GameStorageService<string> {
   protected storageKey = "theme-hex-accent"
 
   protected defaultValue = getDefaultThemeHexAccent()

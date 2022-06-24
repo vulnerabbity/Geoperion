@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core"
+import { BehaviorSubject } from "rxjs"
 import { Locale } from "src/app/common/language/language.interface"
+import { GameStorageEvents } from "./game-storage.events"
 import { GameDifficultyStorage } from "./general/game-difficulty.storage"
 import { GameLengthStorage } from "./general/game-length.storage"
 import { LanguageStorage } from "./general/language.storage"
@@ -25,10 +27,13 @@ export class GameStorage {
   public readonly backgroundStorage = new ThemeBackgroundStorage()
   public readonly languageStorage = new LanguageStorage()
 
+  public configSnapshot$ = new BehaviorSubject(this.getConfig())
+
   private configSnapshot = this.getConfig()
 
   constructor() {
     this.initSnapshot()
+    this.updateSnapshotOnChange()
   }
 
   getConfigReference(): GameConfig {
@@ -38,8 +43,22 @@ export class GameStorage {
   private async initSnapshot() {
     const currentConfig = await this.getConfigFromStorage()
 
+    this.setNewConfig(currentConfig)
+  }
+
+  private async updateSnapshotOnChange() {
+    GameStorageEvents.storageChanged$.subscribe(() => {
+      const newConfig = this.getConfig()
+
+      this.setNewConfig(newConfig)
+    })
+  }
+
+  private setNewConfig(newConfig: GameConfig) {
     // change fields of snapshot without reassigning with "=" to keep same reference
-    Object.assign(this.configSnapshot, currentConfig)
+    Object.assign(this.configSnapshot, newConfig)
+
+    this.configSnapshot$.next(newConfig)
   }
 
   private getConfig(): GameConfig {

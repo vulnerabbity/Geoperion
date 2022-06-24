@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core"
 import { Locale } from "src/app/common/language/language.interface"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
-import { StorageService } from "src/app/common/services/storage.service"
+import { GameStorageService } from "../game-storage.service"
 
 @Injectable({
   providedIn: "root",
 })
-export class LanguageStorage extends StorageService<Locale> {
+export class LanguageStorage extends GameStorageService<Locale> {
   protected readonly defaultValue = "EN"
   protected readonly storageKey = "language"
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { StorageService } from "src/app/common/services/storage.service"
+import { GameStorageService } from "../game-storage.service"
 
 export enum BackgroundThemes {
   Light = "light",
@@ -15,7 +15,7 @@ export type BackgroundTheme = `${BackgroundThemes}`
 @Injectable({
   providedIn: "root",
 })
-export class ThemeBackgroundStorage extends StorageService<BackgroundTheme> {
+export class ThemeBackgroundStorage extends GameStorageService<BackgroundTheme> {
   readonly storageKey = "theme-background"
 
   readonly defaultValue = getDefaultBackgroundTheme()
