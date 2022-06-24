@@ -45,13 +45,10 @@ export class RootThemeDefinerComponent {
   }
 
   private subscribeToTheme() {
-    this.gameStorage.backgroundStorage.currentValue$.subscribe(newBackground => {
-      this.currentBackground = newBackground
+    this.gameStorage.configSnapshot$.subscribe(({ backgroundTheme, hexAccent }) => {
+      this.currentBackground = backgroundTheme
+      this.hexAccent = hexAccent
       this.setBackground()
-    })
-
-    this.gameStorage.accentStorage.currentValue$.subscribe(accent => {
-      this.hexAccent = accent
     })
   }
 }
