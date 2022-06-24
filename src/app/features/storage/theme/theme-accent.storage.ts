@@ -4,7 +4,7 @@ import { StorageService } from "src/app/common/services/storage.service"
 @Injectable({
   providedIn: "root",
 })
-export class AppThemeAccentStorage extends StorageService<string> {
+export class ThemeAccentStorage extends StorageService<string> {
   protected storageKey = "theme-hex-accent"
 
   protected defaultValue = getDefaultThemeHexAccent()
