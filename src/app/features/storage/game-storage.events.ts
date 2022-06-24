@@ -4,6 +4,6 @@ import { Subject } from "rxjs"
 @Injectable({
   providedIn: "root",
 })
-export class GameConfigEvents {
+export class GameStorageEvents {
   configChanged$ = new Subject()
 }
