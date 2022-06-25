@@ -1,0 +1,24 @@
+<ion-title class="finish-modal__title">{{ translation.title }}</ion-title>
+<ion-content>
+  <ul class="finish-modal__statistics-list">
+    <li class="finish-modal__statistics">
+      <p>{{ translation.totalAnswers }}:</p>
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.correctAnswers }}:</p>
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.wrongAnswers }}:</p>
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.timePassed }}:</p>
+    </li>
+  </ul>
+</ion-content>
+<ion-toolbar>
+  <div class="finish-modal__buttons-container">
+    <ion-button color="primary" class="finish-modal__button">
+      {{ translation.buttons.finish }}
+    </ion-button>
+  </div>
+</ion-toolbar>

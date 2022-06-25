@@ -6,6 +6,17 @@ export class TranslationGamePage {
 
   guessCountryTitle = "What country is this flag ?"
 
+  finishModal = {
+    title: "Finish game ?",
+    totalAnswers: "Total answers",
+    correctAnswers: "Correct answers",
+    wrongAnswers: "WrongAnswers",
+    timePassed: "Time passed",
+    buttons: {
+      finish: "Finish",
+    },
+  }
+
   getGuessCapitalTitle({ countryCode }: { countryCode: CountryCode }): string {
     const countryName = this.getCountryNameTranslation(countryCode)
 
