@@ -3,15 +3,19 @@
   <ul class="finish-modal__statistics-list">
     <li class="finish-modal__statistics">
       <p>{{ translation.totalAnswers }}:</p>
+      {{ detailedStatistics.totalAnswers }} / {{ detailedStatistics.totalQuestions }}
     </li>
     <li class="finish-modal__statistics">
       <p>{{ translation.correctAnswers }}:</p>
+      {{ detailedStatistics.correctAnswers }} / {{ detailedStatistics.totalAnswers }}
     </li>
     <li class="finish-modal__statistics">
       <p>{{ translation.wrongAnswers }}:</p>
+      {{ detailedStatistics.wrongAnswers }} / {{ detailedStatistics.totalAnswers }}
     </li>
     <li class="finish-modal__statistics">
       <p>{{ translation.timePassed }}:</p>
+      {{ timeDifference | date: "HH:mm:ss" }}
     </li>
   </ul>
 </ion-content>

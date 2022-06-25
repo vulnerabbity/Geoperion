@@ -4,6 +4,7 @@ import { LanguageServiceInstance } from "src/app/common/language/language.servic
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
@@ -12,7 +13,7 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-capital.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCapitalGamePage implements OnDestroy, OnInit {
-  private pages: CountryPage[] = []
+  pages: CountryPage[] = []
   private currentPageIndex = 0
   private currentPage: CountryPage | undefined = undefined
   private rightCountry: Country | undefined = undefined

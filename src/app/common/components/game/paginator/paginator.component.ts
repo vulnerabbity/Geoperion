@@ -1,6 +1,9 @@
-import { Component, OnDestroy } from "@angular/core"
+import { Component, Input, OnDestroy } from "@angular/core"
 import { ModalController } from "@ionic/angular"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
+import { GamePage } from "src/app/features/games/games.interface"
+import { GameStatistics } from "src/app/features/statistics/statistics"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { CommonGameFinishComponent } from "../finish-modal/finish-modal.component"
 import { CommonGameComponentsEvents } from "../game-events"
 import { CommonGameComponentsState } from "../game-state"
@@ -15,6 +18,20 @@ export class CommonGamePaginatorComponent implements OnDestroy {
   isPrevDisabled = false
 
   buttonsTranslation = LanguageServiceInstance.translation.ui.buttons
+
+  @Input()
+  set pages(newPages: GamePage<any>[]) {
+    this.statistics = GameStatisticsGenerator.generateFromPages(newPages)
+    this._pages = newPages
+  }
+
+  get pages() {
+    return this._pages
+  }
+
+  private _pages: GamePage<any>[] = []
+
+  private statistics = GameStatisticsGenerator.generateFromPages(this._pages)
 
   private stateSub = this.handleStateChange()
 
@@ -33,9 +50,11 @@ export class CommonGamePaginatorComponent implements OnDestroy {
   }
 
   async openFinishModal() {
+    GameStatisticsGenerator.updateStatisticsFromPages(this.statistics, this.pages)
+
     const modal = await this.modalController.create({
       component: CommonGameFinishComponent,
-      swipeToClose: true,
+      componentProps: { statistics: this.statistics },
     })
     await modal.present()
   }

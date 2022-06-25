@@ -11,7 +11,7 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-country.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
-  private pages: CountryPage[] = []
+  pages: CountryPage[] = []
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()

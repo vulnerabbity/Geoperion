@@ -12,7 +12,7 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-population.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessPopulationGamePage implements OnDestroy, OnInit {
-  private pages: CountryPage[] = []
+  pages: CountryPage[] = []
   private currentPage: CountryPage | undefined = undefined
 
   private stateSub = this.handleStateUpdate()
