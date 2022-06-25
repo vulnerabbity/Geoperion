@@ -6,3 +6,8 @@
 @import "./nord.scss";
 @import "./github.scss";
 @import "./retro.scss";
+
+// ion-title did not use default color variable
+ion-title {
+  --color: var(--ion-text-color);
+}
