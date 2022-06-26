@@ -4,6 +4,8 @@ import { LanguageServiceInstance } from "src/app/common/language/language.servic
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { GameStatistics } from "src/app/features/statistics/statistics"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
 @Component({
@@ -12,13 +14,22 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
   pages: CountryPage[] = []
+
+  get statistics() {
+    return GameStatisticsGenerator.generateFromPages(this.pages)
+  }
+
   private currentPageIndex = 0
 
   private stateSub = this.subscribeToState()
 
   private translation = LanguageServiceInstance.translation
 
-  constructor(private state: CountriesGamesState) {}
+  constructor(private state: CountriesGamesState) {
+    // setInterval(() => {
+    //   console.log(this.pages)
+    // }, 500)
+  }
 
   async ngOnInit() {
     await this.startNewGame()
@@ -26,22 +37,6 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   getTitle(): string {
     return this.translation.gamePage.guessCountryTitle
-  }
-
-  getTotalPages() {
-    return this.pages.length
-  }
-
-  getAnsweredNumber() {
-    let answered = 0
-    this.pages.forEach(page => {
-      const isSelected = typeof page.selectedAnswerIndex === "number"
-      if (isSelected) {
-        answered += 1
-      }
-    })
-
-    return answered
   }
 
   getCurrentPageFlag(): string {
@@ -82,7 +77,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
   }
 
   private async startNewGame() {
-    this.state.startNewState()
+    await this.state.startNewState()
   }
 
   private subscribeToState() {

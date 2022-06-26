@@ -14,9 +14,26 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 })
 export class GuessCapitalGamePage implements OnDestroy, OnInit {
   pages: CountryPage[] = []
+
+  get statistics() {
+    return GameStatisticsGenerator.generateFromPages(this.pages)
+  }
+
   private currentPageIndex = 0
-  private currentPage: CountryPage | undefined = undefined
-  private rightCountry: Country | undefined = undefined
+
+  private get currentPage(): CountryPage | undefined {
+    return this.pages[this.currentPageIndex]
+  }
+
+  private get rightCountry(): Country | undefined {
+    const currentPage = this.currentPage
+    if (currentPage === undefined) {
+      return
+    }
+
+    const rightCountry = currentPage.options[currentPage.rightAnswerIndex]
+    return rightCountry
+  }
 
   private stateSub = this.handleStateChange()
 
@@ -24,8 +41,8 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
 
   constructor(private countriesState: CountriesGamesState) {}
 
-  ngOnInit(): void {
-    this.countriesState.startNewState()
+  async ngOnInit() {
+    await this.countriesState.startNewState()
   }
 
   hasCurrentPage() {
@@ -45,22 +62,6 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
       countryCode: currentCountryCode,
     })
     return title
-  }
-
-  getTotalPages() {
-    return this.pages.length
-  }
-
-  getAnsweredQuestionsNumber() {
-    let answered = 0
-    for (let page of this.pages) {
-      const isAnswered = page.selectedAnswerIndex !== undefined
-      if (isAnswered) {
-        answered += 1
-      }
-    }
-
-    return answered
   }
 
   // Allows to use concrete field to display answers
@@ -91,23 +92,6 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
     return this.countriesState.state$.subscribe(newState => {
       this.pages = newState.pages
       this.currentPageIndex = newState.currentPageIndex
-
-      this.updateCurrentPage()
-      this.updateRightCountry()
     })
-  }
-
-  private updateRightCountry() {
-    const currentPage = this.currentPage
-    if (currentPage === undefined) {
-      return
-    }
-
-    const rightCountry = currentPage.options[currentPage.rightAnswerIndex]
-    this.rightCountry = rightCountry
-  }
-
-  private updateCurrentPage() {
-    this.currentPage = this.pages[this.currentPageIndex]
   }
 }

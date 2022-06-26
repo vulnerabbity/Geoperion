@@ -5,6 +5,7 @@ import { LanguageServiceInstance } from "src/app/common/language/language.servic
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
 @Component({
@@ -13,6 +14,11 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 })
 export class GuessPopulationGamePage implements OnDestroy, OnInit {
   pages: CountryPage[] = []
+
+  get statistics() {
+    return GameStatisticsGenerator.generateFromPages(this.pages)
+  }
+
   private currentPage: CountryPage | undefined = undefined
 
   private stateSub = this.handleStateUpdate()
@@ -55,24 +61,6 @@ export class GuessPopulationGamePage implements OnDestroy, OnInit {
 
     const title = this.translation.getGuessPopulationTitle({ countryCode: currentCountryCode })
     return title
-  }
-
-  getAnsweredNumber() {
-    let answered = 0
-
-    this.pages.forEach(page => {
-      const isAnswered = page.selectedAnswerIndex !== undefined
-
-      if (isAnswered) {
-        answered += 1
-      }
-    })
-
-    return answered
-  }
-
-  getTotalPages() {
-    return this.pages.length
   }
 
   private getFancyPopulation(population: number) {
