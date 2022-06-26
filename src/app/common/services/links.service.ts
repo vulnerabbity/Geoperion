@@ -13,6 +13,10 @@ export class LinksService {
     return this.getRootLink(AppPaths.games)
   }
 
+  getStatisticsLink() {
+    return this.getRootLink(AppPaths.statistics)
+  }
+
   private getRootLink(link: string) {
     return `/${link}`
   }
