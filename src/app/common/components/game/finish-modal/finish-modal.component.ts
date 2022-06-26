@@ -50,7 +50,7 @@ export class CommonGameFinishComponent implements OnDestroy {
 
   private getTimeDifference() {
     const currentSeconds = new Date().valueOf()
-    const startSeconds = this.statistics.startTime.valueOf()
+    const startSeconds = new Date(this.statistics.startTime).valueOf()
 
     const difference = currentSeconds - startSeconds
     return new Date(difference)
