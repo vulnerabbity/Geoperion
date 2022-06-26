@@ -5,8 +5,14 @@ import { GameStatisticsStorage } from "./statistics-storage"
 export class GameStatisticsManager {
   private static storage = new GameStatisticsStorage()
 
-  // district instances because of static class
+  static currentStatistics$ = this.storage.currentValue$
+
+  // restrict instances because of static class
   private constructor() {}
+
+  static async get() {
+    return await this.storage.get()
+  }
 
   static async save(statistics: GameStatistics) {
     const statisticsList = await this.storage.get()
@@ -22,8 +28,8 @@ export class GameStatisticsManager {
   }
 
   static async removeById(id: string) {
-    const statisticsList = await this.storage.get()
-    statisticsList.filter(statistics => statistics.id !== id)
+    let statisticsList = await this.storage.get()
+    statisticsList = statisticsList.filter(statistics => statistics.id !== id)
 
     await this.storage.set(statisticsList)
   }
