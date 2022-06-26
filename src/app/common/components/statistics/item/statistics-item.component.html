@@ -4,17 +4,24 @@
     <ion-card-content class="statistics-item__ion-content">
       <ul class="statistics-item__list">
         <li>
-          Correct answers
-          {{ statistic.correctAnswers }} / {{ statistic.totalQuestions }}
+          {{ translation.correctAnswers }}: {{ statistic.correctAnswers }} /
+          {{ statistic.totalQuestions }}
         </li>
-        <li *ngIf="this.statistic.startTime">
-          Date
-          {{ this.statistic.startTime | date: "mm:dd:yyyy hh:mm" }}
+
+        <li>
+          {{ translation.timeTaken }}:
+          {{ getTimePassed() | date: "mm:ss" }}
+        </li>
+
+        <li *ngIf="this.statistic.finishTime">
+          {{ translation.date }}:
+          <!-- example 01.25.2020 20:32 -->
+          {{ this.statistic.finishTime | date: "MM/dd/yyyy HH:mm" }}
         </li>
       </ul>
     </ion-card-content>
     <div class="statistics-item__button-container">
-      <ion-button>
+      <ion-button (click)="this.delete()">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </div>
