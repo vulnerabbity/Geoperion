@@ -14,8 +14,8 @@ export class GameStatistics {
 
   // auto fields
   public readonly id = makeUUID()
-  public startTime = new Date()
-  public finishTime: Date | null = null
+  public startTime: Date | string = new Date()
+  public finishTime: Date | string | null = null
 
   static getDefault(): GameStatistics {
     return new this({ correctAnswers: 0, totalAnswers: 0, totalQuestions: 0 })

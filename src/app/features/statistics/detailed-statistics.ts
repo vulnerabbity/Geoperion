@@ -17,12 +17,14 @@ export class DetailedGameStatisticsGenerator {
 
   private static getSecondsPassed(
     statistics: GameStatistics,
-  ): DetailedGameStatistics["secondsPassed"] {
+  ): DetailedGameStatistics["secondsPassed"] | undefined {
     if (statistics.finishTime) {
-      const startTime = statistics.startTime.getUTCSeconds()
-      const finishTime = statistics.finishTime.getUTCSeconds()
+      const startTime = new Date(statistics.startTime).getUTCSeconds()
+      const finishTime = new Date(statistics.finishTime).getUTCSeconds()
 
-      return finishTime - startTime
+      const difference = finishTime - startTime
+
+      return difference
     }
     return
   }
