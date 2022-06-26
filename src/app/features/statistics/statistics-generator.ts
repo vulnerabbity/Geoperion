@@ -32,7 +32,7 @@ export class GameStatisticsGenerator {
   private static getTotalAnswers(pages: GamePage<unknown>[]): number {
     let answers = 0
     pages.forEach(page => {
-      const isAnswered = page.selectedAnswerIndex
+      const isAnswered = typeof page.selectedAnswerIndex === "number"
       if (isAnswered) {
         answers++
       }
