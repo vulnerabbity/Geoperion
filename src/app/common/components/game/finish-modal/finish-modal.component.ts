@@ -1,7 +1,10 @@
 import { Component, OnDestroy } from "@angular/core"
+import { ModalController } from "@ionic/angular"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
 import { DetailedGameStatisticsGenerator } from "src/app/features/statistics/detailed-statistics"
 import { GameStatistics } from "src/app/features/statistics/statistics"
+import { GameStatisticsManager } from "src/app/features/statistics/statistics-manager"
+import { CommonGameComponentsEvents } from "../game-events"
 
 @Component({
   selector: "common-finish-game-modal",
@@ -9,7 +12,7 @@ import { GameStatistics } from "src/app/features/statistics/statistics"
   styleUrls: ["./finish-modal.component.scss"],
 })
 export class CommonGameFinishComponent implements OnDestroy {
-  statistics: GameStatistics = GameStatistics.getDefault()
+  private statistics: GameStatistics = GameStatistics.getDefault()
 
   timeDifference = this.getTimeDifference()
 
@@ -23,6 +26,22 @@ export class CommonGameFinishComponent implements OnDestroy {
     const detailedStatistics = DetailedGameStatisticsGenerator.generate(this.statistics)
 
     return detailedStatistics
+  }
+
+  constructor(
+    private events: CommonGameComponentsEvents,
+    private modalController: ModalController,
+  ) {}
+
+  async finishGame() {
+    await GameStatisticsManager.finishAndSave(this.statistics)
+    this.events.restarted$.next()
+
+    await this.closeModal()
+  }
+
+  async closeModal() {
+    await this.modalController.dismiss()
   }
 
   private updateTimeDifference() {
@@ -41,7 +60,7 @@ export class CommonGameFinishComponent implements OnDestroy {
     // update initial value
     setTimeout(() => {
       this.updateTimeDifference()
-    }, 200)
+    })
 
     return setInterval(() => {
       this.updateTimeDifference()
