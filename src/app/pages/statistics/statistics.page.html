@@ -5,13 +5,13 @@
 </ion-header>
 <ion-content>
   <div class="container">
-    <h2 class="statistics-page__title">History</h2>
+    <h2 class="statistics-page__title">{{translation.history}}</h2>
     <statistics-list
       [hidden]="this.statisticsList.length === 0"
       [statisticsList]="this.statisticsList"
     ></statistics-list>
     <h3 class="statistics-page__empty-history" *ngIf="this.statisticsList.length === 0">
-      History is empty
+      {{translation.historyIsEmpty}}
     </h3>
   </div>
 </ion-content>
