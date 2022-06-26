@@ -1,0 +1,38 @@
+.statistics-item {
+  &__content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  &__ion-content {
+    padding: 0;
+    width: 100%;
+  }
+
+  &__icon {
+    height: unset;
+    min-width: 3rem;
+    max-width: 10rem;
+
+    padding: 1rem;
+  }
+
+  &__list {
+    padding: 0;
+    list-style: none;
+
+    width: 100%;
+  }
+
+  &__button-container {
+    // vertical center
+    display: flex;
+    align-items: center;
+
+    // take all height
+    flex-grow: 1;
+
+    margin-right: 1rem;
+  }
+}

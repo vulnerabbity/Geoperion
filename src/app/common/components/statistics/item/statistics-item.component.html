@@ -1,0 +1,22 @@
+<ion-card>
+  <div class="statistics-item__content">
+    <ion-icon class="statistics-item__icon" name="stats-chart-outline"></ion-icon>
+    <ion-card-content class="statistics-item__ion-content">
+      <ul class="statistics-item__list">
+        <li>
+          Correct answers
+          {{ statistic.correctAnswers }} / {{ statistic.totalQuestions }}
+        </li>
+        <li *ngIf="this.statistic.startTime">
+          Date
+          {{ this.statistic.startTime | date: "mm:dd:yyyy hh:mm" }}
+        </li>
+      </ul>
+    </ion-card-content>
+    <div class="statistics-item__button-container">
+      <ion-button>
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-card>
