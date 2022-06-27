@@ -36,11 +36,7 @@ export class CountriesGamesEventsHandler {
 
   private handleHeaderActions() {
     this.componentsEvents.restarted$.subscribe(async () => {
-      const pages = await this.countriesGamesService.getPages()
-      const newState = makeCountriesGamesState()
-      newState.pages = pages
-
-      this.state.state$.next(newState)
+      this.state.startNewState()
     })
 
     this.componentsEvents.exited$.subscribe(() => {

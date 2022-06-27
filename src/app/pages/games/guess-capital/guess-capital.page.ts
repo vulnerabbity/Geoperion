@@ -4,6 +4,8 @@ import { LanguageServiceInstance } from "src/app/common/language/language.servic
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { GameStatistics } from "src/app/features/statistics/statistics"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
 
@@ -12,10 +14,30 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-capital.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCapitalGamePage implements OnDestroy, OnInit {
+  get statistics() {
+    GameStatisticsGenerator.updateStatisticsFromPages(this._statistics, this.pages)
+    return this._statistics
+  }
+
+  private _statistics = GameStatistics.getDefault()
+
   private pages: CountryPage[] = []
+
   private currentPageIndex = 0
-  private currentPage: CountryPage | undefined = undefined
-  private rightCountry: Country | undefined = undefined
+
+  private get currentPage(): CountryPage | undefined {
+    return this.pages[this.currentPageIndex]
+  }
+
+  private get rightCountry(): Country | undefined {
+    const currentPage = this.currentPage
+    if (currentPage === undefined) {
+      return
+    }
+
+    const rightCountry = currentPage.options[currentPage.rightAnswerIndex]
+    return rightCountry
+  }
 
   private stateSub = this.handleStateChange()
 
@@ -23,8 +45,8 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
 
   constructor(private countriesState: CountriesGamesState) {}
 
-  ngOnInit(): void {
-    this.countriesState.startNewState()
+  async ngOnInit() {
+    await this.countriesState.startNewState()
   }
 
   hasCurrentPage() {
@@ -44,22 +66,6 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
       countryCode: currentCountryCode,
     })
     return title
-  }
-
-  getTotalPages() {
-    return this.pages.length
-  }
-
-  getAnsweredQuestionsNumber() {
-    let answered = 0
-    for (let page of this.pages) {
-      const isAnswered = page.selectedAnswerIndex !== undefined
-      if (isAnswered) {
-        answered += 1
-      }
-    }
-
-    return answered
   }
 
   // Allows to use concrete field to display answers
@@ -90,23 +96,7 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
     return this.countriesState.state$.subscribe(newState => {
       this.pages = newState.pages
       this.currentPageIndex = newState.currentPageIndex
-
-      this.updateCurrentPage()
-      this.updateRightCountry()
+      this._statistics = newState.statistics
     })
-  }
-
-  private updateRightCountry() {
-    const currentPage = this.currentPage
-    if (currentPage === undefined) {
-      return
-    }
-
-    const rightCountry = currentPage.options[currentPage.rightAnswerIndex]
-    this.rightCountry = rightCountry
-  }
-
-  private updateCurrentPage() {
-    this.currentPage = this.pages[this.currentPageIndex]
   }
 }

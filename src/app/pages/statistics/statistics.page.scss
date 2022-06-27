@@ -1,0 +1,19 @@
+.statistics-page {
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.4rem;
+    line-height: 2.4rem;
+
+    height: 6rem;
+  }
+
+  &__empty-history {
+    font-size: 2rem;
+    height: 3rem;
+
+    text-align: center;
+  }
+}

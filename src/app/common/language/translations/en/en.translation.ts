@@ -3,6 +3,8 @@ import { TranslationCountries } from "./en.countries"
 import { TranslationGamePage } from "./en.game-page"
 import { TranslationGamesPage } from "./en.games-page"
 import { TranslationSettingsPage } from "./en.settings-page"
+import { TranslationStatistics } from "./en.statistics"
+import { TranslationStatisticsPage } from "./en.statistics-page"
 import { TranslationUI } from "./en.ui"
 
 export class Translation {
@@ -15,6 +17,10 @@ export class Translation {
   readonly gamesPage = new TranslationGamesPage()
 
   readonly gamePage = new TranslationGamePage()
+
+  readonly statisticsPage = new TranslationStatisticsPage()
+
+  readonly statistics = new TranslationStatistics()
 
   readonly countries = new TranslationCountries()
 }

@@ -1,0 +1,41 @@
+.finish-modal {
+  &__top-right-button {
+    position: absolute;
+    right: 0;
+  }
+
+  &__title {
+    font-size: 2.6rem;
+    line-height: 3em;
+    max-height: 3rem;
+
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  &__buttons-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    font-size: 2.4rem;
+  }
+
+  &__statistics {
+    font-size: 2.6rem;
+    text-align: center;
+  }
+
+  &__statistics-list {
+    // vertical spacing
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 95%;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}

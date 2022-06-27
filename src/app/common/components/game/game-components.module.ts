@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { NgModule } from "@angular/core"
 import { IonicModule } from "@ionic/angular"
+import { CommonGameFinishComponent } from "./finish-modal/finish-modal.component"
 import { CommonGameAnswersComponent } from "./game-answers/game-answers.component"
 import { CommonGameFlagComponent } from "./game-flag/game-flag.component"
 import { CommonGameHeaderComponent } from "./game-header/game-header.component"
@@ -15,6 +16,7 @@ const components: NgModule["declarations"] = [
   CommonGameAnswersComponent,
   CommonGameFlagComponent,
   CommonGamePaginatorComponent,
+  CommonGameFinishComponent,
 ]
 
 @NgModule({

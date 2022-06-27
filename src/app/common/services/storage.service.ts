@@ -40,8 +40,8 @@ export abstract class StorageService<T> {
     return this.currentValue ?? this.defaultValue
   }
 
-  async remove(key: string) {
-    await this.ionicStorage.remove(key)
+  async remove() {
+    await this.ionicStorage.remove(this.storageKey)
   }
 
   private async initCurrentValue() {

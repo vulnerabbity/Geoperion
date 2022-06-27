@@ -1,5 +1,9 @@
-import { Component, OnDestroy } from "@angular/core"
+import { Component, Input, OnDestroy } from "@angular/core"
+import { ModalController } from "@ionic/angular"
 import { LanguageServiceInstance } from "src/app/common/language/language.service"
+import { GameStatistics } from "src/app/features/statistics/statistics"
+import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
+import { CommonGameFinishComponent } from "../finish-modal/finish-modal.component"
 import { CommonGameComponentsEvents } from "../game-events"
 import { CommonGameComponentsState } from "../game-state"
 
@@ -14,11 +18,15 @@ export class CommonGamePaginatorComponent implements OnDestroy {
 
   buttonsTranslation = LanguageServiceInstance.translation.ui.buttons
 
+  @Input()
+  statistics = GameStatistics.getDefault()
+
   private stateSub = this.handleStateChange()
 
   constructor(
     private events: CommonGameComponentsEvents,
     private state: CommonGameComponentsState,
+    private modalController: ModalController,
   ) {}
 
   onPrevPage() {
@@ -27,6 +35,14 @@ export class CommonGamePaginatorComponent implements OnDestroy {
 
   onNextPage() {
     this.events.nextPageSelected$.next()
+  }
+
+  async openFinishModal() {
+    const modal = await this.modalController.create({
+      component: CommonGameFinishComponent,
+      componentProps: { statistics: this.statistics },
+    })
+    await modal.present()
   }
 
   ngOnDestroy(): void {

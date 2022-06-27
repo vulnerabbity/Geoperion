@@ -5,7 +5,7 @@ import { getTranslations } from "./translations/translations"
 
 export const DefaultLocale: Locale = "EN" as const
 
-class LanguageService {
+export class LanguageService {
   private currentLocale: Locale = DefaultLocale
 
   private readonly translations: Translation[] = getTranslations()

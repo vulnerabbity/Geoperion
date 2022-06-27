@@ -7,6 +7,17 @@ export class TranslationRuGamePage extends TranslationGamePage {
 
   override guessCountryTitle = "Какой страны этот флаг ?"
 
+  override finishModal = {
+    title: "Завершить игру ?",
+    totalAnswers: "Всего ответов",
+    correctAnswers: "Верных ответов",
+    wrongAnswers: "Неверных ответов",
+    timePassed: "Времени прошло",
+    buttons: {
+      finish: "Завершить",
+    },
+  }
+
   override getGuessCapitalTitle({ countryCode }: { countryCode: CountryCode }) {
     const countryName = this.getCountryNameTranslation(countryCode)
 

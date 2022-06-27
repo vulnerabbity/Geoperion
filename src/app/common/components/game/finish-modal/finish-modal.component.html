@@ -1,0 +1,33 @@
+<ion-buttons class="finish-modal__top-right-button">
+  <ion-button (click)="closeModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+</ion-buttons>
+<ion-title class="finish-modal__title">{{ translation.title }}</ion-title>
+<ion-content>
+  <ul class="finish-modal__statistics-list">
+    <li class="finish-modal__statistics">
+      <p>{{ translation.totalAnswers }}:</p>
+      {{ detailedStatistics.totalAnswers }} / {{ detailedStatistics.totalQuestions }}
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.correctAnswers }}:</p>
+      {{ detailedStatistics.correctAnswers }} / {{ detailedStatistics.totalAnswers }}
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.wrongAnswers }}:</p>
+      {{ detailedStatistics.wrongAnswers }} / {{ detailedStatistics.totalAnswers }}
+    </li>
+    <li class="finish-modal__statistics">
+      <p>{{ translation.timePassed }}:</p>
+      {{ timeDifference | date: "mm:ss" }}
+    </li>
+  </ul>
+</ion-content>
+<ion-toolbar>
+  <div class="finish-modal__buttons-container">
+    <ion-button color="primary" class="finish-modal__button" (click)="finishGame()">
+      {{ translation.buttons.finish }}
+    </ion-button>
+  </div>
+</ion-toolbar>
