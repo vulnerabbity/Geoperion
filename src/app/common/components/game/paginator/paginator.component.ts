@@ -21,8 +21,9 @@ export class CommonGamePaginatorComponent implements OnDestroy {
 
   @Input()
   set pages(newPages: GamePage<any>[]) {
-    this.statistics = GameStatisticsGenerator.generateFromPages(newPages)
     this._pages = newPages
+
+    GameStatisticsGenerator.updateStatisticsFromPages(this.statistics, newPages)
   }
 
   get pages() {
