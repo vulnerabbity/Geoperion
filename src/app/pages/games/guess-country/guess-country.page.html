@@ -11,9 +11,10 @@
 
   <common-game-flag [flagUrl]="getCurrentPageFlag()"></common-game-flag>
 
-  <div class="answers">
+  <div class="answers-container">
     <common-game-answers [page]="getAnswersPage()"></common-game-answers>
   </div>
+
   <div class="paginator-container">
     <common-game-paginator [statistics]="this.statistics"></common-game-paginator>
   </div>
