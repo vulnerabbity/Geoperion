@@ -89,12 +89,17 @@ export class GuessPopulationGamePage implements OnDestroy, OnInit {
 
   private handleStateUpdate() {
     return this.gamesState.state$.subscribe(state => {
-      const { pages: newPages, currentPageIndex: newCurrentPageIndex } = state
+      const {
+        pages: newPages,
+        currentPageIndex: newCurrentPageIndex,
+        statistics: newStatistics,
+      } = state
 
       const newCurrentPage: CountryPage | undefined = newPages[newCurrentPageIndex]
 
       this.pages = newPages
       this.currentPage = newCurrentPage
+      this._statistics = newStatistics
     })
   }
 }
