@@ -21,9 +21,9 @@
 
 .game-title {
   display: block;
-  max-height: 3rem;
+  line-height: min(2rem, 10vw);
   margin: 1rem 0;
 
-  font-size: min(2rem, 5vw);
+  font-size: min(2rem, 10vw);
   text-align: center;
 }
