@@ -1,4 +1,9 @@
 .finish-modal {
+  &__top-right-button {
+    position: absolute;
+    right: 0;
+  }
+
   &__title {
     font-size: 2.6rem;
     line-height: 3em;
