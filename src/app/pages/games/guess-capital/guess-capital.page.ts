@@ -4,6 +4,7 @@ import { LanguageServiceInstance } from "src/app/common/language/language.servic
 import { Country } from "src/app/data/countries.data"
 import { CountryPage } from "src/app/features/games/countries/countries-games.interface"
 import { CountriesGamesState } from "src/app/features/games/countries/countries-games.state"
+import { GameStatistics } from "src/app/features/statistics/statistics"
 import { GameStatisticsGenerator } from "src/app/features/statistics/statistics-generator"
 import { CountryCode } from "src/app/interfaces/iso-3166.interface"
 import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
@@ -13,11 +14,14 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-capital.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCapitalGamePage implements OnDestroy, OnInit {
-  pages: CountryPage[] = []
-
   get statistics() {
-    return GameStatisticsGenerator.generateFromPages(this.pages)
+    GameStatisticsGenerator.updateStatisticsFromPages(this._statistics, this.pages)
+    return this._statistics
   }
+
+  private _statistics = GameStatistics.getDefault()
+
+  private pages: CountryPage[] = []
 
   private currentPageIndex = 0
 
@@ -92,6 +96,7 @@ export class GuessCapitalGamePage implements OnDestroy, OnInit {
     return this.countriesState.state$.subscribe(newState => {
       this.pages = newState.pages
       this.currentPageIndex = newState.currentPageIndex
+      this._statistics = newState.statistics
     })
   }
 }

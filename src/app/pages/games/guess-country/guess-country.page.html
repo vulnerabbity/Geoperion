@@ -1,7 +1,9 @@
-<div class="container" *ngIf="this.pages.length > 0">
+<div class="container">
   <common-game-header></common-game-header>
 
-  <p class="progress-numbers">{{this.statistics.totalAnswers}}/{{this.pages.length}}</p>
+  <p class="progress-numbers">
+    {{this.statistics.totalAnswers}}/{{this.statistics.totalQuestions}}
+  </p>
 
   <ion-title class="game-title">
     <p>{{getTitle()}}</p>
@@ -13,6 +15,6 @@
     <common-game-answers [page]="getAnswersPage()"></common-game-answers>
   </div>
   <div class="paginator-container">
-    <common-game-paginator [pages]="this.pages"></common-game-paginator>
+    <common-game-paginator [statistics]="this.statistics"></common-game-paginator>
   </div>
 </div>

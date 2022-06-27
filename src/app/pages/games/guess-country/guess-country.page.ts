@@ -13,11 +13,14 @@ import { getFlagFullPath } from "src/assets/images/flags/flags-getter"
   styleUrls: ["./guess-country.page.scss", "../games.shared-styles.scss"],
 })
 export class GuessCountryGamePage implements OnInit, OnDestroy {
-  pages: CountryPage[] = []
-
   get statistics() {
-    return GameStatisticsGenerator.generateFromPages(this.pages)
+    GameStatisticsGenerator.updateStatisticsFromPages(this._statistics, this.pages)
+    return this._statistics
   }
+
+  private _statistics = GameStatistics.getDefault()
+
+  private pages: CountryPage[] = []
 
   private currentPageIndex = 0
 
@@ -25,11 +28,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
 
   private translation = LanguageServiceInstance.translation
 
-  constructor(private state: CountriesGamesState) {
-    // setInterval(() => {
-    //   console.log(this.pages)
-    // }, 500)
-  }
+  constructor(private state: CountriesGamesState) {}
 
   async ngOnInit() {
     await this.startNewGame()
@@ -84,6 +83,7 @@ export class GuessCountryGamePage implements OnInit, OnDestroy {
     return this.state.state$.subscribe(state => {
       this.pages = state.pages
       this.currentPageIndex = state.currentPageIndex
+      this._statistics = state.statistics
     })
   }
 
