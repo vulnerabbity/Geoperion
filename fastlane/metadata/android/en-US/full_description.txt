@@ -1,0 +1,21 @@
+Geological games built using web.
+
+Geoperion will help you learn geology.
+
+Games:
+- Guess country
+- Guess capital
+- Guess population
+
+Features:
+- Privacy friendly(open source, internet access disabled)
+- Difficulties
+- Configurable game length
+- History
+- A lot of themes(black, nord, github, dark, retro)
+- Customizable app accent
+- Languages: English, Russian
+
+About:
+This app built with Angular and Ionic. 
+Its using standard web technologies like css/html/js packaged in application
