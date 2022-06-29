@@ -19,12 +19,14 @@ export class DetailedGameStatisticsGenerator {
     statistics: GameStatistics,
   ): DetailedGameStatistics["secondsPassed"] | undefined {
     if (statistics.finishTime) {
-      const startTime = new Date(statistics.startTime).getUTCSeconds()
-      const finishTime = new Date(statistics.finishTime).getUTCSeconds()
+      const startTimeInMs = new Date(statistics.startTime).valueOf()
+      const finishTimeInMs = new Date(statistics.finishTime).valueOf()
 
-      const difference = finishTime - startTime
+      const differenceInMs = finishTimeInMs - startTimeInMs
 
-      return difference
+      const differenceInSeconds = differenceInMs / 1000
+
+      return differenceInSeconds
     }
     return
   }
