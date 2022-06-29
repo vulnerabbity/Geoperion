@@ -27,6 +27,12 @@ FOSS geology games build by ionic
   <img src="https://raw.githubusercontent.com/vulnerabbity/Geoperion/master/src/assets/readme/statistics_v1.png" width="400" />
 </p>
 
+## Languages
+Supported languages are:
+
+English
+Russian
+
 ## Instalation
 
 <b>
