@@ -7,19 +7,19 @@
 <div class="container">
   <a [routerLink]="paths.GuessCountry">
     <common-game-preview-with-flag [flagPath]="flags.guessCountry">
-      <h3>{{translation.games.guessCountry | titlecase}}</h3>
+      <h3 class="game-title">{{translation.games.guessCountry | titlecase}}</h3>
     </common-game-preview-with-flag>
   </a>
 
   <a [routerLink]="paths.GuessCapital">
     <common-game-preview-with-flag [flagPath]="flags.guessCapital" [reverseStyle]="true">
-      <h3>{{translation.games.guessCapital | titlecase}}</h3>
+      <h3 class="game-title">{{translation.games.guessCapital | titlecase}}</h3>
     </common-game-preview-with-flag>
   </a>
 
   <a [routerLink]="paths.GuessPopulation">
     <common-game-preview-with-flag [flagPath]="flags.guessPopulation">
-      <h3>{{translation.games.guessPopulation | titlecase}}</h3>
+      <h3 class="game-title">{{translation.games.guessPopulation | titlecase}}</h3>
     </common-game-preview-with-flag>
   </a>
 </div>

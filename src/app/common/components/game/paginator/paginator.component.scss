@@ -5,6 +5,6 @@
 
 .paginator-button {
   min-width: 25%;
-  height: 5rem;
-  font-size: 2rem;
+  height: 3rem;
+  font-size: min(2rem, 4vw);
 }
