@@ -31,10 +31,15 @@ FOSS geology games build by ionic
 Supported languages are:
 
 English
+
 Russian
 
 ## Instalation
 
 <b>
-  Android: Download apk file at <a href="https://github.com/vulnerabbity/Geoperion/releases">releases page</a>
+  Android:
+  
+  - Install from f-droid https://f-droid.org/en/packages/com.vulnerabbity.geoperion/
+    
+  - Download apk file from <a href="https://github.com/vulnerabbity/Geoperion/releases">releases page</a>
 </b>
