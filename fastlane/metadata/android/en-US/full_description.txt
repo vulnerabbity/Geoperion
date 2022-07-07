@@ -1,6 +1,6 @@
 Geological games built using web.
 
-Geoperion will help you learn geology.
+Geoperion will help you learn geography.
 
 Games:
 - Guess country
