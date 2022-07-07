@@ -8,10 +8,9 @@ FOSS geology games build by ionic
 
 ## Screenshots
 
-| <img src="src/assets/readme/main_v1.png" alt="Screenshot-1" /> | <img src="src/assets/readme/guess-population_v1.png" alt="Screenshot-2"/> | <img src="src/assets/readme/guess-country_v1.png" alt="Screenshot-3"/> |
-| --- | --- | --- |
-| <img src="src/assets/readme/guess-capital_v1.png" alt="Screenshot-4" /> | <img src="src/assets/readme/settings_v1.png" alt="Screenshot-5" /> | <img src="src/assets/readme/statistics_v1.png" alt="Screenshot-6" /> |
-| <img src="src/assets/readme/finish_v1.png" alt="Screenshot-7" /> |  |  |
+| <img src="src/assets/readme/main_v1.png" alt="Screenshot-1" /> | <img src="src/assets/readme/guess-population_v1.png" alt="Screenshot-2"/> | <img src="src/assets/readme/guess-country_v1.png" alt="Screenshot-3"/> | <img src="src/assets/readme/guess-capital_v1.png" alt="Screenshot-4" /> 
+| --- | --- | --- | --- |
+| <img src="src/assets/readme/settings_v1.png" alt="Screenshot-5" /> | <img src="src/assets/readme/statistics_v1.png" alt="Screenshot-6" /> | <img src="src/assets/readme/finish_v1.png" alt="Screenshot-7" /> |  |  |  |
 
 ## Languages
 
