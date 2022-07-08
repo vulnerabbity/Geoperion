@@ -1,1 +1,1 @@
-Geological games built using web
+Geographic games built using web.
