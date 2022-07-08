@@ -1,4 +1,4 @@
-Geological games built using web.
+Geographic games built using web.
 
 Geoperion will help you learn geography.
 
