@@ -1,6 +1,6 @@
 # Geoperion
 
-FOSS geology games build by ionic
+FOSS geography games build by ionic
 
 <img src="src/assets/images/icons/geoperion.svg"
      height="120"
